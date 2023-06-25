@@ -9,7 +9,7 @@
 ---
 
  <img src="" width="200" />
-![Cluster Mongo db](../img/cluster-mongdb.png)
+![Cluster Mongo db](img/cluster-mongdb.png)
 
 O Arquivo `docker-compose` provisiona cluster de mongodb com replica set de 3 instâncias: 
 
