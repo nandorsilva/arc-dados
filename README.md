@@ -105,7 +105,7 @@ Outra forma de inserir um documento simples
 
 
 ```
-db.getCollection("lab.")insert({produto: "lapis", categoria: "papelaria"})
+ db.getCollection("lab").insert({produto: "lapis", categoria: "papelaria"})
 
 ```
 
