@@ -333,3 +333,7 @@ Exibir operações rodando
 db.currentOp();
 
 ```
+
+# Remover os containers
+
+docker-compose down
