@@ -117,6 +117,9 @@ conf.members[0].tags = { "dc": "SP"}
 conf.members[1].tags = { "dc": "SP"}
 conf.members[2].tags = { "dc": "RIO"}
 rs.reconfig(conf)
+
+rs.config().members;
+
 ```
 
 
@@ -130,7 +133,8 @@ db.serverStatus()
 ## Inserindo documentos
 
 ```
-for (var i = 1; i <= 100; i++) db.lab.insert({produto: "produto:" + x , categoria: "papelaria"})
+for (var i = 1; i <= 100; i++) db.lab.insert({produto: "produto-" + i , categoria: "papelaria"})
+DBQuery.shellBatchSize = 300
 db.lab.find()
 db.lab.count()
 ```
@@ -143,6 +147,7 @@ db.produtos.insert( { Produto: "Celular", Preco: 10 } )
 Inserindo com o ID (_id)
 ```
 db.produtos.insert( {_id: 1,  Produto: "Celular", Preco: 10 } )
+db.produtos.find()
 ```
 
 Inserindo multiplos documentos
@@ -157,6 +162,9 @@ db.produtos.insert(
      {_id: 500, Produto: "Cama", preco: 100 }
    ]
 )
+
+ db.produtos.find()
+
 ```
 
 
@@ -174,6 +182,8 @@ Buscando com o operador `igual` com mais de um campo
 
 ```
 db.produtos.find( { Produto: "Geladeira", preco:3400 } )
+db.produtos.find( { Produto: "Geladeira", preco:3400 } ).pretty()
+
 ```
 
 Buscando com o operador `Range`
@@ -201,17 +211,45 @@ db.produtos.find({"Produto":/Computador/});
 
 Tipos de `Likes`
 ```
-db.produtos.find({"Produto":/Computador/});
-db.produtos.find({Produto: /^Melhor/}) // Like 'Melhor%'
-db.produtos.find({Produto: /Ca$/}) // Like '%CA'
+db.produtos.find({"Produto":/Computador/}); // Like '%Computador%'
+db.produtos.find({Produto: /^Ge/}); // Like 'Ge%'
+db.produtos.find({Produto: /Melhor$/}); // Like '%Melhor'
 ```
 
 
-## Importando arquivos CSV (VALIDAR)
+## Importando arquivos CSV 
 
 O Arquivo `mongo-import.sh`  vai ler os arquivos csv e importar para o mongodb utilizando a ferramenta `mongoimport`
 
 https://www.mongodb.com/docs/database-tools/mongoimport/
+
+
+```
+//Para sair do cluster mongodb
+exit
+
+//Para voltar uma pasta anterior
+cd ..
+
+//Entrar na pasta import
+cd import 
+
+//Executar o arquivo ./mongo-import.sh para importar os dados dos arquivos csv para o Mongodb
+./mongo-import.sh
+
+//Entrar no cluster novamente
+ mongo --port 27017
+
+//Ver os banco de dados
+show dbs
+
+//listar as collections
+ show collections
+
+ //Listando os documentos da collection orders
+
+db.orders.find()
+```
 
 
 Usando o comando `explain` para extrair informações importantes de uma consulta.
@@ -220,24 +258,29 @@ Usando o comando `explain` para extrair informações importantes de uma consult
 db.orders.find({"CustomerID" :"BONAP"}).explain();
 ```
 
+Mais informações em: https://www.mongodb.com/docs/manual/reference/explain-results/
+
 ## Collection Capped
 
 Verifiando se a collection é do tipo Capped
 ```
-db.orders.isCapped()
+use dbcursofia
+db.produtosCa.insert( {_id: 1,  Produto: "Celular", Preco: 10 } )
+db.produtosCa.isCapped()
 ```
 
 Convertendo uma collection para Capped
 
 ```
-db.runCommand( { collMod: "produtos", cappedSize: 100000 } )
-db.produtos.isCapped()
+db.runCommand({"convertToCapped": "produtosCa", size: 100000});
+db.produtosCa.isCapped()
 ```
 
 Criando uma collection
 
 ```
-db.createCollection("colecaonova", { capped: true, autoIndexID : true, size: 6142800, max: 10000 })
+db.createCollection("colecaonova", { capped : true, size : 5242880, max : 5000 } )
+db.colecaonova.isCapped()
 ```
 
 ## Criando índice
@@ -248,8 +291,10 @@ db.collection.ensureIndex(
 ...} );
 
 ```
+use sample
 db.orders.ensureIndex({ CustomerID : 1});
-db.orders.find({"CustomerID" :"BONAP"}).explain();
+
+db.orders.find({"CustomerID" :"BONAP"}).explain("executionStats");
 ```
 
 Listar os índices criados
@@ -266,6 +311,7 @@ db.orders.dropIndex("<<nome do indice>");
 
 Atualizando o documento todo
 ```
+use dbcursofia
 db.produtos.update( { _id: 10} , {Produto: "TV 30 polegadas", preco: 10.99 })
 ```
 
@@ -276,35 +322,42 @@ db.produtos.update({_id : 10}, {$set:{ "Produto": "TV 30 polegadas - Alterada" }
 
 Criando um atributo no documento
 ```
-db.produtos.update({_id : 10}, {$inc:{ "Categoria": "Eletronico"}})
+db.produtos.update({_id : 10}, {$inc:{ "ranking": 10}})
+db.produtos.find({_id:10})
 ```
 
 Atualizando vários documentos
 
 ```
+db.produtos.find({ Produto: "Geladeira"})
 db.produtos.update( { Produto: "Geladeira"} , { $set: { preco: 10000} })
+db.produtos.find({ Produto: "Geladeira"})
 
 ```
 
-## Foi possível ?
+## Foi possível ? O que acontenceu ?
 
 Precisamos habilitar a atualização para multiplos documentos
 
 ```
 db.produtos.update( { Produto: "Geladeira"} , { $set: { preco: 10000}  }, { multi: true })
+db.produtos.find({ Produto: "Geladeira"})
+ 
 ```
 
 Se o documento não for encontrado ? 
 Adiciona documento se update não tem o filtro existente
 
 ```
-{ Produto: "Geladeira", preco: 5000 }
 
 db.produtos.update(
    {_id : 101},
    { Produto: "Geladeira Nova", preco: 5000 } ,
    { upsert: true }
 )
+
+db.produtos.find({ _id: 101})
+
 ```
 
 
@@ -334,6 +387,14 @@ db.currentOp();
 
 ```
 
+# Instalando um ferramenta gráfica para o Mongodb
+https://studio3t.com/download-studio3t-free/
+
+
 # Remover os containers
 
+```
+exit
+exit
 docker-compose down
+```
