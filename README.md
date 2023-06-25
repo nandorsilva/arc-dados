@@ -391,6 +391,46 @@ db.currentOp();
 https://studio3t.com/download-studio3t-free/
 
 
+## Caso de Uso
+A LoSil é uma empresa fictícia que atua no ramo de comércio eletrônico, oferecendo uma ampla variedade de produtos para seus clientes. Com o crescimento do negócio e a necessidade de gerenciar pedidos, ordens e informações dos clientes de forma eficiente, a LoSil decidiu adotar um banco de dados NoSQL, como o MongoDB.
+
+Após uma análise detalhada das necessidades da empresa, a equipe de desenvolvimento definiu as seguintes entidades principais para a modelagem do banco de dados:
+
+
+Clientes:
+
+* ID do cliente
+* Nome
+* Endereço
+* Informações de contato (e-mail, telefone, etc.)
+
+Pedidos:
+
+* ID do pedido
+* Data do pedido
+* Status do pedido (pendente, em processamento, concluído, cancelado, etc.)
+* ID do cliente associado
+
+Itens do pedido:
+
+* ID do item do pedido
+* ID do pedido associado
+* ID do produto
+* Quantidade
+
+Produtos:
+
+* ID do produto
+* Nome do produto
+* Descrição
+* Preço
+* Estoque disponível
+
+Com base nessas entidades, a equipe de desenvolvimento projetou as seguintes coleções no MongoDB:
+
+
+Com o banco de dados MongoDB, a equipe da LoSil terá uma solução escalável e flexível para lidar com o crescimento do e-commerce, fornecendo uma base sólida para o gerenciamento eficiente das operações relacionadas aos pedidos, ordens e clientes.
+
 # Remover os containers
 
 ```
