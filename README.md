@@ -428,6 +428,7 @@ Produtos:
 
 Com base nessas entidades, a equipe de desenvolvimento projetou as seguintes coleções no MongoDB:
 
+<<Documentos json>>
 
 Com o banco de dados MongoDB, a equipe da LoSil terá uma solução escalável e flexível para lidar com o crescimento do e-commerce, fornecendo uma base sólida para o gerenciamento eficiente das operações relacionadas aos pedidos, ordens e clientes.
 
