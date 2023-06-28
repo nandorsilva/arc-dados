@@ -56,6 +56,9 @@ Verificando as imagens que foram feitas download do docker-hub
 Executando o script `scripts\rs-init.sh` para a criação do replica-set
 
 ```
+chmod -R 777 import
+chmod -R 777 scripts
+
 docker exec -it mongo1 /bin/bash
 cd scripts
 ./rs-init.sh
@@ -242,6 +245,9 @@ cd import
 
 //Ver os banco de dados
 show dbs
+
+//Entrar no banco criado
+use sample
 
 //listar as collections
  show collections
