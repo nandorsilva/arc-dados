@@ -1,5 +1,5 @@
 
-# LAB MONGODB
+# LAB MYSQL
 
 ---
 ## Disclaimer
@@ -9,36 +9,14 @@
 ---
 
 
-![Cluster Mongo db](img/cluster-mongdb.png)
-
-O Arquivo `docker-compose` provisiona cluster de mongodb com replica set de 3 instâncias: 
-
-- mongo1:27017
-- mongo2:27017
-- mongo3:27017
-
----
-
 ## Pré-requisitos?
 * Docker
 * Docker-Compose
 
-> O endereço configurado no host local.
 
-* Linux /etc/hosts
-* Windows C:\Windows\System32\drivers\etc
-
----
-
+## Criando um container com a imagem MySql
 ```
-127.0.0.1       mongo1
-127.0.0.1       mongo2
-127.0.0.1       mongo3
-```
-
-## Executando réplica set Monogodb
-```
-docker-compose up -d
+docker run --network="host" --name meubanco -e MYSQL_ROOT_PASSWORD=1234 mysql
 ```
 
 Verificando se os containers foram criados com sucesso
@@ -51,354 +29,315 @@ Verificando as imagens que foram feitas download do docker-hub
  docker image ls
 ```
 
-## Configurando Replica-set
 
-Executando o script `scripts\rs-init.sh` para a criação do replica-set
+Vamos executar alguns comandos de dentro do container meubanco
 
-```
-chmod -R 777 import
-chmod -R 777 scripts
-
-docker exec -it mongo1 /bin/bash
-cd scripts
-./rs-init.sh
-```
-
-
-Vamos executar alguns comandos de dentro do cluster mongo1 para configurar as tags
-
-Acessar o Shell do container mongo1
+Acessar o Shell do container meubanco
 
 ```
-//Se tiver fora do container
-docker exec -it mongo1 sh -c "mongo --port 27017"
-```
-ou
-```
-//dentro do container
-mongo --port 27017
+docker exec -it meubanco bash
 ```
 
-
-Verificando os bancos de dados existentes
+Conectando ao banco mysql
 ```
-show dbs
-```
-
-Apontando ou criando um banco no mongodb
-```
-use dbcursofia
+mysql -uroot -p
 ```
 
-Criando um documento simples
+Digitar a senha que está na váriavel MYSQL_ROOT_PASSWORD
+
+
+Listar os banco de dados existentes
+
+```
+show databases;
+```
+
+Criando um banco de dados
 
 
 ```
-db.lab.insert({produto: "lapis", categoria: "papelaria"})
+CREATE DATABASE arquitetura;
 
 ```
 
-Lista as collections do banco local selecionado
+Acessar o banco de dados criado
 ```
-show collections
-```
-
-
-Outra forma de inserir um documento simples
-
-
-```
- db.getCollection("lab").insert({produto: "lapis", categoria: "papelaria"})
-
+USE arquitetura;
 ```
 
+
+Exibir as tabelas do banco de dados `arquitetura`
+
+
+```
+SHOW TABLES;
+
+```
+
+## Criando tabelas
+
+```
+CREATE TABLE Cliente (id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(50), telefone VARCHAR(20), email VARCHAR(50), genero CHAR(1), estadocivil VARCHAR(20), dataNascimento DATE, uf char(2), dataCriacao DATE, dataAlteracao DATE);
+```
+
+```
+CREATE TABLE Produto (id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(50), dataCriacao DATE);
+```
+
+
+<<tipos de dados>>
+
+Criado tabela do resultado de uma consulta
+
+```
+
+
+INSERT INTO Cliente values ('1','Teste da Silva','5511971111119','testedasilva@gmail.com','f','casado','SP', '2000-03-31','2022-09-04','2023-06-17');
+
+CREATE TABLE clientesUF AS
+SELECT *
+FROM cliente
+WHERE uf = 'SP';
+```
+
+Alterado informações da tabela
+
+```
+ALTER TABLE Produto ADD Descricao varchar(255);
+
+ALTER TABLE Produto RENAME COLUMN Descricao TO DescricaoProduto;
+
+ALTER TABLE Produto MODIFY COLUMN DescricaoProduto varchar(300);
+
+ALTER TABLE Produto DROP COLUMN DescricaoProduto;
+
+```
+
+Criado tabelas com relacionamento
+
+```
+CREATE TABLE Pedido (id INT AUTO_INCREMENT PRIMARY KEY, 
+idCliente in, dataCriacao DATE,
+constraint pedido_cliente foreign (idCliente) references Cliente(id)
+);
+```
+
+```
+CREATE TABLE PedidoDetalhes (id INT AUTO_INCREMENT PRIMARY KEY, 
+idPedido int,
+idProduto int
+constraint pedido_detalhes_pedido foreign (idPedido) references Pedido(id)
+);
+```
+
+Outras formas de criar relacionamentos
+
+```
+ALTER TABLE PedidoDetalhes ADD CONSTRAINT pedido_detalhes_produto FOREIGN KEY(idProduto) REFERENCES Produto(ID);
+```
+
+
+## Inserindo dados nas tabelas
+
+```
+
+//Informações de cliente - forma abreviada mas todos os campos
+
+INSERT INTO Cliente values ('1','Teste da Silva','5511971111119','testedasilva@gmail.com','f','casado','2000-03-31','2022-09-04','2023-06-17');
+INSERT INTO Cliente values ('2','Teste de Souza','5511971111118','testedasouza@gmail.com','f','solteiro','1999-03-23','2023-06-17','2023-06-17');
+INSERT INTO Cliente values ('3','Fernando Silva','5511971111117','fernandosilva@gmail.com','f','solteiro','1999-03-05','2023-06-17','2023-06-17');
+INSERT INTO Cliente values ('4','Fernando Souza','5511971111116','fernadosouza@gmail.com','f','solteiro','	985-03-01','2023-06-17','2023-06-17');
+INSERT INTO Cliente values ('5','Virgulino da Silva','5511971111115','avast@gmail.com','f','solteiro','1999-03-30','2023-06-17','2023-06-17');
+
+
+
+//Informações do Produto 
+
+INSERT INTO Produto (nome, dataCriacao) values ('Celular', CURDATE());
+INSERT INTO Produto (nome, dataCriacao) values ('Computador', CURDATE());
+
+
+//Insert errado
+
+INSERT INTO Produto values ('Computador');
+
+
+//Insert com select, ops....
+
+INSERT INTO Produto
+SELECT * FROM Produto
+WHERE nome='Celular';
+
+//Opção 1 - Insert com select
+INSERT INTO Produto
+SELECT nome, descricao FROM Produto
+WHERE nome='Celular';
+
+//Opção 2 - Insert com select
+INSERT INTO Produto (nome, descricao)
+SELECT nome, descricao FROM Produto
+WHERE nome='Computador';
+
+
+```
+
+## Atualizando dados nas tabelas
+
+
+//Todo mundo....
+UPDATE Cliente SET nome = 'Nome alterado
+
+//Ah só um cliente
+UPDATE Cliente SET nome = 'Fernandinho Silva' WHERE telefone = 5511971111119;
+
+//Mais atributos
+UPDATE Cliente SET nome = 'Fernandinho Silva', email='email@email.com.br' WHERE telefone = 5511971111119;
+
+
+//Update com select - Atualizar o cliente do pedido 1
+
+INSERT INTO Pedido (idCliente, dataCriacao) values(1, CURDATE());
+
+
+UPDATE Cliente
+SET Nome = 'Cliente do pedido'
+INNER JOIN Pedido  ON Cliente.id =Pedido.idCliente
+WHERE Pedido.id = 1;
+
+
+
+//Merge
+
+//Como funciona o Merge
+//Merge TargetTableName USING SourceTableName
+//ON Merging_Condition
+//WHEN MATCHED
+//THEN Update_Query
+//WHEN NOT MATCHED
+//THEN Insert_Query
+//WHEN NOT MATCHED BY SOURCE
+//THEN DELETE;
+
+MERGE ClienteSP sp
+USING Cliente c
+ON (sp.id = c.id)
+WHEN MATCHED
+THEN UPDATE SET
+sp.Nome = c.Nome
+WHEN NOT MATCHED BY TARGET
+THEN INSERT (Nome, telefone, email)
+VALUES(c.Nome, c.telefone, c.email)
+WHEN NOT MATCHED BY SOURCE
+THEN DELETE;
+
+
+
+## Filtrando dados nas tabelas
+
+select * from Cliente;
+
+select * from Cliente where nome ='Teste da Silva';
+
+select * from Cliente where telefone = '5511971111119' and email ='testedasilva@gmail.com'
+
+select * from Cliente where telefone = '5511971111119' or telefone ='5511971111114';
+
+
+select nome, telefone, email from Cliente where telefone = '5511971111119';   
+
+### Um pouco de joins
+
+select * from Cliente c
+left outer join Pedido p on c.id = p.idCliente
+
+//Somente os campos de cliente
+
+select c.* from Cliente c
+left outer join Pedido p on c.id = p.idCliente
+
+
+select c.* from Cliente c
+inner join Pedido p on c.id = p.idCliente
+
+select c.* from Cliente c
+outer join Pedido p on c.id = p.idCliente
+where c.telefone = '5511971111119';
+
+select c.* from Cliente c
+inner join Pedido p on c.id = p.idCliente
+inner join PedidoDetalhes pd on p.id = pd.idPedido;
+
+//Tempos quantos clientes
+select count(1) from Cliente
+
+//Tirando as duplicidades
+SELECT DISTINCT nome  FROM Cliente;
+
+//Agrupando os dados de estados
+SELECT UF, Count(1) as Total FROM Cliente
+Group by UF
+
+//Agrupando os dados de estados maior que 1
+SELECT UF, Count(1) as Total FROM Cliente
+Group by UF
+having count(*) >1
+
+
+//Ordenando os dados  ASC|DESC
+SELECT * FROM Cliente 
+ORDER BY telefone ASC
+
+
+SELECT *
+FROM Cliente
+WHERE dataCriacao BETWEEN '2022-09-01' AND '2022-09-04';
+
+
+CASE
+    WHEN condition1 THEN result1
+    WHEN condition2 THEN result2
+    WHEN conditionN THEN resultN
+    ELSE result
+END;
+
+SELECT OrderID, Quantity,
+CASE
+    WHEN Quantity > 30 THEN 'The quantity is greater than 30'
+    WHEN Quantity = 30 THEN 'The quantity is 30'
+    ELSE 'The quantity is under 30'
+END AS QuantityText
+FROM OrderDetails;
+
+
+## Removendo dados nas tabelas
+
+
+
+# Transformar registros em json
+
+SET @jsonempl=(SELECT JSON_ARRAYAGG(JSON_OBJECT("id", id, "name", name, "phonenumber", phonenumber, "email", email, "gender", gender, "maritalstatus", maritalstatus, "birth", birth, "createdate", createdate, "lastupdate", lastupdate)) FROM customer);
+SELECT JSON_PRETTY(@jsonempl);
 Criado as tags para organização das réplicas:
 
-```
-conf = rs.conf()
-conf.members[0].tags = { "dc": "SP"}
-conf.members[1].tags = { "dc": "SP"}
-conf.members[2].tags = { "dc": "RIO"}
-rs.reconfig(conf)
 
-rs.config().members;
+## Criando indíces
+
+
 
 ```
-
-
-
-Verificando status do server
-
-```
-db.serverStatus()
-```
-
-## Inserindo documentos
-
-```
-for (var i = 1; i <= 100; i++) db.lab.insert({produto: "produto-" + i , categoria: "papelaria"})
-DBQuery.shellBatchSize = 300
-db.lab.find()
-db.lab.count()
-```
-
-Inserindo sem o ID
-```
-db.produtos.insert( { Produto: "Celular", Preco: 10 } )
-```
-
-Inserindo com o ID (_id)
-```
-db.produtos.insert( {_id: 1,  Produto: "Celular", Preco: 10 } )
-db.produtos.find()
-```
-
-Inserindo multiplos documentos
-```
-db.produtos.insert(
-   [
-     { _id: 10, Produto: "TV", preco: 1.99 },
-     { Produto: "Geladeira", preco: 5000 },
-     { Produto: "Geladeira", preco: 3400 },
-     { Produto: "Computador", preco: 2500 },
-     { Produto: "Computador Melhor", preco: 4500 },
-     {_id: 500, Produto: "Cama", preco: 100 }
-   ]
-)
-
- db.produtos.find()
+CREATE INDEX idx_telefone ON Cliente (Telefone);
 
 ```
 
 
-## Consultando documentos
 
-Busca todos os documentos
-```
-db.produtos.find()
-```
-Buscando com o operador `igual`
-```
-db.produtos.find( { Produto: "Geladeira" } )
-```
-Buscando com o operador `igual` com mais de um campo
+# Instalando um ferramenta gráfica para o MySQL
 
-```
-db.produtos.find( { Produto: "Geladeira", preco:3400 } )
-db.produtos.find( { Produto: "Geladeira", preco:3400 } ).pretty()
-
-```
-
-Buscando com o operador `Range`
-```
-db.produtos.find( { preco: { $gt: 1000, $lt: 5000 } } );
-```
-
-Alguns operadores
-
-* $gt maior que (greater-than)
-* $gte igual ou maior que (greater-than or equal to)
-* $lt menor que (less-than)
-* $lte igual ou menor que (less-than or equal to)
-* $ne não igual (not equal)
-* $in existe em uma lista
-* $nin não existe em uma lista
-* $all existe em todos elementos
-* $not traz o oposto da condição
-
-
-Buscando com o operador `Like`
-```
-db.produtos.find({"Produto":/Computador/});
-```
-
-Tipos de `Likes`
-```
-db.produtos.find({"Produto":/Computador/}); // Like '%Computador%'
-db.produtos.find({Produto: /^Ge/}); // Like 'Ge%'
-db.produtos.find({Produto: /Melhor$/}); // Like '%Melhor'
-```
-
-
-## Importando arquivos CSV 
-
-O Arquivo `mongo-import.sh`  vai ler os arquivos csv e importar para o mongodb utilizando a ferramenta `mongoimport`
-
-https://www.mongodb.com/docs/database-tools/mongoimport/
-
-
-```
-//Para sair do cluster mongodb
-exit
-
-//Para voltar uma pasta anterior
-cd ..
-
-//Entrar na pasta import
-cd import 
-
-//Executar o arquivo ./mongo-import.sh para importar os dados dos arquivos csv para o Mongodb
-./mongo-import.sh
-
-//Entrar no cluster novamente
- mongo --port 27017
-
-//Ver os banco de dados
-show dbs
-
-//Entrar no banco criado
-use sample
-
-//listar as collections
- show collections
-
- //Listando os documentos da collection orders
-
-db.orders.find()
-```
-
-
-Usando o comando `explain` para extrair informações importantes de uma consulta.
-
-```
-db.orders.find({"CustomerID" :"BONAP"}).explain();
-```
-
-Mais informações em: https://www.mongodb.com/docs/manual/reference/explain-results/
-
-## Collection Capped
-
-Verifiando se a collection é do tipo Capped
-```
-use dbcursofia
-db.produtosCa.insert( {_id: 1,  Produto: "Celular", Preco: 10 } )
-db.produtosCa.isCapped()
-```
-
-Convertendo uma collection para Capped
-
-```
-db.runCommand({"convertToCapped": "produtosCa", size: 100000});
-db.produtosCa.isCapped()
-```
-
-Criando uma collection
-
-```
-db.createCollection("colecaonova", { capped : true, size : 5242880, max : 5000 } )
-db.colecaonova.isCapped()
-```
-
-## Criando índice
-
-db.collection.ensureIndex(
-{ <campo1> : <ordem>,
-<campo2> : <ordem>,
-...} );
-
-```
-use sample
-db.orders.ensureIndex({ CustomerID : 1});
-
-db.orders.find({"CustomerID" :"BONAP"}).explain("executionStats");
-```
-
-Listar os índices criados
-```
-db.orders.getIndexes();
-```
-
-Remover um índice criado
-```
-db.orders.dropIndex("<<nome do indice>");
-```
-
-## Alterando documentos
-
-Atualizando o documento todo
-```
-use dbcursofia
-db.produtos.update( { _id: 10} , {Produto: "TV 30 polegadas", preco: 10.99 })
-```
-
-Atualizando uma entidade do documento
-```
-db.produtos.update({_id : 10}, {$set:{ "Produto": "TV 30 polegadas - Alterada" }})
-```
-
-Criando um atributo no documento
-```
-db.produtos.update({_id : 10}, {$inc:{ "ranking": 10}})
-db.produtos.find({_id:10})
-```
-
-Atualizando vários documentos
-
-```
-db.produtos.find({ Produto: "Geladeira"})
-db.produtos.update( { Produto: "Geladeira"} , { $set: { preco: 10000} })
-db.produtos.find({ Produto: "Geladeira"})
-
-```
-
-## Foi possível ? O que acontenceu ?
-
-Precisamos habilitar a atualização para multiplos documentos
-
-```
-db.produtos.update( { Produto: "Geladeira"} , { $set: { preco: 10000}  }, { multi: true })
-db.produtos.find({ Produto: "Geladeira"})
- 
-```
-
-Se o documento não for encontrado ? 
-Adiciona documento se update não tem o filtro existente
-
-```
-
-db.produtos.update(
-   {_id : 101},
-   { Produto: "Geladeira Nova", preco: 5000 } ,
-   { upsert: true }
-)
-
-db.produtos.find({ _id: 101})
-
-```
-
-
-## Excluindo documentos
-
-db.produtos.remove({_id: 101})
-
-## Cluster
-
-Verificando o status do cluster
-
-```
-rs.status();
-```
-
-Criando um usuário
-
-```
-db.createUser({user: 'admin', pwd: 'admin', roles: [ { role: 'root', db: 'admin' } ]});
-```
-
-
-Exibir operações rodando
-
-```
-db.currentOp();
-
-```
-
-# Instalando um ferramenta gráfica para o Mongodb
-https://studio3t.com/download-studio3t-free/
+https://dev.mysql.com/downloads/workbench/
 
 
 ## Caso de Uso
-A LoSil é uma empresa fictícia que atua no ramo de comércio eletrônico, oferecendo uma ampla variedade de produtos para seus clientes. Com o crescimento do negócio e a necessidade de gerenciar pedidos, ordens e informações dos clientes de forma eficiente, a LoSil decidiu adotar um banco de dados NoSQL, como o MongoDB.
+A LoSil é uma empresa fictícia que atua no ramo de comércio eletrônico, oferecendo uma ampla variedade de produtos para seus clientes. Com o crescimento do negócio e a necessidade de gerenciar pedidos, ordens e informações dos clientes de forma eficiente, a LoSil decidiu adotar um banco de dados Relacional, como o MySQL.
 
 Após uma análise detalhada das necessidades da empresa, a equipe de desenvolvimento definiu as seguintes entidades principais para a modelagem do banco de dados:
 
@@ -432,16 +371,19 @@ Produtos:
 * Preço
 * Estoque disponível
 
-Com base nessas entidades, a equipe de desenvolvimento projetou as seguintes coleções no MongoDB:
+Estoque:
 
-<{Documentos json}>
+* ID do Estoque
+* ID do produto
+* Quantidade
 
-Com o banco de dados MongoDB, a equipe da LoSil terá uma solução escalável e flexível para lidar com o crescimento do e-commerce, fornecendo uma base sólida para o gerenciamento eficiente das operações relacionadas aos pedidos, ordens e clientes.
+
+Com base nessas entidades, a equipe de desenvolvimento projetou as seguintes tabelas:
+
 
 # Remover os containers
 
 ```
-exit
 exit
 docker-compose down
 ```
