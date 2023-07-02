@@ -16,7 +16,7 @@
 
 ## Criando um container com a imagem MySql
 ```
-docker run --network="host" --name meubanco -e MYSQL_ROOT_PASSWORD=1234 mysql
+docker run -d --network="host" --name meubanco -e MYSQL_ROOT_PASSWORD=1234 mysql
 ```
 
 Verificando se os containers foram criados com sucesso
@@ -71,7 +71,6 @@ Exibir as tabelas do banco de dados `arquitetura`
 
 ```
 SHOW TABLES;
-
 ```
 
 ## Criando tabelas
@@ -82,21 +81,20 @@ CREATE TABLE Cliente (id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(50), telef
 
 ```
 CREATE TABLE Produto (id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(50), dataCriacao DATE);
+SHOW TABLES;
 ```
 
-
-<<tipos de dados>>
 
 Criado tabela do resultado de uma consulta
 
 ```
 
 
-INSERT INTO Cliente values ('1','Teste da Silva','5511971111119','testedasilva@gmail.com','f','casado','SP', '2000-03-31','2022-09-04','2023-06-17');
+INSERT INTO Cliente values ('1','Teste da Silva','5511971111119','testedasilva@gmail.com','f','casado', '2000-03-31', 'SP', '2022-09-04','2023-06-17');
 
-CREATE TABLE clientesUF AS
+CREATE TABLE ClientesUF AS
 SELECT *
-FROM cliente
+FROM Cliente
 WHERE uf = 'SP';
 ```
 
@@ -109,25 +107,27 @@ ALTER TABLE Produto RENAME COLUMN Descricao TO DescricaoProduto;
 
 ALTER TABLE Produto MODIFY COLUMN DescricaoProduto varchar(300);
 
-ALTER TABLE Produto DROP COLUMN DescricaoProduto;
+DESCRIBE Produto;
 
 ```
+
+Crie um registro para a tabela Produto
+
+
 
 Criado tabelas com relacionamento
 
 ```
 CREATE TABLE Pedido (id INT AUTO_INCREMENT PRIMARY KEY, 
-idCliente in, dataCriacao DATE,
-constraint pedido_cliente foreign (idCliente) references Cliente(id)
-);
+idCliente int, dataCriacao DATE,
+constraint pedido_cliente foreign key (idCliente) references Cliente(id));
 ```
 
 ```
 CREATE TABLE PedidoDetalhes (id INT AUTO_INCREMENT PRIMARY KEY, 
 idPedido int,
-idProduto int
-constraint pedido_detalhes_pedido foreign (idPedido) references Pedido(id)
-);
+idProduto int,
+constraint pedido_detalhes_pedido foreign key (idPedido) references Pedido(id));
 ```
 
 Outras formas de criar relacionamentos
@@ -143,11 +143,11 @@ ALTER TABLE PedidoDetalhes ADD CONSTRAINT pedido_detalhes_produto FOREIGN KEY(id
 
 //Informações de cliente - forma abreviada mas todos os campos
 
-INSERT INTO Cliente values ('1','Teste da Silva','5511971111119','testedasilva@gmail.com','f','casado','2000-03-31','2022-09-04','2023-06-17');
-INSERT INTO Cliente values ('2','Teste de Souza','5511971111118','testedasouza@gmail.com','f','solteiro','1999-03-23','2023-06-17','2023-06-17');
-INSERT INTO Cliente values ('3','Fernando Silva','5511971111117','fernandosilva@gmail.com','f','solteiro','1999-03-05','2023-06-17','2023-06-17');
-INSERT INTO Cliente values ('4','Fernando Souza','5511971111116','fernadosouza@gmail.com','f','solteiro','	985-03-01','2023-06-17','2023-06-17');
-INSERT INTO Cliente values ('5','Virgulino da Silva','5511971111115','avast@gmail.com','f','solteiro','1999-03-30','2023-06-17','2023-06-17');
+
+INSERT INTO Cliente values ('2','Teste de Souza','5511971111118','testedasouza@gmail.com','f','solteiro','1999-03-23','RJ','2023-06-17','2023-06-17');
+INSERT INTO Cliente values ('3','Fernando Silva','5511971111117','fernandosilva@gmail.com','f','solteiro','1999-03-05','SP','2023-06-17','2023-06-17');
+INSERT INTO Cliente values ('4','Fernando Souza','5511971111116','fernadosouza@gmail.com','f','solteiro','	985-03-01','SP','2023-06-17','2023-06-17');
+INSERT INTO Cliente values ('5','Virgulino da Silva','5511971111115','avast@gmail.com','f','solteiro','1999-03-30','RJ','2023-06-17','2023-06-17');
 
 
 
@@ -155,27 +155,29 @@ INSERT INTO Cliente values ('5','Virgulino da Silva','5511971111115','avast@gmai
 
 INSERT INTO Produto (nome, dataCriacao) values ('Celular', CURDATE());
 INSERT INTO Produto (nome, dataCriacao) values ('Computador', CURDATE());
-
+select * from Produto;
 
 //Insert errado
 
 INSERT INTO Produto values ('Computador');
 
 
-//Insert com select, ops....
+//Insert com select
 
-INSERT INTO Produto
-SELECT * FROM Produto
-WHERE nome='Celular';
+//Criando um tabela copia de Produto
+
+CREATE TABLE ProdutoCopia (id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(50), dataCriacao DATE, DescricaoProduto varchar(300));
+
+
 
 //Opção 1 - Insert com select
-INSERT INTO Produto
-SELECT nome, descricao FROM Produto
+INSERT INTO ProdutoCopia
+SELECT id, nome, dataCriacao, DescricaoProduto FROM Produto
 WHERE nome='Celular';
 
 //Opção 2 - Insert com select
-INSERT INTO Produto (nome, descricao)
-SELECT nome, descricao FROM Produto
+INSERT INTO ProdutoCopia (nome, DescricaoProduto)
+SELECT nome, DescricaoProduto FROM Produto
 WHERE nome='Computador';
 
 
@@ -184,18 +186,27 @@ WHERE nome='Computador';
 ## Atualizando dados nas tabelas
 
 
-//Todo mundo....
+Atualiza todos os clientes
+
+```
 UPDATE Cliente SET nome = 'Nome alterado
+```
 
-//Ah só um cliente
+Atualiza somente um cliente
+
+```
 UPDATE Cliente SET nome = 'Fernandinho Silva' WHERE telefone = 5511971111119;
+```
 
-//Mais atributos
+Atualizando os atributos nome e email
+
+```
 UPDATE Cliente SET nome = 'Fernandinho Silva', email='email@email.com.br' WHERE telefone = 5511971111119;
+```
 
+Update com select - Atualizar o cliente do pedido 1
 
-//Update com select - Atualizar o cliente do pedido 1
-
+```
 INSERT INTO Pedido (idCliente, dataCriacao) values(1, CURDATE());
 
 
@@ -203,6 +214,7 @@ UPDATE Cliente
 SET Nome = 'Cliente do pedido'
 INNER JOIN Pedido  ON Cliente.id =Pedido.idCliente
 WHERE Pedido.id = 1;
+```
 
 
 
