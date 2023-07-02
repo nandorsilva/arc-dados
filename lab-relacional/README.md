@@ -139,49 +139,59 @@ ALTER TABLE PedidoDetalhes ADD CONSTRAINT pedido_detalhes_produto FOREIGN KEY(id
 
 ## Inserindo dados nas tabelas
 
+
+
+Informações de cliente - forma abreviada mas todos os campos
+
 ```
-
-//Informações de cliente - forma abreviada mas todos os campos
-
-
 INSERT INTO Cliente values ('2','Teste de Souza','5511971111118','testedasouza@gmail.com','f','solteiro','1999-03-23','RJ','2023-06-17','2023-06-17');
 INSERT INTO Cliente values ('3','Fernando Silva','5511971111117','fernandosilva@gmail.com','f','solteiro','1999-03-05','SP','2023-06-17','2023-06-17');
 INSERT INTO Cliente values ('4','Fernando Souza','5511971111116','fernadosouza@gmail.com','f','solteiro','985-03-01','SP','2023-06-17','2023-06-17');
 INSERT INTO Cliente values ('5','Virgulino da Silva','5511971111115','avast@gmail.com','f','solteiro','1999-03-30','RJ','2023-06-17','2023-06-17');
+```
 
 
+Informações do Produto 
 
-//Informações do Produto 
-
+```
 INSERT INTO Produto (nome, dataCriacao) values ('Celular', CURDATE());
 INSERT INTO Produto (nome, dataCriacao) values ('Computador', CURDATE());
 select * from Produto;
+```
 
-//Insert errado
+Insert errado
 
+```
 INSERT INTO Produto values ('Computador');
+```
 
+Insert com select
 
-//Insert com select
-
+```
 //Criando um tabela copia de Produto
 
+
 CREATE TABLE ProdutoCopia (id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(50), dataCriacao DATE, DescricaoProduto varchar(300));
+```
 
 
+Opção 1 - Insert com select
 
-//Opção 1 - Insert com select
+```
 INSERT INTO ProdutoCopia
 SELECT id, nome, dataCriacao, DescricaoProduto FROM Produto
 WHERE nome='Celular';
+```
 
-//Opção 2 - Insert com select
+Opção 2 - Insert com select
+
+```
 INSERT INTO ProdutoCopia (nome, DescricaoProduto)
 SELECT nome, DescricaoProduto FROM Produto
 WHERE nome='Computador';
-
-
 ```
+
+
 
 ## Atualizando dados nas tabelas
 
