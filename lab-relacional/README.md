@@ -232,17 +232,18 @@ WHERE Pedido.id = 1;
 
 
 
-//Merge dos dados
+Como o Merge funciona
 
-> Como funciona o Merge
-> Merge TargetTableName USING SourceTableName
-> ON Merging_Condition
-> WHEN MATCHED
-> THEN Update_Query
-> WHEN NOT MATCHED
-> THEN Insert_Query
-> WHEN NOT MATCHED BY SOURCE
-> THEN DELETE;
+```shell
+     Merge TargetTableName USING SourceTableName
+     ON Merging_Condition
+     WHEN MATCHED
+     THEN Update_Query
+     WHEN NOT MATCHED
+     THEN Insert_Query
+     WHEN NOT MATCHED BY SOURCE
+     THEN DELETE;
+```
 
 ```
 MERGE ClienteSP sp
