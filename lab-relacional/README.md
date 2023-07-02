@@ -146,7 +146,7 @@ ALTER TABLE PedidoDetalhes ADD CONSTRAINT pedido_detalhes_produto FOREIGN KEY(id
 
 INSERT INTO Cliente values ('2','Teste de Souza','5511971111118','testedasouza@gmail.com','f','solteiro','1999-03-23','RJ','2023-06-17','2023-06-17');
 INSERT INTO Cliente values ('3','Fernando Silva','5511971111117','fernandosilva@gmail.com','f','solteiro','1999-03-05','SP','2023-06-17','2023-06-17');
-INSERT INTO Cliente values ('4','Fernando Souza','5511971111116','fernadosouza@gmail.com','f','solteiro','	985-03-01','SP','2023-06-17','2023-06-17');
+INSERT INTO Cliente values ('4','Fernando Souza','5511971111116','fernadosouza@gmail.com','f','solteiro','985-03-01','SP','2023-06-17','2023-06-17');
 INSERT INTO Cliente values ('5','Virgulino da Silva','5511971111115','avast@gmail.com','f','solteiro','1999-03-30','RJ','2023-06-17','2023-06-17');
 
 
