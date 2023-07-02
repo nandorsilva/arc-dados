@@ -199,13 +199,16 @@ WHERE nome='Computador';
 Atualiza todos os clientes
 
 ```
-UPDATE Cliente SET nome = 'Nome alterado
+UPDATE Cliente SET nome = 'Nome alterado';
+select * from Cliente;
+
 ```
 
-Atualiza somente um cliente
+Atualizar somente um cliente
 
 ```
 UPDATE Cliente SET nome = 'Fernandinho Silva' WHERE telefone = 5511971111119;
+select * from Cliente;
 ```
 
 Atualizando os atributos nome e email
@@ -217,29 +220,31 @@ UPDATE Cliente SET nome = 'Fernandinho Silva', email='email@email.com.br' WHERE 
 Update com select - Atualizar o cliente do pedido 1
 
 ```
+//Fazendo a inserção primeiro
 INSERT INTO Pedido (idCliente, dataCriacao) values(1, CURDATE());
 
 
 UPDATE Cliente
-SET Nome = 'Cliente do pedido'
 INNER JOIN Pedido  ON Cliente.id =Pedido.idCliente
+SET Cliente.Nome = 'Cliente do pedido'
 WHERE Pedido.id = 1;
 ```
 
 
 
-//Merge
+//Merge dos dados
 
-//Como funciona o Merge
-//Merge TargetTableName USING SourceTableName
-//ON Merging_Condition
-//WHEN MATCHED
-//THEN Update_Query
-//WHEN NOT MATCHED
-//THEN Insert_Query
-//WHEN NOT MATCHED BY SOURCE
-//THEN DELETE;
+> Como funciona o Merge
+> Merge TargetTableName USING SourceTableName
+> ON Merging_Condition
+> WHEN MATCHED
+> THEN Update_Query
+> WHEN NOT MATCHED
+> THEN Insert_Query
+> WHEN NOT MATCHED BY SOURCE
+> THEN DELETE;
 
+```
 MERGE ClienteSP sp
 USING Cliente c
 ON (sp.id = c.id)
@@ -251,6 +256,7 @@ THEN INSERT (Nome, telefone, email)
 VALUES(c.Nome, c.telefone, c.email)
 WHEN NOT MATCHED BY SOURCE
 THEN DELETE;
+```
 
 
 
