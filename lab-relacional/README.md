@@ -16,7 +16,7 @@
 
 ## Criando um container com a imagem MySql
 ```
-docker run -d --network="host" --name meubanco -e MYSQL_ROOT_PASSWORD=1234 mysql
+docker run -d  -p 3306:3306 --name meubanco -e MYSQL_ROOT_PASSWORD=1234 mysql
 ```
 
 Verificando se os containers foram criados com sucesso
@@ -232,37 +232,9 @@ WHERE Pedido.id = 1;
 
 
 
-Como o Merge funciona
-
-```shell
-     Merge TargetTableName USING SourceTableName
-     ON Merging_Condition
-     WHEN MATCHED
-     THEN Update_Query
-     WHEN NOT MATCHED
-     THEN Insert_Query
-     WHEN NOT MATCHED BY SOURCE
-     THEN DELETE;
-```
-
-```
-MERGE ClienteSP sp
-USING Cliente c
-ON (sp.id = c.id)
-WHEN MATCHED
-THEN UPDATE SET
-sp.Nome = c.Nome
-WHEN NOT MATCHED BY TARGET
-THEN INSERT (Nome, telefone, email)
-VALUES(c.Nome, c.telefone, c.email)
-WHEN NOT MATCHED BY SOURCE
-THEN DELETE;
-```
-
-
-
 ## Filtrando dados nas tabelas
 
+```
 select * from Cliente;
 
 select * from Cliente where nome ='Teste da Silva';
@@ -273,17 +245,20 @@ select * from Cliente where telefone = '5511971111119' or telefone ='55119711111
 
 
 select nome, telefone, email from Cliente where telefone = '5511971111119';   
+```
 
 ### Um pouco de joins
 
+```
 select * from Cliente c
 left outer join Pedido p on c.id = p.idCliente
+```
 
-//Somente os campos de cliente
+Fazer um join mostrando somente os campos de cliente
 
+```
 select c.* from Cliente c
 left outer join Pedido p on c.id = p.idCliente
-
 
 select c.* from Cliente c
 inner join Pedido p on c.id = p.idCliente
@@ -295,69 +270,87 @@ where c.telefone = '5511971111119';
 select c.* from Cliente c
 inner join Pedido p on c.id = p.idCliente
 inner join PedidoDetalhes pd on p.id = pd.idPedido;
+```
 
-//Tempos quantos clientes
+Quantos clientes existem na tabela
+
+```
 select count(1) from Cliente
+```
 
-//Tirando as duplicidades
+Tirando as duplicidades na consulta
+
+```
 SELECT DISTINCT nome  FROM Cliente;
+```
 
-//Agrupando os dados de estados
+Agrupando os dados pelo campo estados
+
+```
 SELECT UF, Count(1) as Total FROM Cliente
 Group by UF
+```
 
-//Agrupando os dados de estados maior que 1
+
+Agrupando os dados de estados maior que 1
+
+```
 SELECT UF, Count(1) as Total FROM Cliente
 Group by UF
 having count(*) >1
+```
 
 
-//Ordenando os dados  ASC|DESC
+Ordenando os dados  ASC|DESC
+
+```
 SELECT * FROM Cliente 
 ORDER BY telefone ASC
+```
 
+Consultando os dados entre as datas
 
+```
 SELECT *
 FROM Cliente
 WHERE dataCriacao BETWEEN '2022-09-01' AND '2022-09-04';
+```
 
 
+Customizando um atributo com case
+
+```
+SELECT nome,
 CASE
-    WHEN condition1 THEN result1
-    WHEN condition2 THEN result2
-    WHEN conditionN THEN resultN
-    ELSE result
-END;
-
-SELECT OrderID, Quantity,
-CASE
-    WHEN Quantity > 30 THEN 'The quantity is greater than 30'
-    WHEN Quantity = 30 THEN 'The quantity is 30'
-    ELSE 'The quantity is under 30'
-END AS QuantityText
-FROM OrderDetails;
-
+    WHEN uf ='SP'  THEN 'São Paulo'    
+    ELSE uf
+END AS estado
+FROM Cliente;
+```
 
 ## Removendo dados nas tabelas
 
-
+```
+delete from Cliente where id = 1 ;
+```
 
 # Transformar registros em json
 
-SET @jsonempl=(SELECT JSON_ARRAYAGG(JSON_OBJECT("id", id, "name", name, "phonenumber", phonenumber, "email", email, "gender", gender, "maritalstatus", maritalstatus, "birth", birth, "createdate", createdate, "lastupdate", lastupdate)) FROM customer);
+```
+SET @jsonempl=(SELECT JSON_ARRAYAGG(JSON_OBJECT("id", id, "nome", nome, "telefone", telefone, "email", email)) FROM Cliente);
+
 SELECT JSON_PRETTY(@jsonempl);
-Criado as tags para organização das réplicas:
+
+```
 
 
 ## Criando indíces
-
 
 
 ```
 CREATE INDEX idx_telefone ON Cliente (Telefone);
 
 ```
-
 
 
 # Instalando um ferramenta gráfica para o MySQL
