@@ -85,7 +85,7 @@ SHOW TABLES;
 ```
 
 
-Criado tabela do resultado de uma consulta
+Criar tabela do resultado de uma consulta
 
 ```
 
@@ -96,6 +96,9 @@ CREATE TABLE ClientesUF AS
 SELECT *
 FROM Cliente
 WHERE uf = 'SP';
+
+SELECT * FROM ClientesUF;
+
 ```
 
 Alterado informações da tabela
@@ -239,7 +242,7 @@ select * from Cliente;
 
 select * from Cliente where nome ='Teste da Silva';
 
-select * from Cliente where telefone = '5511971111119' and email ='testedasilva@gmail.com'
+select * from Cliente where telefone = '5511971111119' and email ='email@email.com.br';
 
 select * from Cliente where telefone = '5511971111119' or telefone ='5511971111114';
 
@@ -251,20 +254,20 @@ select nome, telefone, email from Cliente where telefone = '5511971111119';
 
 ```
 select * from Cliente c
-left outer join Pedido p on c.id = p.idCliente
+left outer join Pedido p on c.id = p.idCliente;
 ```
 
 Fazer um join mostrando somente os campos de cliente
 
 ```
 select c.* from Cliente c
-left outer join Pedido p on c.id = p.idCliente
+left outer join Pedido p on c.id = p.idCliente;
 
 select c.* from Cliente c
-inner join Pedido p on c.id = p.idCliente
+inner join Pedido p on c.id = p.idCliente;
 
 select c.* from Cliente c
-outer join Pedido p on c.id = p.idCliente
+right outer join Pedido p on c.id = p.idCliente
 where c.telefone = '5511971111119';
 
 select c.* from Cliente c
@@ -275,7 +278,7 @@ inner join PedidoDetalhes pd on p.id = pd.idPedido;
 Quantos clientes existem na tabela
 
 ```
-select count(1) from Cliente
+select count(1) from Cliente;
 ```
 
 Tirando as duplicidades na consulta
@@ -288,7 +291,7 @@ Agrupando os dados pelo campo estados
 
 ```
 SELECT UF, Count(1) as Total FROM Cliente
-Group by UF
+Group by UF;
 ```
 
 
@@ -297,7 +300,7 @@ Agrupando os dados de estados maior que 1
 ```
 SELECT UF, Count(1) as Total FROM Cliente
 Group by UF
-having count(*) >1
+having count(*) >1;
 ```
 
 
@@ -305,7 +308,7 @@ Ordenando os dados  ASC|DESC
 
 ```
 SELECT * FROM Cliente 
-ORDER BY telefone ASC
+ORDER BY telefone ASC;
 ```
 
 Consultando os dados entre as datas
@@ -332,6 +335,8 @@ FROM Cliente;
 
 ```
 delete from Cliente where id = 1 ;
+
+delete from Pedido where id = 1 ;
 ```
 
 # Transformar registros em json
