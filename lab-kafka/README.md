@@ -57,7 +57,7 @@ Listando o tópico criado
 kafka-topics --bootstrap-server localhost:9092 --list 
 ```
 
-Alguém lembra das partições, agora o tópico com mais de uma partição
+Alguém lembra das partições? Agora o tópico com mais de uma partição
 
 ```
 kafka-topics --bootstrap-server localhost:9092 --topic alunos-novos --create --partitions 3
@@ -75,6 +75,7 @@ kafka-topics --bootstrap-server localhost:9092 --topic alunos-novos-factor --cre
 ```
 ...é não deu certo, porque ?
 
+Agora vai dar certo...
 ```
 kafka-topics --bootstrap-server localhost:9092 --topic alunos-novos-factor --create --partitions 3 --replication-factor 1
 ```
@@ -105,7 +106,7 @@ Produzinho mensagens com acks
 kafka-console-producer --bootstrap-server localhost:9092 --topic alunos --producer-property acks=all
 ```
 
-Criando um tópico no momento de criar a mensagem
+Criando o tópico no momento de criar a mensagem
 
 ```
 kafka-console-producer --bootstrap-server localhost:9092 --topic professor
@@ -120,31 +121,7 @@ O tópico foi criado com configurações default
 
 Ver as configurações na pasta cat /etc/kafka/server.properties
 
-Mudar o arquivo docker-compose
-
-
-Novo tópico com a configuração número de partição ajustada
-
-```
-
-//Sair do container
-exit
-
-//Mudar o docker compose colocando
-KAFKA_NUM_PARTITIONS=3
-
-//deploy docker-compose
-docker-compose up -d
-
-//Entrar no conteiner
-docker exec -it kafka1 /bin/bash
-
-kafka-console-producer --bootstrap-server localhost:9092 --topic topico-conf
-
-kafka-topics --bootstrap-server localhost:9092 --topic topico-conf --describe
-```
-
-Produzir mensagens com chaves
+Produzir mensagens com habilitando a Key
 
 ```
 kafka-console-producer --bootstrap-server localhost:9092 --topic alunos --property parse.key=true --property key.separator=:
@@ -158,10 +135,15 @@ kafka-console-producer --bootstrap-server localhost:9092 --topic alunos --proper
 kafka-console-consumer --bootstrap-server localhost:9092 --topic alunos
 ```
 
-Abri outro terminal, entre no container e produza uma mensagem
+Abre outro terminal, entre no container e produza uma mensagem
 
 ```
+
+//Entrando no containar em outro terminal
+
 docker exec -it kafka1 /bin/bash
+
+//Produzindo mensagens
 
 kafka-console-producer --bootstrap-server localhost:9092 --topic alunos --property parse.key=true --property key.separator=:
 
@@ -181,10 +163,13 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic alunos --from-b
 
 ```
 
-Consumindo mensagens mostrado algumas configurações como a chave e valor
+Consumindo mensagens mostrado algumas configurações como a key e value
 
 ```
 kafka-console-consumer --bootstrap-server localhost:9092 --topic alunos  --property print.timestamp=true --property print.key=true --property print.value=true --property print.partition=true --from-beginning
+
+>^C  (<- Ctrl + C is used to exit the producer)
+
 ```
 
 # Consumer group
@@ -193,7 +178,7 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic alunos  --prope
 
 
 
-Cria um consumer group
+Criando um consumer group
 
 Consumindo as mensagens com um consumer group
 
@@ -201,7 +186,7 @@ Consumindo as mensagens com um consumer group
 kafka-console-consumer --bootstrap-server localhost:9092 --topic alunos --group aplicacao-lab
 ```
 
-Abrir outro terminal 
+Em um outro terminal....
 
 Produzindo as mensagem 
 
@@ -227,16 +212,24 @@ kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group aplic
 Produzindo mensagem no Round Robin Partitioner
 
 ```
-kafka-console-producer.sh --bootstrap-server localhost:9092 --producer-property partitioner.class=org.apache.kafka.clients.producer.RoundRobinPartitioner --topic alunos
+kafka-console-producer --bootstrap-server localhost:9092 --producer-property partitioner.class=org.apache.kafka.clients.producer.RoundRobinPartitioner --topic alunos
 ```
+---
 
-## Praticando mais
+## Praticando mais - Desafio
 
-Crie o ambiente
+![Cluster Mongo db](img/desafio.png)
 
-Crie um tópico com 3 partições
-Produce com RoundRobinPartitioner
-Crie 2 consumer group para o tópico criado
+
+O desafio tera a estrutura da imagem acima:
+
+- Um tópico com nome preco-alterado com 3 partições
+- Um consumer group com 3 consumidores
+
+
+> Crie o tópico com a opção `RoundRobinPartitioner` para simular as mensagens em cada consumidor
+
+
 
 # Remover os containers
 
