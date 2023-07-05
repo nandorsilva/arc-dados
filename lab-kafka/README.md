@@ -17,7 +17,7 @@
 
 ## Criando o ambiente Kafka com o docker compose
 
-No diretório /lab-kafka execute o comando abaixo
+No diretório `/lab-kafka` execute o comando abaixo
 ```
 docker-compose up -d
 ```
