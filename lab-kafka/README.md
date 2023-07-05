@@ -35,6 +35,7 @@ Verificando as imagens que foram feitas download do docker-hub
 Verificando se a ferramenta Kafdrop realizou o deploy com sucesso
 http://localhost:19000/
 
+>Kafdrop é uma interface de usuário da web simples, para visualizar tópicos Kafka e navegar em grupos de consumidores. A ferramenta exibe informações como corretores, tópicos, partições, consumidores e permite visualizar mensagens.
 
 ---
 
