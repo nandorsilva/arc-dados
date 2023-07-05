@@ -16,6 +16,8 @@
 ---
 
 ## Criando o ambiente Kafka com o docker compose
+
+No diretório /lab-kafka execute o comando abaixo
 ```
 docker-compose up -d
 ```
@@ -54,7 +56,7 @@ Listando os tópicos criado
 kafka-topics --bootstrap-server localhost:9092 --list 
 ```
 
-Alguém lembra das partições, agora o topico com mais de uma partição
+Alguém lembra das partições, agora o tópico com mais de uma partição
 
 ```
 kafka-topics --bootstrap-server localhost:9092 --topic alunos-novos --create --partitions 3
@@ -102,7 +104,7 @@ Produzinho mensagens com acks
 kafka-console-producer --bootstrap-server localhost:9092 --topic alunos --producer-property acks=all
 ```
 
-Criando um topico no momento de criar a mensagem
+Criando um tópico no momento de criar a mensagem
 
 ```
 kafka-console-producer --bootstrap-server localhost:9092 --topic professor
@@ -111,16 +113,16 @@ kafka-topics --bootstrap-server localhost:9092 --topic professor --describe
 
 ```
 
-A Criação foi possivel pois a propriedade auto.create.topics.enable está com true
+> A Criação do tópico foi possivel pois a propriedade auto.create.topics.enable está com true.
 
-O Topico foi criado com configurações default
+O tópico foi criado com configurações default
 
 Ver as configurações na pasta cat /etc/kafka/server.properties
 
 Mudar o arquivo docker-compose
 
 
-Novo topico com a configuração numero de partição ajustada
+Novo tópico com a configuração número de partição ajustada
 
 ```
 
@@ -231,9 +233,9 @@ kafka-console-producer.sh --bootstrap-server localhost:9092 --producer-property 
 
 Crie o ambiente
 
-Crie um topico com 3 partições
+Crie um tópico com 3 partições
 Produce com RoundRobinPartitioner
-Crie 2 consumer group para o topico criado
+Crie 2 consumer group para o tópico criado
 
 # Remover os containers
 
