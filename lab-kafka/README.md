@@ -13,6 +13,7 @@
 * Docker
 * Docker-Compose
 
+---
 
 ## Criando o ambiente Kafka com o docker compose
 ```
@@ -29,11 +30,11 @@ Verificando as imagens que foram feitas download do docker-hub
  docker image ls
 ```
 
-Verificando se a ferramenta Kafdrop subiu com sucesso
+Verificando se a ferramenta Kafdrop realizou o deploy com sucesso
 http://localhost:19000/
 
 
-
+---
 
 Vamos executar alguns comandos de dentro do container kafka1
 
