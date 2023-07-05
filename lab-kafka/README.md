@@ -52,7 +52,7 @@ docker exec -it kafka1 /bin/bash
 kafka-topics --bootstrap-server localhost:9092 --topic alunos --create
 ```
 
-Listando os tópicos criado
+Listando o tópico criado
 ```
 kafka-topics --bootstrap-server localhost:9092 --list 
 ```
