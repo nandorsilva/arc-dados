@@ -80,6 +80,19 @@ Agora vai dar certo...
 kafka-topics --bootstrap-server localhost:9092 --topic alunos-novos-factor --create --partitions 3 --replication-factor 1
 ```
 
+
+Criando tópicos com configurações
+
+```
+kafka-topics --bootstrap-server localhost:9092 --create --topic topico-config --partitions 3 --replication-factor 1
+
+
+kafka-configs --bootstrap-server kafka:29092 --entity-type topics --entity-name topico-config --alter --add-config retention.ms=259200000
+
+kafka-topics --bootstrap-server localhost:9092 --describe --topic topico-config
+
+```
+
 # Deletando um tópico
 
 ```
@@ -174,10 +187,6 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic alunos  --prope
 
 # Consumer group
 
-
-
-
-
 Criando um consumer group
 
 Consumindo as mensagens com um consumer group
@@ -208,6 +217,8 @@ As configurações do consume groups são :
 kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group aplicacao-lab
 
 ```
+Deletando os consumer groups
+kafka-consumer-groups --bootstrap-server kafka:29092 --delete --group aplicacao-lab
 
 Produzindo mensagem no Round Robin Partitioner
 
