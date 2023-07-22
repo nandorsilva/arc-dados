@@ -1,20 +1,17 @@
 # Lab Eda
 
----
-## Disclaimer
+
+### Disclaimer
 > **As configurações dos Laboratórios é puramente para fins de desenvolvimento local e estudos**
-> 
-
----
 
 
-## Pré-requisitos?
+### Pré-requisitos?
 * Docker
 * Docker-Compose
 
 
 
-# Instalação Kafka 
+## Instalação Kafka 
 
 ![Cluster Mongo db](../content/ambiente.png)
 
@@ -37,10 +34,8 @@ Verificando as imagens que foram feitas download do docker-hub
  docker image ls
 ```
 
-# O que acontenceu ?
+## O que acontenceu ?
 
-
----
 
 * 3.1. [LAB EDA - API](kafka-net/README.md)
 * 3.2. [LAB EDA - AsyncAPI](asyncAPI/README.md)
