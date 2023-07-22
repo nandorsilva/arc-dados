@@ -37,6 +37,28 @@ Verificando as imagens que foram feitas download do docker-hub
 ## O que acontenceu ?
 
 
+## Acesso WebUI dos componentes
+
+
+* AKHQ http://localhost:8080/ui
+* ZooNavigator http://localhost:8000/
+* Prometeus http://localhost:9090/
+* jmx-prometheus-exporter http://localhost:5556/
+* Grafana http://localhost:3000/login
+
+## Acessos
+
+ZooNavigator
+
+```
+zookeeper:2181
+```
+
+Grafana
+
+* user : `admin`
+* password : `kafka`
+
 * 3.1. [LAB EDA - API](kafka-net/README.md)
 * 3.2. [LAB EDA - AsyncAPI](asyncAPI/README.md)
 * 3.3. [LAB EDA - Event-Catalog](event-catalog//README.md)
