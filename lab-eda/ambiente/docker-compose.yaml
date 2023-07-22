@@ -64,7 +64,7 @@ services:
   kafka-broker:
     image: confluentinc/cp-kafka:${CONFLUENT_VERSION}
     depends_on:
-      - zk1
+      - zk
     ports:
       - "9092:9092"
       - "9991:9991"
