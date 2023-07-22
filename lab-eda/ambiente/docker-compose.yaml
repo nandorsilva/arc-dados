@@ -138,10 +138,10 @@ services:
     ports:
      - 8083:8083
     links:
-     - kafka101    
+     - kafka-broker    
     environment:
      - KAFKA_LOG4J_OPTS=-Dlog4j.configuration=file:/opt/kafka/config/connect-log4j.properties
-     - KAFKA_CONNECT_BOOTSTRAP_SERVERS=kafka101:29092
+     - KAFKA_CONNECT_BOOTSTRAP_SERVERS=kafka-broker:29092
      - |
          KAFKA_CONNECT_CONFIGURATION=
          key.converter=org.apache.kafka.connect.json.JsonConverter
@@ -234,7 +234,7 @@ services:
     container_name: jaegerconsumer
     image: quay.io/strimzi-examples/java-kafka-consumer:latest
     environment:
-      KAFKA_BOOTSTRAP_SERVERS: kafka101:29092
+      KAFKA_BOOTSTRAP_SERVERS: kafka-broker:29092
       STRIMZI_TOPIC: dbserver1.inventory.orders   
       KAFKA_GROUP_ID: java-kafka-consumer   
       STRIMZI_LOG_LEVEL: INFO   
@@ -247,14 +247,14 @@ services:
       JAEGER_SAMPLER_PARAM: "1"
       STRIMZI_TRACING_SYSTEM: jaeger
     depends_on:
-      - kafka101    
+      - kafka-broker    
       - jaeger
 
   jaegerconsumer2:
     container_name: jaegerconsumer2
     image: quay.io/strimzi-examples/java-kafka-consumer:latest
     environment:
-      KAFKA_BOOTSTRAP_SERVERS: kafka101:29092
+      KAFKA_BOOTSTRAP_SERVERS: kafka-broker:29092
       STRIMZI_TOPIC: dbserver1.inventory.orders   
       KAFKA_GROUP_ID: java-kafka-consumer-2   
       STRIMZI_LOG_LEVEL: INFO   
@@ -267,5 +267,5 @@ services:
       JAEGER_SAMPLER_PARAM: "1"
       STRIMZI_TRACING_SYSTEM: jaeger
     depends_on:
-      - kafka101    
+      - kafka-broker    
       - jaeger
