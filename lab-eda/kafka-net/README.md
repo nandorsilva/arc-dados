@@ -16,32 +16,5 @@
 
 
 
-# Instalação Kafka 
-
-![Cluster Mongo db](../content/kafka-metrics.png)
-
-Executando o docker compose
-
-```
-cd ambiente
-docker-compose up -d
-```
-
-Verificando se os containers foram criados com sucesso
-
-```
- docker container ls
-```
-Verificando as imagens que foram feitas download do docker-hub
-```
- docker image ls
-```
-
-# O que acontenceu ?
-
-
-
----
-
 # Deploy Aplicação Net Producer
 
