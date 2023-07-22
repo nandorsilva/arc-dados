@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "LTBEEM3Ca91n8p7GiaMyIPtWB4zqIBMYfQ8kv07qx1E=",
+  "Source": "kafka-net",
+  "BasePath": "_content/kafka-net",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

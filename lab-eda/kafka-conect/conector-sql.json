@@ -1,0 +1,13 @@
+{
+        "connector.class" : "io.debezium.connector.sqlserver.SqlServerConnector",
+        "tasks.max" : "1",
+        "topic.prefix" : "server1",
+        "database.server.name": "sqldebezium",
+        "database.hostname": "sqlserver",
+        "database.port": "1433",
+        "database.dbname": "dbEcommerce",
+        "database.user": "sa",
+        "database.password": "Password!",      
+        "snapshot.mode" : "schema_only",
+        "database.history": "io.debezium.relational.history.MemoryDatabaseHistory"
+}

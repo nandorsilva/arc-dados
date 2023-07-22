@@ -1,0 +1,271 @@
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements. See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License. You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+version: '2.4'
+services:
+  grafana:
+    image: "grafana/grafana:${GRAFANA_VERSION}"
+    ports:
+     - "3000:3000"
+    environment:
+      GF_PATHS_DATA : /var/lib/grafana
+      GF_SECURITY_ADMIN_PASSWORD : kafka
+    volumes:
+     - ./grafana/provisioning:/etc/grafana/provisioning
+     - ./grafana/dashboards:/var/lib/grafana/dashboards
+    container_name: grafana
+    depends_on:
+     - prometheus
+
+  prometheus:
+    image: "prom/prometheus:${PROMETHEUS_VERSION}"
+    ports:
+     - "9090:9090"
+    volumes:
+     - ./etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command: "--config.file=/etc/prometheus/prometheus.yml"
+    container_name: prometheus
+
+  jmx-kafka101:
+    image: "sscaling/jmx-prometheus-exporter"
+    ports:
+     - "5556:5556"
+    environment:
+     CONFIG_YML : "/etc/jmx_exporter/config.yml"
+     JVM_OPTS: ${PROMETHEUS_JMX_AGENT_JVM_OPTS}
+    volumes:
+     - ./etc/jmx_exporter/config_kafka101.yml:/etc/jmx_exporter/config.yml
+    container_name: jmx-kafka101
+    depends_on:
+     - kafka101
+
+  zk1:
+    image: confluentinc/cp-zookeeper:${CONFLUENT_VERSION}
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_INIT_LIMIT: 5
+      ZOOKEEPER_SYNC_LIMIT: 2
+    ports:
+     - "2181:2181"
+    container_name: zookeeper1
+
+  kafka101:
+    image: confluentinc/cp-kafka:${CONFLUENT_VERSION}
+    depends_on:
+      - zk1
+    ports:
+      - "9092:9092"
+      - "9991:9991"
+
+    container_name: kafka101
+    environment:
+      KAFKA_BROKER_ID: 101
+      KAFKA_JMX_PORT: 9991
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper1:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka101:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka101:29092
+      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper1:2181
+      CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
+      CONFLUENT_METRICS_ENABLE: 'false'
+      KAFKA_HEAP_OPTS: ${KAFKA_BROKER_HEAP_OPTS}
+    mem_limit: ${KAFKA_BROKER_MEM_LIMIT}
+
+
+  zoonavigator:
+    image: elkozmon/zoonavigator:${ZOONAVIGATOR_VERSION}
+    container_name: zoonavigator
+    ports:
+      - "8000:8000"
+    environment:
+      HTTP_PORT: 8000
+      AUTO_CONNECT_CONNECTION_STRING: zookeeper1:2181
+    depends_on:
+      - zk1
+
+  akhq:
+    image: tchiotludo/akhq:${AKHQ_VERSION}
+    container_name: akhq
+    environment:
+      AKHQ_CONFIGURATION: |
+        akhq:
+          connections:
+            docker-kafka-server:
+              properties:
+                bootstrap.servers: "kafka101:29092"       
+#              connect:
+#                url: "http://connect:8083"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - kafka101    
+
+  kafka-net:
+    image: fernandos/kafka-net:v1
+    container_name: kafkanet    
+    environment:
+        ASPNETCORE_ENVIRONMENT: Development
+    depends_on:
+      - kafka101    
+    ports:
+     - "5000:80"   
+
+  jaeger:
+    image: jaegertracing/all-in-one:1
+    ports:
+     - 6831:6831/udp
+     - 16686:16686
+
+  connect:
+    image: fernandos/kafka-connet-debezium-lab    
+    container_name: kafkaConect
+    ports:
+     - 8083:8083
+    links:
+     - kafka101    
+    environment:
+     - KAFKA_LOG4J_OPTS=-Dlog4j.configuration=file:/opt/kafka/config/connect-log4j.properties
+     - KAFKA_CONNECT_BOOTSTRAP_SERVERS=kafka101:29092
+     - |
+         KAFKA_CONNECT_CONFIGURATION=
+         key.converter=org.apache.kafka.connect.json.JsonConverter
+         value.converter=org.apache.kafka.connect.json.JsonConverter
+         key.converter.schemas.enable=false
+         value.converter.schemas.enable=false
+         group.id=connect
+         offset.storage.topic=connect-offsets
+         offset.storage.replication.factor=1
+         config.storage.topic=connect-configs
+         config.storage.replication.factor=1
+         status.storage.topic=connect-status
+         status.storage.replication.factor=1
+         consumer.interceptor.classes=io.opentracing.contrib.kafka.TracingConsumerInterceptor
+         producer.interceptor.classes=io.opentracing.contrib.kafka.TracingProducerInterceptor
+     - JAEGER_SERVICE_NAME=kafka-connect
+     - JAEGER_AGENT_HOST=jaeger
+     - JAEGER_SAMPLER_TYPE=const
+     - JAEGER_SAMPLER_PARAM=1
+     - STRIMZI_TRACING=jaeger
+    command: /opt/kafka/kafka_connect_run.sh
+
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+     - 1433:1433
+    environment:
+     - ACCEPT_EULA=Y
+     - MSSQL_PID=Standard
+     - SA_PASSWORD=Password!
+     - MSSQL_AGENT_ENABLED=true
+    stdin_open: true
+    volumes:
+      - /sql/init.sql:/opt/sql_scripts/init.sql
+
+  postgres:
+    image: quay.io/debezium/example-postgres:2.1
+    container_name: postgres
+    ports:
+     - 5432:5432
+    environment:
+     - POSTGRES_USER=postgres
+     - POSTGRES_PASSWORD=postgres
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: lab-pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: postgres    
+    ports:
+      - "5433:80"
+    depends_on:
+      - postgres    
+
+
+  zipkin-all-in-one:
+    image: openzipkin/zipkin:latest
+    restart: always
+    ports:
+      - "9411:9411"
+      
+  otel-collector:
+    image: otel/opentelemetry-collector:0.67.0
+    restart: always
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    ports:
+     - "1888:1888"   # pprof extension
+     - "8888:8888"   # Prometheus metrics exposed by the collector
+     - "8889:8889"   # Prometheus exporter metrics
+     - "13133:13133" # health_check extension
+     - "4317:4317"   # OTLP gRPC receiver
+     - "55679:55679" # zpages extension
+    depends_on:
+      - jaeger
+      - zipkin-all-in-one
+
+  prometheusj:
+    container_name: prometheusj
+    image: prom/prometheus:latest
+    restart: always
+    volumes:
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+
+  jaegerconsumer:
+    container_name: jaegerconsumer
+    image: quay.io/strimzi-examples/java-kafka-consumer:latest
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka101:29092
+      STRIMZI_TOPIC: dbserver1.inventory.orders   
+      KAFKA_GROUP_ID: java-kafka-consumer   
+      STRIMZI_LOG_LEVEL: INFO   
+      MESSAGE_COUNT: "1000000" 
+      KAFKA_KEY_DESERIALIZER: "org.apache.kafka.common.serialization.StringDeserializer"   
+      KAFKA_VALUE_DESERIALIZER: "org.apache.kafka.common.serialization.StringDeserializer"     
+      JAEGER_SERVICE_NAME : kafka-consumer   
+      JAEGER_AGENT_HOST: jaeger
+      JAEGER_SAMPLER_TYPE: const   
+      JAEGER_SAMPLER_PARAM: "1"
+      STRIMZI_TRACING_SYSTEM: jaeger
+    depends_on:
+      - kafka101    
+      - jaeger
+
+  jaegerconsumer2:
+    container_name: jaegerconsumer2
+    image: quay.io/strimzi-examples/java-kafka-consumer:latest
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka101:29092
+      STRIMZI_TOPIC: dbserver1.inventory.orders   
+      KAFKA_GROUP_ID: java-kafka-consumer-2   
+      STRIMZI_LOG_LEVEL: INFO   
+      MESSAGE_COUNT: "1000000" 
+      KAFKA_KEY_DESERIALIZER: "org.apache.kafka.common.serialization.StringDeserializer"   
+      KAFKA_VALUE_DESERIALIZER: "org.apache.kafka.common.serialization.StringDeserializer"     
+      JAEGER_SERVICE_NAME : kafka-consumer-2
+      JAEGER_AGENT_HOST: jaeger
+      JAEGER_SAMPLER_TYPE: const   
+      JAEGER_SAMPLER_PARAM: "1"
+      STRIMZI_TRACING_SYSTEM: jaeger
+    depends_on:
+      - kafka101    
+      - jaeger

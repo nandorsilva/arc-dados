@@ -23,6 +23,7 @@
 Executando o docker compose
 
 ```
+cd ambiente
 docker-compose up -d
 ```
 
@@ -39,24 +40,12 @@ Verificando as imagens que foram feitas download do docker-hub
 # O que acontenceu ?
 
 
-
 ---
 
-# Deploy Aplicação Net Producer
-
----
-
-# Criando um arquiro AsynAPI
-
-https://studio.asyncapi.com/
-
-
-# Criando o template html pelo AsyncAPI
-
-## Pré-requisitos?
-
-
-* Node.js v12.16 and higher
-* Npm v6.13.7 and higher
-
-> https://nodejs.org/en/download
+3.1 [LAB EDA - API](kafka-net/README.md)
+3.2 [LAB EDA - AsyncAPI](asyncAPI/README.md)
+3.3 [LAB EDA - Event-Catalog](event-catalog//README.md)
+3.4 [LAB EDA - Microcks](microcks/README.md)
+3.5 [LAB EDA - Kafka Conect](kafka-conect/README.md)
+3.6 [LAB EDA - Jaeger](jaeger/README.md)
+3.7 [LAB EDA - Ksqldb](ksql/README.md)
