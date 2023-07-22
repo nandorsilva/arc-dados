@@ -1,4 +1,4 @@
-# Lab Eda - AsynAPI
+# Lab Eda - AsyncAPI
 
 ---
 ## Disclaimer
