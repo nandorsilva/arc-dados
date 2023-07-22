@@ -1,4 +1,4 @@
-# Lab Eda
+# Lab Eda - AsynAPI
 
 ---
 ## Disclaimer
@@ -6,9 +6,6 @@
 > 
 
 ---
-
----
-
 
 ## Pré-requisitos?
 * Docker
@@ -18,27 +15,7 @@
 
 # Instalação Kafka 
 
-![Cluster Mongo db](../content/kafka-metrics.png)
-
-Executando o docker compose
-
-```
-docker-compose up -d
-```
-
-Verificando se os containers foram criados com sucesso
-
-```
- docker container ls
-```
-Verificando as imagens que foram feitas download do docker-hub
-```
- docker image ls
-```
-
-# O que acontenceu ?
-
-
+[LAB EDA](lab-eda//README.md)
 
 ---
 

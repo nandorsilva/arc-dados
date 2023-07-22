@@ -11,28 +11,10 @@
 * Docker
 * Docker-Compose
 
+# Instalação Kafka 
 
-
-# Criando o ambiente
-
-
-
-Executando o docker compose
-
-```
-cd ambiente
-docker-compose up -d
-```
-
-Verificando se os containers foram criados com sucesso
-
-```
- docker container ls
-```
-Verificando as imagens que foram feitas download do docker-hub
-```
- docker image ls
-```
+[LAB EDA](lab-eda//README.md)
+---
 
 # KSqldb
 

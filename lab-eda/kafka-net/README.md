@@ -1,4 +1,4 @@
-# Lab Eda
+# Lab Eda - kafka Net
 
 ---
 ## Disclaimer
@@ -12,6 +12,10 @@
 * Docker
 * Docker-Compose
 
+
+# Instalação Kafka 
+
+[LAB EDA](lab-eda//README.md)
 
 
 # Deploy Aplicação Net Producer
