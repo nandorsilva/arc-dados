@@ -16,7 +16,7 @@
 
 # Instalação Kafka 
 
-![Cluster Mongo db](../content/kafka-metrics.png)
+![Cluster Mongo db](../content/ambiente.png)
 
 Executando o docker compose
 
