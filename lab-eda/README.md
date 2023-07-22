@@ -59,6 +59,8 @@ Grafana
 * user : `admin`
 * password : `kafka`
 
+---
+
 * 3.1. [LAB EDA - API](kafka-net/README.md)
 * 3.2. [LAB EDA - AsyncAPI](asyncAPI/README.md)
 * 3.3. [LAB EDA - Event-Catalog](event-catalog//README.md)
