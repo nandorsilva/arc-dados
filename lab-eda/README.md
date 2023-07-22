@@ -7,8 +7,6 @@
 
 ---
 
----
-
 
 ## Pré-requisitos?
 * Docker
