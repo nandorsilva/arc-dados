@@ -24,7 +24,9 @@ Executando o docker compose
 
 ```
 cd ambiente
-docker-compose up -d
+
+docker-compose up -d grafana prometheus jmx-kafka-broker zk kafka-broker zoonavigator akhq
+
 ```
 
 Verificando se os containers foram criados com sucesso

@@ -37,7 +37,7 @@ services:
     command: "--config.file=/etc/prometheus/prometheus.yml"
     container_name: prometheus
 
-  jmx-kafka101:
+  jmx-kafka-broker:
     image: "sscaling/jmx-prometheus-exporter"
     ports:
      - "5556:5556"
@@ -46,11 +46,11 @@ services:
      JVM_OPTS: ${PROMETHEUS_JMX_AGENT_JVM_OPTS}
     volumes:
      - ./etc/jmx_exporter/config_kafka101.yml:/etc/jmx_exporter/config.yml
-    container_name: jmx-kafka101
+    container_name: jmx-kafka-broker
     depends_on:
-     - kafka101
+     - kafka-broker
 
-  zk1:
+  zk:
     image: confluentinc/cp-zookeeper:${CONFLUENT_VERSION}
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
@@ -59,9 +59,9 @@ services:
       ZOOKEEPER_SYNC_LIMIT: 2
     ports:
      - "2181:2181"
-    container_name: zookeeper1
+    container_name: zookeeper
 
-  kafka101:
+  kafka-broker:
     image: confluentinc/cp-kafka:${CONFLUENT_VERSION}
     depends_on:
       - zk1
@@ -69,19 +69,19 @@ services:
       - "9092:9092"
       - "9991:9991"
 
-    container_name: kafka101
+    container_name: kafka-broker
     environment:
       KAFKA_BROKER_ID: 101
       KAFKA_JMX_PORT: 9991
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper1:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka101:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-broker:29092,PLAINTEXT_HOST://localhost:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka101:29092
-      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper1:2181
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-broker:29092
+      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:2181
       CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
       CONFLUENT_METRICS_ENABLE: 'false'
       KAFKA_HEAP_OPTS: ${KAFKA_BROKER_HEAP_OPTS}
@@ -95,9 +95,9 @@ services:
       - "8000:8000"
     environment:
       HTTP_PORT: 8000
-      AUTO_CONNECT_CONNECTION_STRING: zookeeper1:2181
+      AUTO_CONNECT_CONNECTION_STRING: zookeeper:2181
     depends_on:
-      - zk1
+      - zk
 
   akhq:
     image: tchiotludo/akhq:${AKHQ_VERSION}
@@ -108,13 +108,13 @@ services:
           connections:
             docker-kafka-server:
               properties:
-                bootstrap.servers: "kafka101:29092"       
+                bootstrap.servers: "kafka-broker:29092"       
 #              connect:
 #                url: "http://connect:8083"
     ports:
       - "8080:8080"
     depends_on:
-      - kafka101    
+      - kafka-broker    
 
   kafka-net:
     image: fernandos/kafka-net:v1
@@ -122,7 +122,7 @@ services:
     environment:
         ASPNETCORE_ENVIRONMENT: Development
     depends_on:
-      - kafka101    
+      - kafka-broker    
     ports:
      - "5000:80"   
 
