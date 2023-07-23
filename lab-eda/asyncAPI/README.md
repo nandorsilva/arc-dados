@@ -9,7 +9,8 @@
 ## Pré-requisitos?
 * Docker
 * Docker-Compose
-
+* Node.js v12.16 and higher
+* Npm v6.13.7 and higher
 
 # Instalação Kafka 
 
@@ -23,11 +24,6 @@ https://studio.asyncapi.com/
 
 # Criando o template html pelo AsyncAPI
 
-## Pré-requisitos?
-
-
-* Node.js v12.16 and higher
-* Npm v6.13.7 and higher
 
 > https://nodejs.org/en/download
 
@@ -43,3 +39,8 @@ Gerando o template html baseado no asyncAPI
 ```
  ag lab-eda/asyncAPI/estoque.yaml @asyncapi/html-template -o lab-eda/asyncAPI/templatehtml 
 ```
+
+ag lab-eda/asyncAPI/estoque.yaml @asyncapi/java-spring-template
+
+
+>https://www.asyncapi.com/
