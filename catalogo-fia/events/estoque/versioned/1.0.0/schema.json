@@ -1,0 +1,25 @@
+{
+    "type": "object",
+    "properties": {
+        "idEstoque": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Identificação estoque."
+        },
+        "idProduto": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Produto."
+        },
+        "quantidadeDisponivel": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Quantidade disponivel do produto."
+        },
+        "dtEstoque": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Data estoque."
+        }
+    }
+}

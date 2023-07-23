@@ -31,6 +31,8 @@ npm run dev
 
 ```
 
+**EventCatalog** http://localhost:3000/
+
 
 ## Instalando o plugin AsyncAPI
 
@@ -63,11 +65,17 @@ module.exports = {
 
 Gerando as alterações
 
+> Copiar o arquivo asyncAPI pra dentro da pasta catalogo-fia e mudar o nome para `asyncapi.yml`
+
 ```
 npm run generate
 cd my-catalog
 npm run dev
 ```
 
+**EventCatalog** http://localhost:3000/
+
 
 https://www.eventcatalog.dev/docs/guides/deployment
+
+https://www.eventcatalog.dev/docs
