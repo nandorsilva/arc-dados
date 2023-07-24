@@ -17,7 +17,7 @@
 
 ## Kafka Connect
 
-![Exemplo Kafka Conect](../content/kafka-connect.png)
+![Exemplo Kafka Conect]../../content/kafka-connect.png)
 
 ### Realizando download dos plugins Debezium Sql Server e PostGres (Source) 
 
@@ -111,17 +111,17 @@ Acesso o PgAdmin http://localhost:5433/
 
 
 *Tela de login do PgAdmin*
-![Exemplo Kafka Conect](../content/login-pgadmin.png)
+![Exemplo Kafka Conect](../../content/login-pgadmin.png)
 
 
 *Inserindo um server*
-![Exemplo Kafka Conect](../content/add-server.png)
+![Exemplo Kafka Conect](../../content/add-server.png)
 
 *Configurando o server*
-![Exemplo Kafka Conect](../content/conect-pgadmin.png)
+![Exemplo Kafka Conect](../../content/conect-pgadmin.png)
 
 *...Se tudo deu certo o banco de exemplo com suas tabelas*
-![Exemplo Kafka Conect](../content/tabelas.png)
+![Exemplo Kafka Conect](../../content/tabelas.png)
 
 ### Criando os Conectores
 
@@ -188,7 +188,7 @@ docker exec -i sqlserver /opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d db
 ### Insere um registro na tabela `inventory.products`
 
 
-![Exemplo Kafka Conect](../content/insert.png)
+![Exemplo Kafka Conect](../../content/insert.png)
 
 ```
 INSERT INTO inventory.products(	id, name, description, weight)
@@ -251,7 +251,7 @@ http PUT http://localhost:8083/connectors/connector-sql/resume
 
 *Fazer o Sinc para o Mongodb*
 
-![Exemplo Kafka Conect](../content/sinc.png)
+![Exemplo Kafka Conect](../../content/sinc.png)
 
 
 >Dicas
