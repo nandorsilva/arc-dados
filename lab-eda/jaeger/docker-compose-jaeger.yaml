@@ -1,0 +1,86 @@
+version: '3'
+
+services:
+  jaeger:
+    image: jaegertracing/all-in-one:1
+    container_name: jaeger
+    ports:
+     - 6831:6831/udp
+     - 16686:16686
+
+  connect:
+        image: fernandos/kafka-connet-debezium-lab    
+        container_name: kafkaConect
+        ports:
+        - 8083:8083
+        depends_on:      
+         - kafka-broker  
+         - jaeger    
+        environment:
+        - KAFKA_LOG4J_OPTS=-Dlog4j.configuration=file:/opt/kafka/config/connect-log4j.properties
+        - KAFKA_CONNECT_BOOTSTRAP_SERVERS=kafka-broker:29092
+        - |
+            KAFKA_CONNECT_CONFIGURATION=
+            key.converter=org.apache.kafka.connect.json.JsonConverter
+            value.converter=org.apache.kafka.connect.json.JsonConverter
+            key.converter.schemas.enable=false
+            value.converter.schemas.enable=false
+            group.id=connect
+            offset.storage.topic=connect-offsets
+            offset.storage.replication.factor=1
+            config.storage.topic=connect-configs
+            config.storage.replication.factor=1
+            status.storage.topic=connect-status
+            status.storage.replication.factor=1  
+            CONNECT_REST_ADVERTISED_HOST_NAME: 'connect'
+            consumer.interceptor.classes=io.opentracing.contrib.kafka.TracingConsumerInterceptor
+            producer.interceptor.classes=io.opentracing.contrib.kafka.TracingProducerInterceptor
+        - JAEGER_SERVICE_NAME=kafka-connect
+        - JAEGER_AGENT_HOST=jaeger
+        - JAEGER_SAMPLER_TYPE=const
+        - JAEGER_SAMPLER_PARAM=1
+        - STRIMZI_TRACING=jaeger       
+        command: /opt/kafka/kafka_connect_run.sh
+
+
+  jaegerconsumer:
+    container_name: jaegerconsumer
+    image: quay.io/strimzi-examples/java-kafka-consumer:latest
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka-broker:29092
+      STRIMZI_TOPIC: sqldebezium.dbo.produtos
+      KAFKA_GROUP_ID: java-kafka-consumer   
+      STRIMZI_LOG_LEVEL: INFO   
+      MESSAGE_COUNT: "1000000" 
+      KAFKA_KEY_DESERIALIZER: "org.apache.kafka.common.serialization.StringDeserializer"   
+      KAFKA_VALUE_DESERIALIZER: "org.apache.kafka.common.serialization.StringDeserializer"     
+      JAEGER_SERVICE_NAME : kafka-consumer   
+      JAEGER_AGENT_HOST: jaeger
+      JAEGER_SAMPLER_TYPE: const   
+      JAEGER_SAMPLER_PARAM: "1"
+      STRIMZI_TRACING_SYSTEM: jaeger
+    depends_on:
+      - kafka-broker      
+      - jaeger
+
+  jaegerconsumer2:
+    container_name: jaegerconsumer2
+    image: quay.io/strimzi-examples/java-kafka-consumer:latest
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka-broker:29092
+      STRIMZI_TOPIC: sqldebezium.dbo.produtos
+      KAFKA_GROUP_ID: java-kafka-consumer2   
+      STRIMZI_LOG_LEVEL: INFO   
+      MESSAGE_COUNT: "1000000" 
+      KAFKA_KEY_DESERIALIZER: "org.apache.kafka.common.serialization.StringDeserializer"   
+      KAFKA_VALUE_DESERIALIZER: "org.apache.kafka.common.serialization.StringDeserializer"     
+      JAEGER_SERVICE_NAME : kafka-consumer2
+      JAEGER_AGENT_HOST: jaeger
+      JAEGER_SAMPLER_TYPE: const   
+      JAEGER_SAMPLER_PARAM: "1"
+      STRIMZI_TRACING_SYSTEM: jaeger
+    depends_on:
+      - kafka-broker      
+      - jaeger
+
+ 

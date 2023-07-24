@@ -9,7 +9,5 @@
         "database.user": "sa",
         "database.password": "Password!",      
         "snapshot.mode" : "schema_only",
-        "database.history": "io.debezium.relational.history.MemoryDatabaseHistory",
-        "value.converter": "io.debezium.converters.CloudEventsConverter",
-        "value.converter.serializer.type": "json" 
+        "database.history": "io.debezium.relational.history.MemoryDatabaseHistory"
 }

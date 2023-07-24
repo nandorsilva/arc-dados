@@ -164,7 +164,7 @@ Listando os conectors
 http http://localhost:8083/connectors/
 ```
 
-Vendo o status dos conectors
+Verificando o status dos conectors
 
 ```
 http http://localhost:8083/connectors/connector-sql/status
