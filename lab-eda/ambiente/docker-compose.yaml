@@ -109,12 +109,14 @@ services:
             docker-kafka-server:
               properties:
                 bootstrap.servers: "kafka-broker:29092"       
-#              connect:
-#                url: "http://connect:8083"
+ #             connect:
+ #               - name: "connect"
+ #                 url: "http://connect:8083"
     ports:
       - "8080:8080"
     depends_on:
       - kafka-broker    
+      - connect
 
 
   kafka-net:
@@ -191,3 +193,69 @@ services:
       - "./config:/deployments/config"
     environment:
       - QUARKUS_PROFILE=docker-compose
+
+  connect:
+        image: fernandos/kafka-connet-debezium-lab    
+        container_name: kafkaConect
+        ports:
+        - 8083:8083
+        depends_on:      
+         - kafka-broker      
+        environment:
+        - KAFKA_LOG4J_OPTS=-Dlog4j.configuration=file:/opt/kafka/config/connect-log4j.properties
+        - KAFKA_CONNECT_BOOTSTRAP_SERVERS=kafka-broker:29092
+        - |
+            KAFKA_CONNECT_CONFIGURATION=
+            key.converter=org.apache.kafka.connect.json.JsonConverter
+            value.converter=org.apache.kafka.connect.json.JsonConverter
+            key.converter.schemas.enable=false
+            value.converter.schemas.enable=false
+            group.id=connect
+            offset.storage.topic=connect-offsets
+            offset.storage.replication.factor=1
+            config.storage.topic=connect-configs
+            config.storage.replication.factor=1
+            status.storage.topic=connect-status
+            status.storage.replication.factor=1  
+            CONNECT_REST_ADVERTISED_HOST_NAME: 'connect'       
+        command: /opt/kafka/kafka_connect_run.sh
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    ports:
+     - 1433:1433
+    environment:
+     - ACCEPT_EULA=Y
+     - MSSQL_PID=Standard
+     - SA_PASSWORD=Password!
+     - MSSQL_AGENT_ENABLED=true
+    stdin_open: true
+    volumes:
+      - /sql/init.sql:/opt/sql_scripts/init.sql
+
+
+  postgres:
+    image: quay.io/debezium/example-postgres:2.1
+    container_name: postgres
+    ports:
+     - 5432:5432
+    environment:
+     - POSTGRES_USER=postgres
+     - POSTGRES_PASSWORD=postgres
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: lab-pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: postgres    
+    ports:
+      - "5433:80"
+    depends_on:
+      - postgres    
+
+  mongo-connect:
+    image: mongo:3.4.23
+    container_name: mongo-connect
+    volumes:
+      - "~/tmp/mongodbdata:/data/db"
