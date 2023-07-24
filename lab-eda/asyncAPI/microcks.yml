@@ -1,0 +1,52 @@
+asyncapi: '2.0.0'
+id: 'urn:io.microcks.example.user-signedup2'
+info:
+  title: User signed-up API 2
+  version: 0.1.1
+  description: Sample AsyncAPI for user signedup events
+defaultContentType: application/json
+channels:
+  sku:
+    description: The topic on which user signed up events may be consumed
+    subscribe:
+      summary: Receive informations about user signed up
+      operationId: receivedUserSIgnedUp
+      message:
+        description: An event describing that a user just signed up.
+        traits:
+          - $ref: '#/components/messageTraits/commonHeaders'
+        payload:
+          type: object
+          additionalProperties: false
+          properties:
+            id:
+              type: string
+            sendAt:
+              type: string
+            preco:
+              type: string           
+        examples:
+          - laurent:
+              summary: Example for Laurent user
+              headers: |-
+                {"my-app-header": 23}
+              payload: |-
+                {"id": "{{randomString(32)}}", "sendAt": "{{now()}}", "preco": "{{randomString(32)}}"}
+          - john:
+              summary: sku1
+              headers:
+                my-app-header: 24
+              payload:
+                id: '{{randomString(32)}}'
+                sendAt: '{{now()}}'
+                preco: '{{randomString(32)}}'               
+components:
+  messageTraits:
+    commonHeaders:
+      headers:
+        type: object
+        properties:
+          my-app-header:
+            type: integer
+            minimum: 0
+            maximum: 100

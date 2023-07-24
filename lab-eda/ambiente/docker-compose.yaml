@@ -126,3 +126,68 @@ services:
           - kafka-broker       
       ports:
         - "5000:80"
+
+  mongo:
+    image: mongo:3.4.23
+    container_name: microcks-db
+    volumes:
+      - "~/tmp/microcks-data:/data/db"
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:20.0.2
+    container_name: microcks-sso
+    ports:
+      - "18080:8080"
+    environment:
+      KEYCLOAK_ADMIN: "admin"
+      KEYCLOAK_ADMIN_PASSWORD: "admin"
+      KC_HOSTNAME_ADMIN_URL: "http://localhost:18080"
+      KC_HOSTNAME_URL: "http://localhost:18080"
+    volumes:
+      - "./keycloak-realm/microcks-realm-sample.json:/opt/keycloak/data/import/microcks-realm.json"
+    command:
+      - start-dev --import-realm
+
+
+  postman:
+    image: quay.io/microcks/microcks-postman-runtime:latest
+    container_name: microcks-postman-runtime
+
+  app:
+    depends_on:
+      - mongo
+      - keycloak
+      - postman
+      - kafka-broker
+    image: quay.io/microcks/microcks:1.7.1
+    container_name: microcks
+    volumes:
+      - "./config:/deployments/config"
+    ports:
+      - "8080:8080"
+      - "9090:9090"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017
+      - SPRING_DATA_MONGODB_DATABASE=microcks
+      - POSTMAN_RUNNER_URL=http://postman:3000
+      - TEST_CALLBACK_URL=http://microcks:8080
+      - SERVICES_UPDATE_INTERVAL=0 0 0/2 * * *
+      - KEYCLOAK_URL=http://keycloak:8080
+      - KEYCLOAK_PUBLIC_URL=http://localhost:18080
+      - ASYNC_MINION_URL=http://microcks-async-minion:8081
+      - KAFKA_BOOTSTRAP_SERVER=kafka-broker:29092
+
+  async-minion:
+    depends_on:
+      - app
+      - kafka-broker
+    ports:
+      - "8081:8081"
+    image: quay.io/microcks/microcks-async-minion:1.7.1
+    container_name: microcks-async-minion
+    restart: on-failure
+    volumes:
+      - "./config:/deployments/config"
+    environment:
+      - QUARKUS_PROFILE=docker-compose

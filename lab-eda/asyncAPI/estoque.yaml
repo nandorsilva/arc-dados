@@ -1,4 +1,5 @@
 asyncapi: '2.6.0'
+id: 'urn:io.logistica.estoque'
 info:
   title: Lab Arquitetura de dados
   version: '1.0.0'
@@ -13,7 +14,12 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0
 servers:
   test:
-    url: kafka:9092
+    bindings:
+      kafka:
+        schemaRegistryUrl: 'https://my-schema-registry.com'
+        schemaRegistryVendor: 'confluent'
+        bindingVersion: '0.4.0'
+    url: kafka-broker:9092
     protocol: kafka-secure
     description: Test broker
     security:
@@ -24,14 +30,23 @@ channels:
     description: Estoque alterado.
     parameters:
       estoqueID:
-        $ref: '#/components/parameters/estoqueID'
-    publish:
+        $ref: '#/components/parameters/estoqueID' 
+    subscribe:
       summary: Informação de estoque alterado
-      operationId: estoque-alterado
-      traits:
-        - $ref: '#/components/operationTraits/kafka'
+      operationId: s-estoque-alterado    
       message:
-        $ref: '#/components/messages/estoque' 
+        $ref: '#/components/messages/estoque'        
+      bindings:
+          kafka:
+            topic: 'ogistica.estoque.alterado.v1'
+            partitions: 1
+            replicas: 1
+            groupId:
+              type: string
+              enum: ['myGroupId']
+            clientId:
+              type: string
+              enum: ['myClientId']
 components:
   messages:
     estoque:
@@ -40,9 +55,17 @@ components:
       summary: Informações de mudanças de cada produto.
       contentType: application/json
       traits:
-        - $ref: '#/components/messageTraits/commonHeaders'
+        - $ref: '#/components/messageTraits/commonHeaders'      
       payload:
         $ref: "#/components/schemas/estoquePayload"  
+      examples:
+        - name: "produto-1"
+          summary: Exemplo produto 1             
+          payload: 
+            idEstoque: '{{randomInt())}}'
+            idProduto: '{{randomInt(100)}}'
+            quantidadeDisponivel: '{{randomInt(1, 10)}}'
+            dtEstoque: "{{now(dd/MM/yyyy HH:mm:ss)}}"
   schemas:
     estoquePayload:
       type: object
@@ -84,8 +107,4 @@ components:
             type: integer
             minimum: 0
             maximum: 100
-  operationTraits:
-    kafka:
-      bindings:
-        kafka:
-          clientId: my-app-id
+  
