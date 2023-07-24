@@ -110,17 +110,17 @@ Acesso o PgAdmin http://localhost:5433/
 * Senha : postgres    
 
 
-*Tela de login do PgAdmin*
+### Tela de login do PgAdmin
 ![Exemplo Kafka Conect](../../content/login-pgadmin.png)
 
 
-*Inserindo um server*
+### Inserindo um server
 ![Exemplo Kafka Conect](../../content/add-server.png)
 
-*Configurando o server*
+### Configurando o server
 ![Exemplo Kafka Conect](../../content/conect-pgadmin.png)
 
-*...Se tudo deu certo o banco de exemplo com suas tabelas*
+### ...Se tudo deu certo o banco de exemplo com suas tabelas
 ![Exemplo Kafka Conect](../../content/tabelas.png)
 
 ### Criando os Conectores
