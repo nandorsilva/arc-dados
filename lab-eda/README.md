@@ -67,4 +67,4 @@ Grafana
 * 3.4. [LAB EDA - Microcks](microcks/README.md)
 * 3.5. [LAB EDA - Kafka Conect](kafka-conect/README.md)
 * 3.6. [LAB EDA - Jaeger](jaeger/README.md)
-* 3.7. [LAB EDA - Ksqldb](ksql/README.md)
+* 3.7. [LAB EDA - Ksqldb](ksqldb/README.md)
