@@ -36,5 +36,5 @@ https://strimzi.io/
 https://operatorhub.io/operator/strimzi-kafka-operator
 
 
-## Sudindo o cluster kafka 
+## Deletando o cluster kafka 
 kubectl delete -f kafka.yaml
