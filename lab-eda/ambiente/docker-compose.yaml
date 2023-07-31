@@ -120,7 +120,7 @@ services:
 
 
   kafka-net:
-      image: fernandos/kafka-net-exemplo:v1
+      image: fernandos/kafka-net:v2
       container_name: kafkanet    
       environment:
           ASPNETCORE_ENVIRONMENT: Development
