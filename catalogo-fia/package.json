@@ -11,8 +11,8 @@
   },
   "devDependencies": {
     "@eventcatalog/types": "0.4.2",
-    "@types/node": "20.4.4",
-    "@types/react": "18.2.15",
+    "@types/node": "20.4.6",
+    "@types/react": "18.2.18",
     "autoprefixer": "10.4.5",
     "cross-env": "^7.0.3",
     "postcss": "^8.3.11",
@@ -20,7 +20,6 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@eventcatalog/core": "0.6.12",
-    "@eventcatalog/plugin-doc-generator-asyncapi": "^0.3.5"
+    "@eventcatalog/core": "0.6.12"
   }
 }

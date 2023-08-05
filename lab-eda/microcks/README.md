@@ -20,10 +20,6 @@
 Entre na pasta microcks
 
 
-```
-cd microcks
-
-```
 
 *** Limpando os deploy anteriormente
 ```
@@ -52,6 +48,8 @@ Acessando http://localhost:8080/
 
 
 ## Vamos subir o Arquivo AsyncAPI ?
+
+No menu `Importers >> Upload` realizar o upload do arquivo `asyncAPI/microcks.yml`
 
 Vamos observar....
 
