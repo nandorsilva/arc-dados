@@ -21,6 +21,8 @@
 Entrando no container cli
 
 ```
+cd ksqldb
+docker-compose up -d 
 docker-compose exec ksqldb-cli ksql http://ksqldb-server:8088
 ```
 
@@ -197,7 +199,6 @@ Terminal KsqlDB
 select FORMAT_TIMESTAMP(FROM_UNIXTIME(rowtime), 'yyyy-MM-dd HH:mm:ss', 'America/Sao_Paulo') as data, id, nome from ALUNOS_STREAM emit changes;
 
 
-select FROM_DAYS(FROM_UNIXTIME(rowtime)) as data, id, nome from ALUNOS_STREAM emit changes;
 
 select CAST(FROM_UNIXTIME(rowtimE) AS DATE) as data, id, nome from ALUNOS_STREAM emit changes;
 
@@ -301,7 +302,7 @@ kafka-topics --bootstrap-server localhost:9092 --create --partitions 1 --replica
 No terminal KSqldb criar a tabela `produtosTable`
 
 ```
-create table produtosTable4 (idProduto int primary key, produto varchar) with (KAFKA_TOPIC='produto4', KEY_FORMAT = 'JSON',
+create table produtosTable (idProduto int primary key, produto varchar) with (KAFKA_TOPIC='produto', KEY_FORMAT = 'JSON',
   VALUE_FORMAT = 'JSON' , PARTITIONS = 3);
 
 show tables;
@@ -310,7 +311,7 @@ describe produtosTable;
 
 describe  produtosTable extended;
 
-select idProduto, produto, valor from produtosTable emit changes;
+select idProduto, produto from produtosTable emit changes;
 
 ```
 
@@ -340,11 +341,10 @@ No terminal Linux, vamos criar a mensagem 2
 ^C
 kafka-consumer-groups --bootstrap-server localhost:9092 --list
 
-//Verifica se tem o topico *.-KsqlTopic-Reduce-changelog
+//Verifica se tem o topico *PRODUTOSTABLE*
 
 
- kafka-console-consumer --bootstrap-server localhost:9092 --topic _confluent-ksql-default_transient_transient_PRODUTOSTABLE4_2388878536066455653_1689963843486-KsqlTopic-Reduce-changelog --property print.timestamp=true --property print.key=true --property print.va
-lue=true --property print.partition=true --from-beginning
+ kafka-console-consumer --bootstrap-server localhost:9092 --topic _confluent-ksql-default_transient_transient_PRODUTOSTABLE_164564820911461907_1691341622923 --property print.timestamp=true --property print.key=true --property print.value=true --property print.partition=true --from-beginning
 
 
 //Listando as configurações do topico 

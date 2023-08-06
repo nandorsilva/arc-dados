@@ -110,6 +110,11 @@ Acesso o PgAdmin http://localhost:5433/
 * Login: lab-pgadmin4@pgadmin.org
 * Senha : postgres    
 
+* Nome do server: postgres
+* Nome do Host Name: postgres
+* database: postgres
+* Username: postgres
+* password: postgres
 
 ### Tela de login do PgAdmin
 ![Exemplo Kafka Conect](../../content/login-pgadmin.png)
@@ -222,6 +227,7 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic dbserver1.inven
 
 
 ```
+exit
 http http://localhost:8083/connectors/connector-sql/config
 http http://localhost:8083/connectors/connector-postgres/status
 

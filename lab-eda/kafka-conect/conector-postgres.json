@@ -6,6 +6,6 @@
         "database.user": "postgres",
         "database.password": "postgres",
         "database.dbname" : "postgres",
-        "topic.prefix": "dbserver1",
+        "topic.prefix": "postgres",
         "schema.include.list": "inventory"
 }
