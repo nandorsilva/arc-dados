@@ -48,7 +48,10 @@ helm repo update
 ```
 
 ## Instalando o keda 
+
+```
 helm install keda kedacore/keda
+```
 
 *Isso instalará o Operador KEDA e o servidor da API KEDA Metrics (como separado Deployment)*
 
