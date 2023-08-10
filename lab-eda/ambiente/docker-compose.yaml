@@ -259,3 +259,49 @@ services:
     container_name: mongo-connect
     volumes:
       - "~/tmp/mongodbdata:/data/db"
+
+
+  ksqldb-server:
+    image: confluentinc/cp-ksqldb-server:${KSQLDB_VER}
+    hostname: ksqldb-server
+    container_name: ksqldb-server
+    depends_on:
+      - kafka-broker        
+    ports:
+      - "8088:8088"
+    environment:
+      KSQL_LISTENERS: http://0.0.0.0:8088
+      KSQL_BOOTSTRAP_SERVERS: kafka-broker:29092      
+      KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: "true"
+      KSQL_CONFLUENT_SUPPORT_METRICS_ENABLE: "false"        
+    volumes:
+      - ./scripts:/scripts
+   
+
+
+  ksqldb-cli:
+    image: confluentinc/cp-ksqldb-cli:${KSQLDB_VER}
+    container_name: ksqldb-cli
+    depends_on:
+      - kafka-broker
+      - ksqldb-server
+    volumes:
+      - ./scripts:/scripts
+    entrypoint: /bin/sh
+    tty: true
+
+  schema-registry:
+    image: "confluentinc/cp-schema-registry:${CONFLUENT_VERSION}"
+    container_name: schema-registry
+    ports:
+      - 8081:8081  
+    depends_on:
+      - zk
+      - kafka-broker 
+    environment:     
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: zookeeper:2181
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: "PLAINTEXT://kafka-broker:9092"
+      SCHEMA_REGISTRY_AVRO_COMPATIBILITY_LEVEL: "none"
+      SCHEMA_REGISTRY_LOG4J_ROOT_LOGLEVEL: "WARN"

@@ -1,0 +1,9 @@
+create stream view_professores_stream as 
+
+select  id, 'Professor: ' + ucase(nome) + ' de ' + materia 
++ ' , a quantidade de matéria é: '
++ case when quantidadeaula <= 2  then 'Bom'
+       when quantidadeaula between 3 and 5 then 'Ótimo'
+       else 'Excelente' 
+   end as descricao
+from professores_stream;

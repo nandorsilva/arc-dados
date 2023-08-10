@@ -36,7 +36,7 @@ O cliente geralmente não envia todos os rastreamentos ao agente, mas geralmente
 ## Instalando  Jaeger
 
 ```
-docker-compose  -f ambiente/docker-compose.yaml -f jaeger/docker-compose-jaeger.yaml down
+
 docker-compose  -f ambiente/docker-compose.yaml -f jaeger/docker-compose-jaeger.yaml up -d zk kafka-broker jaeger sqlserver connect
 
 ```
@@ -79,6 +79,10 @@ As informações de rastreamento ficam no cabeçalho das mensagens, para obter m
 *Mensagens com o rastreamento*
 
 ```
+
+docker exec -it kafka-broker /bin/bash
+
+kafka-topics --bootstrap-server localhost:9092 --list 
 
  kafka-console-consumer --bootstrap-server localhost:9092 --topic sqldebezium.dbo.produtos  --property print.timestamp=true --property print.key=true --property print.headers=true --property print.value=true --property print.partition=true --from-beginning
 
