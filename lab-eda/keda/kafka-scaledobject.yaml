@@ -13,4 +13,4 @@ spec:
       topic: my-topic
       bootstrapServers: my-cluster-kafka-bootstrap:9092
       consumerGroup: my-kafka-consumer-group
-      lagThreshold: '10'
+      lagThreshold: '1000'

@@ -1,6 +1,6 @@
 asyncapi: '2.6.0'
 info:
-  title: Streetlights Kafka API
+  title: logistica
   version: '1.0.0'
   description: |
     The Smartylighting Streetlights API allows you to remotely manage the city lights.
@@ -12,8 +12,14 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
 servers:
+  producao:
+    url: localhost:9092
+    protocol: kafka-secure
+    description: Test broker
+    security:
+      - saslScram: []
   test:
-    url: test.mykafkacluster.org:8092
+    url: localhost:9092
     protocol: kafka-secure
     description: Test broker
     security:

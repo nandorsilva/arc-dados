@@ -14,3 +14,4 @@ owners:
 This domain encapsulates everything in our business that has to do with shopping and users. This might be new items added to our online shop or online cart management.
 
 <NodeGraph title="Domain Graph" />
+
