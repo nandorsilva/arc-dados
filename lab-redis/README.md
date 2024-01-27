@@ -4,18 +4,13 @@
 > **Esta configuração é puramente para fins de desenvolvimento local e estudos**
 
 
----
-
-
 O Arquivo `docker-compose` provisiona o Redis e Interface Web para acesso ao redis
 
----
+
 
 ## Pré-requisitos?
 * Docker
 * Docker-Compose
-
----
 
 
 
@@ -50,9 +45,13 @@ Set Armazena a chave e seu valor, caso já exista, seu valor é atualizado
 
 ```sh
 set aluno-1 pedro
+
 set aluno-1 joao
+
 get aluno-1
+
 set aluno-2 maria
+
 get aluno-2
 ```
 
@@ -69,6 +68,7 @@ APPEND Inseri o conteúdo no final de string
 
 ```sh
 APPEND aluno-1  " da silva "
+
 GET aluno-1
 
 ```
@@ -80,6 +80,7 @@ Key busca as chaves do Redis por um determinado padrão (patthern), informado co
 
 ```sh
 keys *
+
 keys aluno*
 
 ```
@@ -93,6 +94,7 @@ SCAN Permite iteração incremental, retornando apenas um pequeno número de ele
 
 ```sh
 scan 0
+
 scan 0 MATCH *mega*
 ```
 
@@ -104,8 +106,6 @@ O Scan pode ser combinado com outros comandos
 ```sh
 scan 0 MATCH *mega*
 ```
-
-colocar uma imagem falando das diferenças um pouco do keys e scan
 
 
 ## Deletando a chave com DEL
@@ -127,6 +127,7 @@ Criar uma chave já com o tempo de expiração
 
 ```sh
 set aluno-10 Paula EX 50
+
 ttl aluna-10
 ```
 
@@ -137,6 +138,7 @@ Adicionando um tempo de expiração em uma chave criada
 
 ```sh
 expire aluno-10 100
+
 ttl aluna-10
 ```
 
@@ -145,6 +147,7 @@ Removendo a chave de expiração
 
 ```sh
 persist aluno-10
+
 ttl aluna-10
 ```
 
@@ -152,17 +155,25 @@ ttl aluna-10
 
 ```sh
 incr pagina-usuario
+
 get pagina-usuario
+
 incr pagina-usuario
+
 get pagina-usuario
+
 type pagina-usuario
+
 object encoding pagina-usuario
+
 get pagina-usuario
+
 decr pagina-usuario
+
 get pagina-usuario
 ```
 
-Criando os pontos
+Criando pontos de incrementos
 
 ```sh
 incrby pontos-usuario-1 2
@@ -170,10 +181,11 @@ decrby pontos-usuario-1 3
 
 ```
 
-E se for incrementar texto com número
+E se for incrementar texto com número ?
 
 ```sh
 set jogador-goleiro Pedro
+
 incr jogador-goleiro
 
 ////(error) ERR value is not an integer or out of range
@@ -197,7 +209,9 @@ Cada hash pode ter mais de 4 bilhões de pares
 
 ```sh
 hset aluno-10 nome fabio rua "av paulista" idade 30
+
 hexists aluno-10 idade
+
 hget aluno-10 idade
 
 //Se buscar um campo que não existe
@@ -246,7 +260,9 @@ hscan aluno-10 0 match prof*
 * São permitidas duplicidades
 * Itens podem ser adicionados no começo ou no fim
 
-fazer um desenho 
+![Listas](../content/lista-redis.png)
+
+
 
 ```sh
 lpush lista-de-compra-maria arroz feijão carne batata alface
