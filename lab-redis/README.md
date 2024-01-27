@@ -121,7 +121,7 @@ UNLINK mega-sena-dia-1
 ```
 
 
-# Expiração de Chaves (Voltar para o apresentação)
+## Expiração de Chaves (Voltar para o apresentação)
 
 Criar uma chave já com o tempo de expiração
 
@@ -151,7 +151,7 @@ persist aluno-10
 ttl aluna-10
 ```
 
-# Usuários onlines
+## Usuários onlines
 
 ```sh
 incr pagina-usuario
@@ -194,7 +194,7 @@ object encoding jogador-goleiro
 ```
 
 
-# Hashes
+## Hashes
 
 Hash são mapas que contem campos e valores do tipo string (texto), muito usando para representar um conjunto de informações
 
@@ -254,7 +254,7 @@ hscan aluno-10 0 match prof*
 ```
 
 
-# Listas
+## Listas
 
 * São ordenadas
 * São permitidas duplicidades
@@ -300,7 +300,7 @@ lrange lista-de-compra-maria 0 -1
 
 ```
 
-# Transações
+## Transações
 
 ![Transação redis](../content/transacao-redis.png)
 
@@ -366,7 +366,7 @@ exec
 
 ```
 
-# Publish-Subscribe
+## Publish-Subscribe
 
 ![Publish-Subscribe](../content/publish-subscriber-redis.png)
 
