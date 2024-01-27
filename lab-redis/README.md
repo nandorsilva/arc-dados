@@ -302,6 +302,8 @@ lrange lista-de-compra-maria 0 -1
 
 # Transações
 
+![Transação redis](../content/transacao-redis.png)
+
 ```sh
 multi
 
@@ -365,6 +367,9 @@ exec
 ```
 
 # Publish-Subscribe
+
+![Publish-Subscribe](../content/publish-subscriber-redis.png)
+
 
 ```sh
 //No terminal 1
