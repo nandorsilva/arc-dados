@@ -17,3 +17,4 @@
 2. [LAB RELACIONAL - MYSQL](lab-relacional/README.md)
 3. [LAB KAFKA](lab-kafka/README.md)
 3. [LAB EDA](lab-eda//README.md)
+4. [LAB REDIS](lab-redis/README.md)
