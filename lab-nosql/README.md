@@ -38,6 +38,11 @@ O Arquivo `docker-compose` provisiona cluster de mongodb com replica set de 3 in
 
 ## Executando réplica set Monogodb
 ```
+
+chmod -R 777 import
+chmod -R 777 scripts
+
+
 docker-compose up -d
 ```
 
@@ -56,8 +61,7 @@ Verificando as imagens que foram feitas download do docker-hub
 Executando o script `scripts\rs-init.sh` para a criação do replica-set
 
 ```
-chmod -R 777 import
-chmod -R 777 scripts
+
 
 docker exec -it mongo1 /bin/bash
 cd scripts
