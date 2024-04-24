@@ -204,6 +204,8 @@ Cada hash pode ter mais de 4 bilhões de pares
 
 
 ```sh
+
+del aluno-10
 hset aluno-10 nome fabio rua "av paulista" idade 30
 
 hexists aluno-10 idade
