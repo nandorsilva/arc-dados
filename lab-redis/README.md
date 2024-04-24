@@ -221,12 +221,10 @@ hget aluno-10 bairro
 HDEL aluno-10 rua
 
 
-//Será que o Fabio tem 25 anos ??
+//Só se o campo existir
 HSETNX aluno-10 idade 25
 
 hget aluno-10 idade
-
-hgetall aluno-10
 
 //Voltando o campo Rua
 hset aluno-10 rua "av paulista"
@@ -307,7 +305,7 @@ multi
 
 set produto-2024 caderno
 
-get produto-20204
+get produto-2024
 
 
 exec
@@ -317,6 +315,8 @@ Testando transações em outras sessões
 
 ```sh
 //Sessão client 1 no terminal 1
+
+multi
 
 set produto-2024 produto-alterado
 
@@ -386,9 +386,12 @@ psubscribe ConcessionariaBMW*
 publish ConcessionariaBMW-A-TemX1 sim
 
 //No terminal 3
-publish ConcessionariaBMW-B-TemX1 nao
 
-//Não quero mais telefone da ConcessionariaBMW-B
+docker exec -it redis /bin/bash
+
+redis-cli -h 127.0.0.1 -p 6379 -a "labdata"
+
+publish ConcessionariaBMW-B-TemX1 nao
 
 
 ```
