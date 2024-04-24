@@ -126,7 +126,7 @@ UNLINK mega-sena-dia-1
 Criar uma chave já com o tempo de expiração
 
 ```sh
-set aluno-10 Paula EX 50
+set aluno-10 Paulo EX 50
 
 ttl aluno-10
 ```
