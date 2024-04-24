@@ -162,10 +162,6 @@ incr pagina-usuario
 
 get pagina-usuario
 
-type pagina-usuario
-
-object encoding pagina-usuario
-
 get pagina-usuario
 
 decr pagina-usuario
