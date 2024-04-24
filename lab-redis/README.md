@@ -121,7 +121,7 @@ UNLINK mega-sena-dia-1
 ```
 
 
-## Expiração de Chaves (Voltar para o apresentação)
+## Expiração de Chaves 
 
 Criar uma chave já com o tempo de expiração
 
