@@ -128,7 +128,7 @@ Criar uma chave já com o tempo de expiração
 ```sh
 set aluno-10 Paula EX 50
 
-ttl aluna-10
+ttl aluno-10
 ```
 
 Retorno do TTL -2 chave não existente, -1 Chave sem tempo de expiração
@@ -139,7 +139,7 @@ Adicionando um tempo de expiração em uma chave criada
 ```sh
 expire aluno-10 100
 
-ttl aluna-10
+ttl aluno-10
 ```
 
 Removendo a chave de expiração
@@ -148,7 +148,7 @@ Removendo a chave de expiração
 ```sh
 persist aluno-10
 
-ttl aluna-10
+ttl aluno-10
 ```
 
 ## Usuários onlines
