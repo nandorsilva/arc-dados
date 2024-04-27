@@ -19,7 +19,7 @@ services:
     container_name: redisinsight
     hostname: redislabs
     ports:
-      - "8001:8001"
+      - "8001:5540"
     depends_on:
      - redis-stack
 
