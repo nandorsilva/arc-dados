@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: akswebapp
+  labels:
+    app: akswebapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: akswebapp
+  template:
+    metadata:
+      labels:
+        app: akswebapp
+    spec:
+      containers:
+      - name: akswebapp
+        image: fiaacr.azurecr.io/kafka-net:v1
+        env:
+         - name: ASPNETCORE_ENVIRONMENT
+           value: Development
+        ports:
+        - containerPort: 80

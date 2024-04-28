@@ -772,11 +772,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Fernando Rodrigues\\source\\repos\\kafka-net\\kafka-net\\kafka-net.csproj",
+      "projectUniqueName": "D:\\sourceControl\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\kafka-net.csproj",
       "projectName": "kafka-net",
-      "projectPath": "C:\\Users\\Fernando Rodrigues\\source\\repos\\kafka-net\\kafka-net\\kafka-net.csproj",
+      "projectPath": "D:\\sourceControl\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\kafka-net.csproj",
       "packagesPath": "C:\\Users\\Fernando Rodrigues\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Fernando Rodrigues\\source\\repos\\kafka-net\\kafka-net\\obj\\",
+      "outputPath": "D:\\sourceControl\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Fernando Rodrigues\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -787,7 +787,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -800,6 +799,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -838,7 +842,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

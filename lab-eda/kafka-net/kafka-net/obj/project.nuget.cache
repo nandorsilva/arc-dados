@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qaHeTtiA4sugi172m89PNGZX9is5UMwiOeMs+m3xsSTNqRNWRhF9HwhZKOp7SOgK5bshIsb9FL+tldjltg721Q==",
+  "dgSpecHash": "RpQiOCDHdthu5GM39ejrsUW+r+V9IoF0s2m5cidVLEQJluXR+THxKhWgRjTN9W96pai9g9elqC9EJ4YnzAIWjQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Fernando Rodrigues\\source\\repos\\kafka-net\\kafka-net\\kafka-net.csproj",
+  "projectFilePath": "D:\\sourceControl\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\kafka-net.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Fernando Rodrigues\\.nuget\\packages\\confluent.kafka\\2.2.0\\confluent.kafka.2.2.0.nupkg.sha512",
     "C:\\Users\\Fernando Rodrigues\\.nuget\\packages\\librdkafka.redist\\2.2.0\\librdkafka.redist.2.2.0.nupkg.sha512",
