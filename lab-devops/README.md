@@ -170,3 +170,33 @@ da nossa origin remota
 git push -u origin main
 ```
 
+## Criando o App Services na Azure
+
+Após entrar no portal e selecionar App Services
+
+
+![Criando repositorio](../content/devops-09.png)
+
+
+Configurando o github para o Runners
+
+![Criando repositorio](../content/devops-10.png)
+
+
+Após a criação no repositório será criada uma pasta .github/workflows
+
+![Criando repositorio](../content/devops-11.png)
+
+Observe o arquivo criado dentro da pasta .github/workflows
+
+E ao efeturar um commit da aplicação o processo de deploy é iniciado
+
+![Criando repositorio](../content/devops-12.png)
+
+
+![Criando repositorio](../content/devops-13.png)
+
+
+Não esqueça de apagar a chave ssh do seu git criado anteriormente.
+
+
