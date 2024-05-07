@@ -1,4 +1,4 @@
-# Lab Eda
+# Lab Devops
 
 
 ### Disclaimer
@@ -34,8 +34,6 @@ Ao criar esse repositório já vemos alguns comandos git que podemos utilizar.
 Primeiramente vamos verificar se temos o binário do git instalado na máquina.
 
 
-
-
 ```
 git --version
 
@@ -54,14 +52,14 @@ Criando o repositório local.
 
 ```
  git init
- git config --global user.email "seuemail@seudominio.com.br"
 
 ```
 
 Configurando email do repositório
 
 ```
- git config --global user.email "fernandos007@gmail.com"
+git config --global user.name "nandorsilva"
+git config --global user.email "fernandos007@gmail.com"
 
 ```
 
@@ -143,7 +141,7 @@ Na pagina inicial do repo
 ![Criando repositorio](../content/devops-08.png)
 
 ```
-git remote add origin https://github.com/nandorsilva/app-net-devops.git
+git remote add origin git@github.com:nandorsilva/app-net-devops.git
 ```
 
 Com este comando, adicionamos uma origem remota ao nosso repositório, permitindo que o git saiba para onde enviar o código ao executarmos um comando de push.
@@ -155,8 +153,6 @@ Com o comando origin, criamos uma referência chamada 'origin' com o endereço d
 
 ```
 git remote -v
-git branch -M main
-git push -u origin main
 
 ```
 
