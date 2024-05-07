@@ -172,6 +172,10 @@ git push -u origin main
 
 ## Criando o App Services na Azure
 
+![Criando repositorio](../content/devops-09-b.png)
+
+
+
 Após entrar no portal e selecionar App Services
 
 
