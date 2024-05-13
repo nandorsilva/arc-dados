@@ -67,6 +67,11 @@ https://github.com/Azure-Samples/azure-event-grid-viewer
 
 ![Criando storage account](/content/storage-12.png/)
 
+> https://viewerimage.azurewebsites.net/api/updates
+
+![Criando storage account](/content/storage-13.png/)
+
+
 ![Criando storage account](/content/storage-14.png/)
 
 
@@ -78,6 +83,8 @@ https://github.com/Azure-Samples/azure-event-grid-viewer
 ![Criando storage account](/content/storage-16.png/)
 
 ### Filtrando o evento pelo conteiner imagem
+
+> 
 ![Criando storage account](/content/storage-17.png/)
 
 
