@@ -20,7 +20,7 @@
 
 ```
 cd ..
-cd laba-eda/ambiente
+cd lab-eda/ambiente
 docker-compose up -d grafana prometheus jmx-kafka-broker zookeeper kafka-broker zoonavigator akhq
 
 ```
