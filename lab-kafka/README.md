@@ -17,9 +17,12 @@
 
 ## Criando o ambiente Kafka com o docker compose
 
-No diretório `/lab-kafka` execute o comando abaixo
+
 ```
-docker-compose up -d
+cd ..
+cd laba-eda/ambiente
+docker-compose up -d grafana prometheus jmx-kafka-broker zookeeper kafka-broker zoonavigator akhq
+
 ```
 
 Verificando se os containers foram criados com sucesso
