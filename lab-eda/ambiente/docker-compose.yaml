@@ -50,7 +50,7 @@ services:
     depends_on:
      - kafka-broker
 
-  zk:
+  zookeeper:
     image: confluentinc/cp-zookeeper:${CONFLUENT_VERSION}
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
@@ -64,7 +64,7 @@ services:
   kafka-broker:
     image: confluentinc/cp-kafka:${CONFLUENT_VERSION}
     depends_on:
-      - zk
+      - zookeeper
     ports:
       - "9092:9092"
       - "9991:9991"
@@ -97,7 +97,7 @@ services:
       HTTP_PORT: 8000
       AUTO_CONNECT_CONNECTION_STRING: zookeeper:2181
     depends_on:
-      - zk
+      - zookeeper
 
   akhq:
     image: tchiotludo/akhq:${AKHQ_VERSION}
@@ -297,7 +297,7 @@ services:
     ports:
       - 8081:8081  
     depends_on:
-      - zk
+      - zookeeper
       - kafka-broker 
     environment:     
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
