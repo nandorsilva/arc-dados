@@ -67,7 +67,7 @@ Vamos executar alguns comandos de dentro do container kafka1
 Acessar o Shell do container kafka1
 
 ```
-docker exec -it kafka1 /bin/bash
+docker exec -it kafka-broker /bin/bash
 ```
 
 # Criando nosso Primeiro tópico
