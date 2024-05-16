@@ -25,6 +25,31 @@ docker-compose up -d grafana prometheus jmx-kafka-broker zookeeper kafka-broker 
 
 ```
 
+## O que acontenceu ?
+
+
+## Acesso WebUI dos componentes
+
+
+* AKHQ http://localhost:8080/ui
+* ZooNavigator http://localhost:8000/
+* Prometeus http://localhost:9090/
+* jmx-prometheus-exporter http://localhost:5556/
+* Grafana http://localhost:3000/login
+
+## Acessos
+
+ZooNavigator
+
+```
+zookeeper:2181
+```
+
+Grafana
+
+* user : `admin`
+* password : `kafka`
+
 Verificando se os containers foram criados com sucesso
 
 ```
@@ -34,11 +59,6 @@ Verificando as imagens que foram feitas download do docker-hub
 ```
  docker image ls
 ```
-
-Verificando se a ferramenta Kafdrop realizou o deploy com sucesso
-http://localhost:19000/
-
->Kafdrop é uma interface de usuário da web simples, para visualizar tópicos Kafka e navegar em grupos de consumidores. A ferramenta exibe informações como corretores, tópicos, partições, consumidores e permite visualizar mensagens.
 
 ---
 
