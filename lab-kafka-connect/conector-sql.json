@@ -1,0 +1,21 @@
+{
+        "connector.class" : "io.debezium.connector.sqlserver.SqlServerConnector",
+        "tasks.max" : "1",
+        "topic.prefix" : "server2",
+        "database.server.name": "sqldebezium",
+        "database.hostname": "sqlserver",
+        "database.port": "1433",
+        "database.dbname": "dbEcommerce",
+        "database.user": "sa",
+        "database.password": "Password!",      
+        "snapshot.mode" : "schema_only", 
+        
+        "database.history": "io.debezium.relational.history.MemoryDatabaseHistory",
+        "transforms": "unwrap",
+        "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState", 
+        "transforms.unwrap.add.fields":"after.id",
+        "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "key.converter.schemas.enable": "false",
+        "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "value.converter.schemas.enable": "false"
+}
