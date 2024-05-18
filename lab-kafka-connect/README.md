@@ -17,7 +17,7 @@
 
 ## Kafka Connect
 
-![Exemplo Kafka Conect](../../content/kafka-connect-minio.png)
+![Exemplo Kafka Conect](../content/kafka-connect-minio.png)
 
 
 ### Realizando download do plugins Debezium para PostGres (Source) 
@@ -34,7 +34,7 @@ ls plugin
 
 Criando a imagem junto com o plugin do Debezium Postgres
 
-![Exemplo Kafka Conect](../../content/kafka-connect-imagem.png)
+![Exemplo Kafka Conect](../content/kafka-connect-imagem.png)
 
 
 
@@ -97,17 +97,17 @@ Acesso para o PgAdmin http://localhost:5433/
 * password: postgres
 
 ### Tela de login do PgAdmin
-![Exemplo Kafka Conect](../../content/login-pgadmin.png)
+![Exemplo Kafka Conect](../content/login-pgadmin.png)
 
 
 ### Inserindo um server
-![Exemplo Kafka Conect](../../content/add-server.png)
+![Exemplo Kafka Conect](../content/add-server.png)
 
 ### Configurando o server
-![Exemplo Kafka Conect](../../content/conect-pgadmin.png)
+![Exemplo Kafka Conect](../content/conect-pgadmin.png)
 
 ### ...Se tudo deu certo o banco de exemplo com suas tabelas
-![Exemplo Kafka Conect](../../content/tabelas.png)
+![Exemplo Kafka Conect](../content/tabelas.png)
 
 ### Criando os Conectores
 
@@ -119,7 +119,7 @@ Criando o conector PostGres
 
 ```
 
- cd ../../lab-kafka-connect/
+ cd ../lab-kafka-connect/
 
 http PUT http://localhost:8083/connectors/connector-postgres/config < conector-postgres.json
 
@@ -171,7 +171,7 @@ Vamos inserir alguns registros nas tabelas e listar os tópicos do Kafka
 ### Inserir um registro na tabela `inventory.products`
 
 
-![Exemplo Kafka Conect](../../content/insert.png)
+![Exemplo Kafka Conect](../content/insert.png)
 
 > Para entrar nos scripts, botão direito na tabela clica em `Query Tool`
 
@@ -231,7 +231,7 @@ Intalando o plugin do MinIO
 
 ```
 
-cd ../../lab-kafka-connect/
+cd ../lab-kafka-connect/
 
 wget https://api.hub.confluent.io/api/plugins/confluentinc/kafka-connect-s3/versions/10.5.5/archive
 
@@ -262,12 +262,12 @@ docker exec -it kafkaConect curl  http://localhost:8083/connector-plugins
 
 Configurando o MinIO
 
-![MinIO](../../content/minio-01.png)
-![MinIO](../../content/minio-02.png)
-![MinIO](../../content/minio-03.png)
-![MinIO](../../content/minio-04.png)
-![MinIO](../../content/minio-05.png)
-![MinIO](../../content/minio-06.png)
+![MinIO](../content/minio-01.png)
+![MinIO](../content/minio-02.png)
+![MinIO](../content/minio-03.png)
+![MinIO](../content/minio-04.png)
+![MinIO](../content/minio-05.png)
+![MinIO](../content/minio-06.png)
 
 
 Instalando o conector do MinIO
@@ -275,7 +275,7 @@ Instalando o conector do MinIO
 > Não esqueçam de mudar os campos  `aws.access.key.id` e `aws.secret.access.key` do arquivo `conector-minio.json`
 
 ```
-cd ../../lab-kafka-connect/
+cd ../lab-kafka-connect/
 
 http PUT http://localhost:8083/connectors/connector-minio/config < conector-minio.json
 ```
@@ -302,7 +302,7 @@ VALUES (112, 'Lapis', 'O melhor', 1);
 
 *Fazer o Sinc para o Mongodb*
 
-![Exemplo Kafka Conect](../../content/sinc.png)
+![Exemplo Kafka Conect](../content/sinc.png)
 
 
 >Dicas
@@ -319,6 +319,6 @@ docker-compose up -d mongo-connect
  ```
 
  > Lab Mongodb
- [LAB NOSQL](../../lab-nosql/README.md)
+ [LAB NOSQL](../lab-nosql/README.md)
 
  https://github.com/nandorsilva/arc-dados/tree/main/lab-nosql
