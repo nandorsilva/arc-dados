@@ -195,7 +195,7 @@ services:
       - QUARKUS_PROFILE=docker-compose
 
   connect:
-        image: fernandos/kafka-connet-debezium-lab:v213    
+        image: fernandos/kafka-connet-debezium-lab:v213  
         container_name: kafkaConect
         ports:
         - 8083:8083

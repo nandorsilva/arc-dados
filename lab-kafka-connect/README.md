@@ -20,17 +20,8 @@
 ![Exemplo Kafka Conect](../content/kafka-connect-minio.png)
 
 
-### Realizando download do plugins Debezium para PostGres (Source) 
+### Realizando download do plugins Debezium para PostGres (Source) pelo arquivo `Dockerfile`
 
-```
-cd lab-kafka-connect
-
-mkdir plugin
-
-curl -sfSL https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/2.1.3.Final/debezium-connector-postgres-2.1.3.Final-plugin.tar.gz | tar xz -C plugin
-
-ls plugin
-```
 
 Criando a imagem junto com o plugin do Debezium Postgres
 
@@ -40,7 +31,10 @@ Criando a imagem junto com o plugin do Debezium Postgres
 
 
 ```
- docker image build -t <<usuario>>/kafka-connet-debezium-lab:v213  -f Dockerfile .
+
+cd lab-kafka-connect
+
+docker image build -t <<usuario>>/kafka-connet-debezium-lab:v213  -f Dockerfile .
  
 ```
 
@@ -48,7 +42,7 @@ Vamos enviar a imagem para o dockerhub ??
 https://hub.docker.com/
 
 ```
-docker image push <<usuario>>/kafka-connet-debezium-lab::v213
+docker image push <<usuario>>/kafka-connet-debezium-lab:v213
 ```
 
 > As imagens customizadas encontra-se no https://hub.docker.com/
@@ -64,7 +58,7 @@ No diretório `/lab-eda/ambiente` execute o comando abaixo
 ```
 cd ../lab-eda/ambiente/
 
-docker-compose up -d  connect
+docker-compose up -d grafana prometheus jmx-kafka-broker zookeeper kafka-broker zoonavigator akhq connect
 
 docker container ls
 ```
@@ -119,7 +113,7 @@ Criando o conector PostGres
 
 ```
 
- cd ../lab-kafka-connect/
+ cd ../../lab-kafka-connect/
 
 http PUT http://localhost:8083/connectors/connector-postgres/config < conector-postgres.json
 
