@@ -33,14 +33,6 @@ Criando a imagem junto com o plugin do Debezium Postgres
 
 cd lab-kafka-connect
 
-wget https://api.hub.confluent.io/api/plugins/confluentinc/kafka-connect-s3/versions/10.5.5/archive
-
-unzip archive
-
-mkdir -p plugin/kafka-connect-s3
-
-mv confluentinc-kafka-connect-s3-10.5.5/lib/* plugin/kafka-connect-s3/
-
 docker image build -t <<usuario>>/kafka-connet-debezium-lab:v213  -f Dockerfile .
  
 ```
