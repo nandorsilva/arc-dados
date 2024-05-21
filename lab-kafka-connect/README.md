@@ -214,6 +214,8 @@ http PUT http://localhost:8083/connectors/connector-postgres/resume
 Subindo o serviço do MinIO
 
 ```
+cd ../lab-eda/ambiente/
+
 docker-compose up -d minio
 ```
 
@@ -225,7 +227,7 @@ Intalando o plugin do MinIO
 
 ```
 
-cd ../lab-kafka-connect/
+ cd ../../lab-kafka-connect/
 
 wget https://api.hub.confluent.io/api/plugins/confluentinc/kafka-connect-s3/versions/10.5.5/archive
 
@@ -254,7 +256,7 @@ Listando os plugins
 docker exec -it kafkaConect curl  http://localhost:8083/connector-plugins
 ```
 
-Configurando o MinIO
+### Configurando o MinIO
 
 ![MinIO](../content/minio-01.png)
 ![MinIO](../content/minio-02.png)
@@ -269,7 +271,7 @@ Instalando o conector do MinIO
 > Não esqueçam de mudar os campos  `aws.access.key.id` e `aws.secret.access.key` do arquivo `conector-minio.json`
 
 ```
-cd ../lab-kafka-connect/
+cd ../../lab-kafka-connect/
 
 http PUT http://localhost:8083/connectors/connector-minio/config < conector-minio.json
 ```
