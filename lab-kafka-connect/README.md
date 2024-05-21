@@ -20,7 +20,7 @@
 ![Exemplo Kafka Conect](../content/kafka-connect-minio.png)
 
 
-### Realizando download do plugins Debezium para PostGres (Source) pelo arquivo `Dockerfile`
+### Realizando download dos plugins dos conectores
 
 
 Criando a imagem junto com o plugin do Debezium Postgres
@@ -29,10 +29,17 @@ Criando a imagem junto com o plugin do Debezium Postgres
 
 
 
-
 ```
 
 cd lab-kafka-connect
+
+wget https://api.hub.confluent.io/api/plugins/confluentinc/kafka-connect-s3/versions/10.5.5/archive
+
+unzip archive
+
+mkdir -p plugin/kafka-connect-s3
+
+mv confluentinc-kafka-connect-s3-10.5.5/lib/* plugin/kafka-connect-s3/
 
 docker image build -t <<usuario>>/kafka-connet-debezium-lab:v213  -f Dockerfile .
  
@@ -58,7 +65,7 @@ No diretório `/lab-eda/ambiente` execute o comando abaixo
 ```
 cd ../lab-eda/ambiente/
 
-docker-compose up -d grafana prometheus jmx-kafka-broker zookeeper kafka-broker zoonavigator akhq connect
+docker-compose up -d grafana prometheus jmx-kafka-broker zookeeper kafka-broker zoonavigator akhq connect postgres pgadmin minio
 
 docker container ls
 ```
@@ -74,9 +81,6 @@ docker exec -it kafkaConect curl  http://localhost:8083/connector-plugins
 
 ### Provisionando Banco de dados Postgres e a ferramenta PgAdmin
 
-```
-docker-compose up -d postgres pgadmin
-```
 
 Acesso para o PgAdmin http://localhost:5433/
 
@@ -117,6 +121,10 @@ Criando o conector PostGres
 
 http PUT http://localhost:8083/connectors/connector-postgres/config < conector-postgres.json
 
+//Ou via powershell
+$response = Invoke-WebRequest -Uri "http://localhost:8083/connectors/connector-postgres/config" -Method Put -Body (Get-Content -Path "conector-postgres.json" -Raw) -ContentType "application/json"; $response.Content
+
+
 ```
 
 
@@ -136,19 +144,19 @@ Algumas informações básicas sobre o connector:
 Listando os conectores
 
 ```
-http http://localhost:8083/connectors/
+docker exec -it kafkaConect curl http://localhost:8083/connectors/
 ```
 
 Verificando o status dos conectores
 
 ```
-http http://localhost:8083/connectors/connector-postgres/status
+docker exec -it kafkaConect curl http://localhost:8083/connectors/connector-postgres/status
 
 ```
 
 ### E o Akhq ?
 
-Vamos tirar o comentario do conector no serviço akhq do arquivo docker-compose
+Vamos tirar o comentario do conector no serviço akhq do arquivo docker-compose caso ainda o tenha.
 
 ```
 cd ../lab-eda/ambiente/
@@ -197,7 +205,7 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic postgres.invent
 ```
 exit
 
-http http://localhost:8083/connectors/connector-postgres/status
+docker exec -it kafkaConect curl http://localhost:8083/connectors/connector-postgres/status
 
 ```
 
@@ -209,52 +217,15 @@ http http://localhost:8083/connectors/connector-postgres/status
 http PUT http://localhost:8083/connectors/connector-postgres/resume
 ```
 
-### Configurando conector SYNC do MinIO
-
-Subindo o serviço do MinIO
-
-```
-cd ../lab-eda/ambiente/
-
-docker-compose up -d minio
-```
-
-> http://localhost:9001/login
+### Configurando MinIO
 
 
-Intalando o plugin do MinIO
+Acesso para o MinIO http://localhost:9001/login
+
+* Senha : admin
+* password: minioadmin
 
 
-```
-
- cd ../../lab-kafka-connect/
-
-wget https://api.hub.confluent.io/api/plugins/confluentinc/kafka-connect-s3/versions/10.5.5/archive
-
-unzip archive
-
-mkdir -p plugin/kafka-connect-s3
-
-mv confluentinc-kafka-connect-s3-10.5.5/lib/* plugin/kafka-connect-s3/
-
-docker image build -t <<usuario>>/kafka-connet-debezium-lab:v213  -f Dockerfile .
-
-
-```
-
-Atualizando a imagem do Kafka Conect
-
-```
-cd  ../lab-eda/ambiente/
-docker-compose up -d  connect
-
-
-```
-
-Listando os plugins
-```
-docker exec -it kafkaConect curl  http://localhost:8083/connector-plugins
-```
 
 ### Configurando o MinIO
 
@@ -274,12 +245,17 @@ Instalando o conector do MinIO
 cd ../../lab-kafka-connect/
 
 http PUT http://localhost:8083/connectors/connector-minio/config < conector-minio.json
+
+//Ou via powershell
+$response = Invoke-WebRequest -Uri "http://localhost:8083/connectors/connector-minio/config" -Method Put -Body (Get-Content -Path "conector-minio.json" -Raw) -ContentType "application/json"; $response.Content
+
+
 ```
 
 Listando os conectores
 
 ```
-http http://localhost:8083/connectors/
+docker exec -it kafkaConect curl http://localhost:8083/connectors/
 ```
 
 Será que deu certo??
