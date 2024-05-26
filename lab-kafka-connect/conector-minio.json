@@ -7,6 +7,6 @@
         "storage.class": "io.confluent.connect.s3.storage.S3Storage",      
         "format.class": "io.confluent.connect.s3.format.json.JsonFormat",     
         "s3.region": "us-east-1",
-        "aws.access.key.id": "24kQYXkPGwvHNbUN5Eek",
-        "aws.secret.access.key": "T8eJvCDYLctNR6VqXAuw7aUF9MgJHKPw6UrWtHMO"
+        "aws.access.key.id": "JRhC0BxXXSBsJvXihPae",
+        "aws.secret.access.key": "8nbQ1diqmXJc0WYxfaeN3h8YkX4nWUwbzHTRxzin"
 }

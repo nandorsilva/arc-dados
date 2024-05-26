@@ -1,4 +1,4 @@
-# Lab Eda - deploy kafka Net
+# Lab Microservices Kafka-Net AKS
 
 ## Disclaimer
 > **As configurações dos Laboratórios é puramente para fins de desenvolvimento local e estudos**
@@ -8,6 +8,7 @@
 * Docker
 * Docker-Compose
 * Kubernetes - AKS
+* Kubectl
 
 
 ## Deploy Aplicação Net Producer Localmente
@@ -20,7 +21,7 @@ Provisionando o container da imagem fernandos/kafka-net.
 
 ```
 
-cd ambiente
+cd lab-eda/ambiente/
 
 docker-compose up -d kafka-net
 
@@ -31,7 +32,7 @@ docker container ls
 http://localhost:5000/swagger/index.html
 
 
-> Ambiente funcionando locamente
+> Ambiente funcionando localmente
 
 ## Deploy a aplicação em um Kubernetes aks.
 
@@ -47,7 +48,7 @@ https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
 Entrando na conta da Azure
 
 ```
-az login 
+az login  --use-device-code 
 ```
 
 
@@ -109,7 +110,10 @@ az acr repository list --name fiaacr --output table
 
 
 Criando o AKS (Kubernetes)
+
+```
 az aks create -n aksappkafka -g rg-fia --enable-managed-identity --attach-acr $ACR_ID --node-count 1 --generate-ssh-keys
+```
 
 > Se o SSH Keys já foi criado tire o atributo --generate-ssh-keys.
 
@@ -122,15 +126,29 @@ az aks get-credentials --resource-group rg-fia --name aksappkafka --overwrite-ex
 Criando o Deployment
 
 ```
- kubectl apply -f deployment.yml
+cd ../../lab-deploy-aks/
+
+kubectl apply -f deployment.yml
+
+kubectl get namespace
+
+kubectl get pods
+
+ kubectl get pods -o jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.containers[*]}{.image}{", "}{end}{end}'
+
 ```
 
 Expondo o Deployment via serviço
 
 ```
+ kubectl get services
  kubectl apply -f service.yml
 ```
 
 Testando a API.Net
+
+```
+kubectl get services
+```
 
 http://<<ip do serviço>>/swagger/index.html
