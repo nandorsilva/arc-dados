@@ -172,6 +172,12 @@ git push -u origin main
 
 ## Criando o App Services na Azure
 
+
+>GitHub Actions é uma plataforma de integração contínua e entrega contínua (CI/CD) que permite automatizar a sua compilação, testar e pipeline de implantação.
+
+>Runners são agentes/servidores que executam fluxos de trabalho definidos nos arquivos de configuração de GitHub Actions, podendo executar no próprio github (Hosted) ou na máquina local (Self-hosted).
+
+
 ![Criando repositorio](../content/devops-09-b.png)
 
 
