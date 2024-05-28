@@ -87,7 +87,7 @@ Executamos o aplicação localmente com a imagem chamada fernandos/kafka-net:v1,
 do nosso ACR
 
 ```
-docker tag fernandos/kafka-net:v1 fiaacr.azurecr.io/kafka-net:v1
+docker tag fernandos/kafka-net:v0 fiaacr.azurecr.io/kafka-net:v0
 ```
 
 > Observer que o endereço do nosso ACR é fiaacr.azurecr.io, veja seu nome caso tenho alterado.
@@ -103,7 +103,7 @@ Enviando a imagem para o ACR
 
 
 ```
-docker push fiaacr.azurecr.io/kafka-net:v1
+docker push fiaacr.azurecr.io/kafka-net:v0
 az acr repository list --name fiaacr --output table
 
 ```
