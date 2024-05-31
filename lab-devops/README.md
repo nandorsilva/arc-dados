@@ -211,9 +211,10 @@ Vamos ver nosso processo de build
 
 ### Build e deploy da nossa imagem no docker-hub com sucesso.
 ![Criando repositorio](../content/devops-24.png)
+![Criando repositorio](../content/devops-25.png)
 
 ### No repositório do docker hub
-![Criando repositorio](../content/devops-24.png)
+![Criando repositorio](../content/devops-26.png)
 
 
 
