@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: akswebapp
-        image: fiaacr.azurecr.io/kafka-net:v1
+        image: fiaacr.azurecr.io/kafka-net:v0
         env:
          - name: ASPNETCORE_ENVIRONMENT
            value: Development
