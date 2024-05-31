@@ -184,6 +184,10 @@ git push -u origin main
 
 
 ### Criando Secrets para logar no docker hub
+
+* DOCKER_USERNAME
+* DOCKER_PASSWORD
+
 ![Criando repositorio](../content/devops-17.png)
 ![Criando repositorio](../content/devops-18.png)
 
@@ -191,7 +195,27 @@ git push -u origin main
 ### Usando o Codespaces para criar o arquivo de workflows
 ![Criando repositorio](../content/devops-19.png)
 
-![Criando repositorio](../content/devops-20.png)
+> Não esquece de mudar seu repositório no arquivo docker-image.yml
+
+![Criando repositorio](../content/devops-21.png)
+
+![Criando repositorio](../content/devops-22.png)
+
+Sync para enviar os arquivos ao github
+
+![Criando repositorio](../content/devops-23.png)
+
+Vamos ver nosso processo de build
+
+![Criando repositorio](../content/devops-23.png)
+
+### Build e deploy da nossa imagem no docker-hub com sucesso.
+![Criando repositorio](../content/devops-24.png)
+
+### No repositório do docker hub
+![Criando repositorio](../content/devops-24.png)
+
+
 
 ## Criando o App Services na Azure
 
