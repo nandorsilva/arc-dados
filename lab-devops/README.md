@@ -216,7 +216,7 @@ Vamos ver nosso processo de build
 ### No repositório do docker hub
 ![Criando repositorio](../content/devops-26.png)
 
-
+---
 
 ## Criando o App Services na Azure
 
