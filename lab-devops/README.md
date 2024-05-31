@@ -7,6 +7,8 @@
 
 ### Pré-requisitos?
 * Conta github
+* Conta Docker hub
+
 
 ## Criando um repositório
 
