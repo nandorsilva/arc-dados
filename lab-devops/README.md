@@ -170,6 +170,27 @@ da nossa origin remota
 git push -u origin main
 ```
 
+## Automação Build DockerFile docker hub.
+![Criando repositorio](../content/devops-16.png)
+
+
+### Criando repositório docker
+![Criando repositorio](../content/devops-14.png)
+
+
+![Criando repositorio](../content/devops-15.png)
+
+
+### Criando Secrets para logar no docker hub
+![Criando repositorio](../content/devops-17.png)
+![Criando repositorio](../content/devops-18.png)
+
+
+### Usando o Codespaces para criar o arquivo de workflows
+![Criando repositorio](../content/devops-19.png)
+
+![Criando repositorio](../content/devops-20.png)
+
 ## Criando o App Services na Azure
 
 
@@ -209,4 +230,6 @@ E ao efeturar um commit da aplicação o processo de deploy é iniciado
 
 Não esqueça de apagar a chave ssh do seu git criado anteriormente.
 
+
+https://app-net-lab.azurewebsites.net/swagger/index.html
 
