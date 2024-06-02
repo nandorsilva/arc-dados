@@ -1,0 +1,91 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\sourceControl\\arc-dados\\lab-observabilidade\\app-net\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FB994B0C-0B71-487F-99BA-F643B37BE2C0}|dev-kafka-demo\\dev-kafka-demo.csproj|d:\\sourcecontrol\\arc-dados\\lab-observabilidade\\app-net\\dev-kafka-demo\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{FB994B0C-0B71-487F-99BA-F643B37BE2C0}|dev-kafka-demo\\dev-kafka-demo.csproj|solutionrelative:dev-kafka-demo\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB994B0C-0B71-487F-99BA-F643B37BE2C0}|dev-kafka-demo\\dev-kafka-demo.csproj|d:\\sourcecontrol\\arc-dados\\lab-observabilidade\\app-net\\dev-kafka-demo\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB994B0C-0B71-487F-99BA-F643B37BE2C0}|dev-kafka-demo\\dev-kafka-demo.csproj|solutionrelative:dev-kafka-demo\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB994B0C-0B71-487F-99BA-F643B37BE2C0}|dev-kafka-demo\\dev-kafka-demo.csproj|d:\\sourcecontrol\\arc-dados\\lab-observabilidade\\app-net\\dev-kafka-demo\\controllers\\kafkacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB994B0C-0B71-487F-99BA-F643B37BE2C0}|dev-kafka-demo\\dev-kafka-demo.csproj|solutionrelative:dev-kafka-demo\\controllers\\kafkacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB994B0C-0B71-487F-99BA-F643B37BE2C0}|dev-kafka-demo\\dev-kafka-demo.csproj|d:\\sourcecontrol\\arc-dados\\lab-observabilidade\\app-net\\dev-kafka-demo\\dev-kafka-demo.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{FB994B0C-0B71-487F-99BA-F643B37BE2C0}|dev-kafka-demo\\dev-kafka-demo.csproj|solutionrelative:dev-kafka-demo\\dev-kafka-demo.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\sourceControl\\arc-dados\\lab-observabilidade\\app-net\\dev-kafka-demo\\appsettings.json",
+              "RelativeDocumentMoniker": "dev-kafka-demo\\appsettings.json",
+              "ToolTip": "D:\\sourceControl\\arc-dados\\lab-observabilidade\\app-net\\dev-kafka-demo\\appsettings.json",
+              "RelativeToolTip": "dev-kafka-demo\\appsettings.json",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAkAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-06-02T16:21:42.758Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\sourceControl\\arc-dados\\lab-observabilidade\\app-net\\dev-kafka-demo\\Program.cs",
+              "RelativeDocumentMoniker": "dev-kafka-demo\\Program.cs",
+              "ToolTip": "D:\\sourceControl\\arc-dados\\lab-observabilidade\\app-net\\dev-kafka-demo\\Program.cs",
+              "RelativeToolTip": "dev-kafka-demo\\Program.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAAAC4AAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-02T16:21:52.142Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "KafkaController.cs",
+              "DocumentMoniker": "D:\\sourceControl\\arc-dados\\lab-observabilidade\\app-net\\dev-kafka-demo\\Controllers\\KafkaController.cs",
+              "RelativeDocumentMoniker": "dev-kafka-demo\\Controllers\\KafkaController.cs",
+              "ToolTip": "D:\\sourceControl\\arc-dados\\lab-observabilidade\\app-net\\dev-kafka-demo\\Controllers\\KafkaController.cs",
+              "RelativeToolTip": "dev-kafka-demo\\Controllers\\KafkaController.cs",
+              "ViewState": "AQIAAB8AAAAAAAAAAAAMwCkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-02T14:10:11.135Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "dev-kafka-demo",
+              "DocumentMoniker": "D:\\sourceControl\\arc-dados\\lab-observabilidade\\app-net\\dev-kafka-demo\\dev-kafka-demo.csproj",
+              "RelativeDocumentMoniker": "dev-kafka-demo\\dev-kafka-demo.csproj",
+              "ToolTip": "D:\\sourceControl\\arc-dados\\lab-observabilidade\\app-net\\dev-kafka-demo\\dev-kafka-demo.csproj",
+              "RelativeToolTip": "dev-kafka-demo\\dev-kafka-demo.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-06-02T14:09:41.999Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

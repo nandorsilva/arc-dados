@@ -27,3 +27,9 @@ scrape_configs:
 
     static_configs:
     - targets: ['jmx-kafka-broker:5556']
+
+  - job_name: 'otel-collector'
+    scrape_interval: 10s
+    static_configs:
+    - targets: ['otel-collector:8889']
+    - targets: ['otel-collector:8888']

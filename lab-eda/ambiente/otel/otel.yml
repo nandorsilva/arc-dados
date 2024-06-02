@@ -1,0 +1,45 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+exporters:
+  prometheus:
+    endpoint: otel:8889
+  otlp:
+    endpoint: tempo:4007
+    tls:
+      insecure: true
+  loki:
+    endpoint: http://loki:3100/loki/api/v1/push
+    tls:
+      insecure: true
+  otlp/jaeger:
+    endpoint: jaeger-all-in-one:4317
+    tls:
+      insecure: true
+
+extensions:
+  health_check:
+  zpages:
+     endpoint: otel:55679
+
+processors:
+  # Data sources: traces, metrics, logs
+  batch:
+
+service:
+  extensions: [zpages, health_check]  # Enable zpages
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      exporters: [prometheus]
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp, otlp/jaeger]
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [loki]

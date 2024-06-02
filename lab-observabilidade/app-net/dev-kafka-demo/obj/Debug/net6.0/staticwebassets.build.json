@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "A8m1mPHShuGMqewNFbyD2X6AFdDtfkgtX911bF+rgQ4=",
+  "Source": "dev-kafka-demo",
+  "BasePath": "_content/dev-kafka-demo",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
