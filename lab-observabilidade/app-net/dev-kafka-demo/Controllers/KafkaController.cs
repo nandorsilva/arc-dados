@@ -57,6 +57,9 @@ namespace dev_kafka_demo.Controllers
 
             }
 
+          
+            Console.WriteLine($"Send message Tipic: {this._topic} message: {mensagemJSON}");
+
             _logger.LogInformation($"Send message Tipic: {this._topic} message: {mensagemJSON}");
 
 

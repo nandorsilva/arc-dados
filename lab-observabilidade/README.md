@@ -21,7 +21,7 @@
 
 
 ```
-cd ..
+
 cd lab-eda/ambiente
 docker-compose up -d grafana prometheus jmx-kafka-broker zookeeper kafka-broker  akhq
 
@@ -55,13 +55,15 @@ Verificando as imagens que foram feitas download do docker-hub
  docker image ls
 ```
 
-### Analizando os componentes
+### Vamos analisar os componentes??
+
+
+
+## Subindo as demais aplicações e validando o fluxo
 
 ```
 docker-compose up -d sqlserver grafana prometheus zookeeper kafka-broker akhq connect sqlserver minio tempo loki otel-collector jaeger-all-in-one 
 ```
-
-## Subindo as demais aplicações e validando o fluxo
 
 Listando os plugins existentes, os padrões da imagem e do debezium que foi inserido na imagem, via arquivo `Dockerfile`
 
@@ -82,9 +84,6 @@ cat sql/init.sql | docker exec -i sqlserver /opt/mssql-tools/bin/sqlcmd -U sa -P
 
 ```
 
-### Provisionando Banco de dados Sql Server
-
-Criando o conector Sql Server
 
 ```
  http PUT http://localhost:8083/connectors/connector-sql/config < connect/conector-sql.json
@@ -113,6 +112,21 @@ export SA_PASSWORD=Password!
 docker exec -i sqlserver /opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d dbEcommerce -Q "INSERT INTO produtos(nome,descricao)  VALUES ('Lapis','lapis de escrever');"
 
 ```
+
+Listando os tópicos
+
+
+```
+docker exec -it kafka-broker /bin/bash
+kafka-topics --bootstrap-server localhost:9092 --list 
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic server.dbEcommerce.dbo.produtos --property print.headers=true  --property print.timestamp=true --property print.key=true --property print.value=true --property print.partition=true --from-beginning
+
+
+
+
+```
+
 
 ### Jaeger
 
@@ -163,5 +177,5 @@ docker-compose up -d kafka-net-api-obs kafka-net-worker-obs
 
 ```
 
-http://localhost:16686/
-http://localhost:3000/
+* http://localhost:16686/
+* http://localhost:3000/

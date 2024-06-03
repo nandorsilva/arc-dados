@@ -24,6 +24,9 @@ namespace worker_demo_kafka
 
             _logger.LogInformation("Worker started at: {time}", DateTimeOffset.Now);
 
+            Console.WriteLine("Worker started at: {0}", DateTimeOffset.Now);
+
+
             //Logar o "Kafka:TopicConsummer 
             _logger.LogInformation("Kafka:TopicConsummer: {topic}", config.GetValue<string>("Kafka:TopicConsummer"));
 
@@ -48,14 +51,17 @@ namespace worker_demo_kafka
             //};
 
 
-            
+
+         
+            Console.WriteLine("Worker Finish at: {0}", DateTimeOffset.Now);
 
             _logger.LogInformation("Worker Finish at: {time}", DateTimeOffset.Now);
 
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {
+        {          
+
             await Task.Run(() => StartConsumerKafka(stoppingToken), stoppingToken);
         }
 
@@ -89,7 +95,8 @@ namespace worker_demo_kafka
 
                         _logger.LogInformation($"Received message at {consumeResult.TopicPartitionOffset}: {message}");
 
-                        Console.WriteLine($"Received message: {message}");
+                        Console.WriteLine($"Received message at {consumeResult.TopicPartitionOffset}: {message}");
+                                              
 
                         using (var activity = Activity.StartActivity("Consumer.mensagem", ActivityKind.Consumer, parentContext.ActivityContext))
                         {                          
@@ -145,8 +152,8 @@ namespace worker_demo_kafka
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("traceparent", "00-" + activity.TraceId.ToHexString() + "-" + activity.SpanId.ToHexString() + "-01");
             client.BaseAddress = new Uri(this.hostEndPoint);
-                     
-          
+
+            
             var content = new StringContent(mensagem, Encoding.UTF8, "application/json");
             var response = client.PostAsync("/api/Kafka", content).Result;
 

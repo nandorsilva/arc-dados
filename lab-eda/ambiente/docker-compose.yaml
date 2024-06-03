@@ -147,9 +147,7 @@ services:
 
   kafka-net-api-obs:
       image: fernandos/kafka-net-api-obs:v1
-      container_name: kafka-net-api-obs    
-      environment:
-          ASPNETCORE_ENVIRONMENT: Development
+      container_name: kafka-net-api-obs      
       depends_on:
           - kafka-broker     
           - otel-collector                
@@ -161,14 +159,10 @@ services:
   kafka-net-worker-obs:
       image: fernandos/kafka-net-worker-obs:v1
       container_name: kafka-net-worker-obs 
-      environment:
-          ASPNETCORE_ENVIRONMENT: Development
       depends_on:
           - kafka-broker     
           - otel-collector   
-          - kafka-net-api-obs             
-      ports:
-        - "5000:80"
+          - kafka-net-api-obs        
       networks:
         otel:
 
@@ -269,7 +263,14 @@ services:
             config.storage.replication.factor=1
             status.storage.topic=connect-status
             status.storage.replication.factor=1  
-            CONNECT_REST_ADVERTISED_HOST_NAME: 'connect'       
+            CONNECT_REST_ADVERTISED_HOST_NAME: 'connect'  
+            producer.interceptor.classes=io.debezium.tracing.DebeziumTracingProducerInterceptor  
+        - OTEL_SERVICE_NAME=kafka-connect
+        - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+        - OTEL_TRACES_SAMPLER=always_on
+        - OTEL_TRACES_EXPORTER=otlp
+        - OTEL_METRICS_EXPORTER=none
+        - STRIMZI_TRACING=opentelemetry      
         command: /opt/kafka/kafka_connect_run.sh
         networks:
           otel:
@@ -388,7 +389,6 @@ services:
       otel:
 
   tempo:
-    
     image: grafana/tempo:2.0.1
     container_name: tempo
     command: [ "-config.file=/etc/tempo.yaml" ]
@@ -406,7 +406,6 @@ services:
       otel:
 
   loki:
-
     image: grafana/loki:2.8.0
     container_name: loki
     command: -config.file=/etc/loki/local-config.yaml
@@ -420,8 +419,7 @@ services:
     networks:
       otel:
 
-  otel-collector:
-    
+  otel-collector:    
     container_name: otel
     hostname: otel
     image: otel/opentelemetry-collector-contrib:0.75.0
@@ -439,6 +437,7 @@ services:
       otel:
   
   jaeger-all-in-one:
+    container_name: jaeger
     image: jaegertracing/all-in-one:latest
     ports:
       - "16686:16686"
