@@ -30,22 +30,11 @@ O Arquivo `docker-compose` provisiona cluster de mongodb com replica set de 3 in
 
 ---
 
-```
-127.0.0.1       mongo1
-127.0.0.1       mongo2
-127.0.0.1       mongo3
-```
-
 ## Executando réplica set Monogodb
+
 ```
-
-chmod -R 777 import
-chmod -R 777 scripts
-
-
 docker-compose up -d
 ```
-
 Verificando se os containers foram criados com sucesso
 
 ```
@@ -56,46 +45,42 @@ Verificando as imagens que foram feitas download do docker-hub
  docker image ls
 ```
 
-## Configurando Replica-set por arquivo de configuração
-
-Executando o script `scripts\rs-init.sh` para a criação do replica-set
-
-```
-
-
-docker exec -it mongo1 /bin/bash
-cd scripts
-./rs-init.sh
-```
-## Configurando Replica-set por CLI
+## Configurando Replica-set
 
 *  Primeiro, inicie todas as instâncias do MongoDB que farão parte do Replica Set com a opção --replSet, nos containers mongo1, mongo2, mongo3
 
 ```
 docker exec -it mongo1 /bin/bash
-mongod --port 27017 --replSet "rs0"
+mongod --port 27017 --replSet rs0
+exit
 ```
 
 ```
 docker exec -it mongo2 /bin/bash
-mongod --port 27017 --replSet "rs0"
+mongod --port 27017 --replSet rs0
+exit
 ```
 
 ```
 docker exec -it mongo3 /bin/bash
-mongod --port 27017 --replSet "rs0"
+mongod --port 27017 --replSet rs0
+exit
 ```
 
 *  Segundo passo, Conecte-se ao nó primário (container mongo1)
 
 ```
+
+docker exec -it mongo1 /bin/bash
+
+
 mongo --port 27017
 
 rs.initiate(
   {
     _id: "rs0",
     members: [
-      { _id: 0, host: "mongo2:27017" } 
+      { _id: 0, host: "mongo1:27017" } 
     ]
   }
 )
