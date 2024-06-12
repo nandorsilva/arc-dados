@@ -42,27 +42,7 @@ Verificando as imagens que foram feitas download do docker-hub
 
 ## Configurando Replica-set
 
-*  Primeiro, inicie todas as instâncias do MongoDB que farão parte do Replica Set com a opção --replSet, nos containers mongo1, mongo2, mongo3
-
-```
-docker exec -it mongo1 /bin/bash
-mongod --port 27017 --replSet rs0
-exit
-```
-
-```
-docker exec -it mongo2 /bin/bash
-mongod --port 27017 --replSet rs0
-exit
-```
-
-```
-docker exec -it mongo3 /bin/bash
-mongod --port 27017 --replSet rs0
-exit
-```
-
-*  Segundo passo, Conecte-se ao nó primário (container mongo1)
+> Os nomes da replica-set foi definido dentro do arquivo docker-compose.yml
 
 ```
 
@@ -73,9 +53,11 @@ mongo --port 27017
 
 rs.initiate(
   {
-    _id: "rs0",
+    _id: "db-replica-set",
     members: [
-      { _id: 0, host: "mongo1:27017" } 
+      { _id: 0, host: "mongo1:27017" } ,
+      { _id: 1, host: "mongo2:27017" } ,
+      { _id: 2, host: "mongo3:27017" } 
     ]
   }
 )
