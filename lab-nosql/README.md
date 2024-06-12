@@ -62,9 +62,6 @@ rs.initiate(
   }
 )
 
-rs.add("mongo2:27017")
-
-rs.add("mongo3:27017")
 
 rs.config()
 
