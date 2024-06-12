@@ -23,11 +23,6 @@ O Arquivo `docker-compose` provisiona cluster de mongodb com replica set de 3 in
 * Docker
 * Docker-Compose
 
-> O endereço configurado no host local.
-
-* Linux /etc/hosts
-* Windows C:\Windows\System32\drivers\etc
-
 ---
 
 ## Executando réplica set Monogodb
