@@ -56,7 +56,7 @@ Verificando as imagens que foram feitas download do docker-hub
  docker image ls
 ```
 
-## Configurando Replica-set
+## Configurando Replica-set por arquivo de configuração
 
 Executando o script `scripts\rs-init.sh` para a criação do replica-set
 
@@ -67,8 +67,47 @@ docker exec -it mongo1 /bin/bash
 cd scripts
 ./rs-init.sh
 ```
+## Configurando Replica-set por CLI
+
+*  Primeiro, inicie todas as instâncias do MongoDB que farão parte do Replica Set com a opção --replSet, nos containers mongo1, mongo2, mongo3
+
+```
+docker exec -it mongo1 /bin/bash
+mongod --port 27017 --replSet "rs0"
+```
+
+```
+docker exec -it mongo2 /bin/bash
+mongod --port 27017 --replSet "rs0"
+```
+
+```
+docker exec -it mongo3 /bin/bash
+mongod --port 27017 --replSet "rs0"
+```
+
+*  Segundo passo, Conecte-se ao nó primário (container mongo1)
+
+```
+mongo --port 27017
+
+rs.initiate(
+  {
+    _id: "rs0",
+    members: [
+      { _id: 0, host: "mongo2:27017" } 
+    ]
+  }
+)
+
+rs.add("mongo2:27017")
+
+rs.add("mongo3:27017")
+
+rs.config()
 
 
+```
 Vamos executar alguns comandos de dentro do cluster mongo1 para configurar as tags
 
 Acessar o Shell do container mongo1
