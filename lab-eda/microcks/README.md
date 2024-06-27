@@ -35,7 +35,7 @@ Execute o docke-compose
 
 
 ```
-docker-compose -f ambiente/docker-compose.yaml  up -d zk kafka-broker mongo keycloak postman app async-minion 
+docker-compose -f ambiente/docker-compose.yaml  up -d zookeeper kafka-broker mongo keycloak postman app async-minion 
 
 ```
 

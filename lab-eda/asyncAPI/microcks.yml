@@ -31,7 +31,7 @@ channels:
               headers: |-
                 {"my-app-header": 23}
               payload: |-
-                {"id": "{{randomString(32)}}", "sendAt": "{{now()}}", "preco": "{{randomString(32)}}"}
+                {"id": "{{randomString(32)}}", "sendAt": "{{now()}}", "preco": "{{randomInt(25, 1500))}}"}
           - john:
               summary: sku1
               headers:
