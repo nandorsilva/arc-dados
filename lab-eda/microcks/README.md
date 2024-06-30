@@ -24,11 +24,8 @@ Entre na pasta microcks
 *** Limpando os deploy anteriormente
 ```
 
-//Entrar na pasta ambiente
-cd ambiente 
-docker-compose down
-docker volume prune
-docker network prune
+//Entrar na pasta lab-eda
+cd lab-eda 
 ```
 
 Execute o docke-compose
