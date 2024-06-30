@@ -333,7 +333,7 @@ No terminal Ksqldb
  select * from PRODUTOSTABLE where idproduto= 2  emit changes;
 ```
 
-No terminal Linux, vamos criar a mensagem 2
+No terminal Linux, vamos alterar a mensagem 2
 
 ```
 >2:{"produto":"TV - Alterada"}
@@ -341,10 +341,10 @@ No terminal Linux, vamos criar a mensagem 2
 ^C
 kafka-consumer-groups --bootstrap-server localhost:9092 --list
 
-//Verifica se tem o topico *PRODUTOSTABLE*
+//Verifica se tem o topico *PRODUTOSTABLE*KsqlTopic*
 
 
- kafka-console-consumer --bootstrap-server localhost:9092 --topic _confluent-ksql-default_transient_transient_PRODUTOSTABLE_164564820911461907_1691341622923 --property print.timestamp=true --property print.key=true --property print.value=true --property print.partition=true --from-beginning
+ kafka-console-consumer --bootstrap-server localhost:9092 --topic _confluent-ksql-default_transient_transient_PRODUTOSTABLE_8009244719463908702_1719781776330-KsqlTopic-Reduce-changelog --property print.timestamp=true --property print.key=true --property print.value=true --property print.partition=true --from-beginning
 
 
 //Listando as configurações do topico 
