@@ -16,6 +16,9 @@
 [LAB EDA](lab-eda//README.md)
 ---
 
+![Ksqldb](../../content/ksql-01.png)
+
+
 # KSqldb
 
 Entrando no container cli
