@@ -22,7 +22,7 @@ Entrando no container cli
 
 ```
 cd ambiente
-docker-compose up -d kafka-broker zk connect ksqldb-server ksqldb-cli 
+docker-compose up -d kafka-broker zookeeper  connect ksqldb-server ksqldb-cli 
 docker-compose exec ksqldb-cli ksql http://ksqldb-server:8088
 ```
 
