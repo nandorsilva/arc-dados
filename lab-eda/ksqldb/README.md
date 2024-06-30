@@ -31,7 +31,7 @@ docker-compose exec ksqldb-cli ksql http://ksqldb-server:8088
 
 Eu outro terminal crie um tópico
 ```
-docker exec -it kafka /bin/bash
+docker exec -it kafka-broker /bin/bash
 kafka-topics --bootstrap-server localhost:9092 --create --partitions 1 --replication-factor 1 --topic alunos ;
 ```
 
@@ -109,7 +109,7 @@ No outro terminal - linuz
 
 //Se não estiver dentro do container
 
-docker exec -it kafka /bin/bash
+docker exec -it kafka-broker /bin/bash
 
 kafka-console-producer --bootstrap-server localhost:9092 --topic alunos --property parse.key=true --property key.separator=:
 
