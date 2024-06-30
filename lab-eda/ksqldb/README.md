@@ -411,7 +411,7 @@ left join produto_preco_stream p on pp.idproduto=p.idproduto emit changes;
 
 
 
-Criando um um strema do join
+Criando um um Stream do join
 
 ```
 create stream produto_com_precos as 
@@ -421,8 +421,6 @@ left join PRODUTOSTABLE p on pp.idproduto=p.idproduto emit changes;
 
 select P_IDPRODUTO, produto , preco from produto_com_precos  emit changes;
 ```
-
-4:{"idprodutopreco":5,"idproduto":1, "preco":1500}
 
 
 --------
