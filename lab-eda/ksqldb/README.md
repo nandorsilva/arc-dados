@@ -303,7 +303,7 @@ No terminal KSqldb criar a tabela `produtosTable`
 
 ```
 create table produtosTable (idProduto int primary key, produto varchar) with (KAFKA_TOPIC='produto', KEY_FORMAT = 'JSON',
-  VALUE_FORMAT = 'JSON' , PARTITIONS = 3);
+  VALUE_FORMAT = 'JSON');
 
 show tables;
 
