@@ -39,7 +39,7 @@ channels:
               payload:
                 id: '{{randomString(32)}}'
                 sendAt: '{{now()}}'
-                preco: '{{randomString(32)}}'               
+                preco: '{{randomInt(1, 1400)}}'               
 components:
   messageTraits:
     commonHeaders:
