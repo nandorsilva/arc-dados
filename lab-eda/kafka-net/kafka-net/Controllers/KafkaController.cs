@@ -23,26 +23,26 @@ namespace kafka_net.Controllers
         [HttpPost(Name = "ProduzirMensagen")]
         public ActionResult  Post(MensagemAluno mensagem)
         {
-            var config = new ProducerConfig
-            {
-                BootstrapServers = _bootstrapServers
-            };
+            //var config = new ProducerConfig
+            //{
+            //    BootstrapServers = _bootstrapServers
+            //};
 
 
-            string mensagemJSON = JsonSerializer.Serialize(mensagem);
+            //string mensagemJSON = JsonSerializer.Serialize(mensagem);
 
             
-            using (var producer = new ProducerBuilder<int, string>(config).Build())
-            {
-                var resultado = producer.ProduceAsync(TOPIC_ALUNO,
-                    new Message<int, string>
-                    {
-                        Key = mensagem.Id,
-                        Value = mensagemJSON
-                    }).GetAwaiter().GetResult();
+            //using (var producer = new ProducerBuilder<int, string>(config).Build())
+            //{
+            //    var resultado = producer.ProduceAsync(TOPIC_ALUNO,
+            //        new Message<int, string>
+            //        {
+            //            Key = mensagem.Id,
+            //            Value = mensagemJSON
+            //        }).GetAwaiter().GetResult();
 
-                _logger.LogInformation($"Mensagem: {mensagemJSON} | Status: {resultado.Status.ToString()}");
-            }
+            //    _logger.LogInformation($"Mensagem: {mensagemJSON} | Status: {resultado.Status.ToString()}");
+            //}
 
             return Ok();
         }

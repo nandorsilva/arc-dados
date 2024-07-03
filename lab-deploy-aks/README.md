@@ -23,7 +23,7 @@ Provisionando o container da imagem fernandos/kafka-net.
 
 cd lab-eda/ambiente/
 
-docker-compose up -d kafka-net
+docker-compose up -d kafka-net kafka-broker zookeeper
 
 docker container ls
 
@@ -33,6 +33,16 @@ http://localhost:5000/swagger/index.html
 
 
 > Ambiente funcionando localmente
+
+# Consumindo mensagens
+
+```
+docker exec -it kafka-broker /bin/bash
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic aluno --from-beginning
+```
+
+
 
 ## Deploy a aplicação em um Kubernetes aks.
 
