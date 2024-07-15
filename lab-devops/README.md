@@ -229,6 +229,8 @@ docker container run -d --name demo-fia -p 8080:80 fernandos/app-net-lab:1
 * [Localhost](http://localhost:8080/)
 
 
+# Teste em  casa!
+
 ## Criando o App Services na Azure
 
 
