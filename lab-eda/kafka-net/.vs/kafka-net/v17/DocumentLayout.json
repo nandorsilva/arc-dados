@@ -7,12 +7,16 @@
       "RelativeMoniker": "D:0:0:{35942970-9590-4AB9-ACC3-0F8BEA6CDF65}|kafka-net\\kafka-net.csproj|solutionrelative:kafka-net\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{35942970-9590-4AB9-ACC3-0F8BEA6CDF65}|kafka-net\\kafka-net.csproj|d:\\sourcecontrol\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\controllers\\kafkacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35942970-9590-4AB9-ACC3-0F8BEA6CDF65}|kafka-net\\kafka-net.csproj|solutionrelative:kafka-net\\controllers\\kafkacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{35942970-9590-4AB9-ACC3-0F8BEA6CDF65}|kafka-net\\kafka-net.csproj|d:\\sourcecontrol\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{35942970-9590-4AB9-ACC3-0F8BEA6CDF65}|kafka-net\\kafka-net.csproj|solutionrelative:kafka-net\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{35942970-9590-4AB9-ACC3-0F8BEA6CDF65}|kafka-net\\kafka-net.csproj|d:\\sourcecontrol\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\controllers\\kafkacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{35942970-9590-4AB9-ACC3-0F8BEA6CDF65}|kafka-net\\kafka-net.csproj|solutionrelative:kafka-net\\controllers\\kafkacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{35942970-9590-4AB9-ACC3-0F8BEA6CDF65}|kafka-net\\kafka-net.csproj|d:\\sourcecontrol\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35942970-9590-4AB9-ACC3-0F8BEA6CDF65}|kafka-net\\kafka-net.csproj|solutionrelative:kafka-net\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Fernando Rodrigues\\source\\repos\\kafka-net\\kafka-net\\Controllers\\WeatherForecastController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -28,10 +32,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{35942970-9590-4AB9-ACC3-0F8BEA6CDF65}|kafka-net\\kafka-net.csproj|d:\\sourcecontrol\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\model\\mensagemaluno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{35942970-9590-4AB9-ACC3-0F8BEA6CDF65}|kafka-net\\kafka-net.csproj|solutionrelative:kafka-net\\model\\mensagemaluno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{35942970-9590-4AB9-ACC3-0F8BEA6CDF65}|kafka-net\\kafka-net.csproj|d:\\sourcecontrol\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{35942970-9590-4AB9-ACC3-0F8BEA6CDF65}|kafka-net\\kafka-net.csproj|solutionrelative:kafka-net\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -49,20 +49,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "D:\\sourceControl\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\appsettings.Development.json",
               "RelativeDocumentMoniker": "kafka-net\\appsettings.Development.json",
               "ToolTip": "D:\\sourceControl\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\appsettings.Development.json",
               "RelativeToolTip": "kafka-net\\appsettings.Development.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAACAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-07-02T15:21:01.874Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Dockerfile",
               "DocumentMoniker": "D:\\sourceControl\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\Dockerfile",
               "RelativeDocumentMoniker": "kafka-net\\Dockerfile",
@@ -80,14 +80,14 @@
               "RelativeDocumentMoniker": "kafka-net\\appsettings.json",
               "ToolTip": "D:\\sourceControl\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\appsettings.json",
               "RelativeToolTip": "kafka-net\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-04-28T00:20:19.961Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "MensagemAluno.cs",
               "DocumentMoniker": "D:\\sourceControl\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\Model\\MensagemAluno.cs",
               "RelativeDocumentMoniker": "kafka-net\\Model\\MensagemAluno.cs",
@@ -99,32 +99,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "KafkaController.cs",
               "DocumentMoniker": "D:\\sourceControl\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\Controllers\\KafkaController.cs",
               "RelativeDocumentMoniker": "kafka-net\\Controllers\\KafkaController.cs",
               "ToolTip": "D:\\sourceControl\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\Controllers\\KafkaController.cs",
               "RelativeToolTip": "kafka-net\\Controllers\\KafkaController.cs",
-              "ViewState": "AQIAACMAAAAAAAAAAAAAACQAAAAQAAAA",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAuwCIAAABOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-28T00:20:19.975Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\sourceControl\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\Program.cs",
               "RelativeDocumentMoniker": "kafka-net\\Program.cs",
               "ToolTip": "D:\\sourceControl\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\Program.cs",
               "RelativeToolTip": "kafka-net\\Program.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABIAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-28T00:20:19.981Z"
+              "WhenOpened": "2024-04-28T00:20:19.981Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "WeatherForecastController.cs",
               "DocumentMoniker": "C:\\Users\\Fernando Rodrigues\\source\\repos\\kafka-net\\kafka-net\\Controllers\\WeatherForecastController.cs",
               "ToolTip": "C:\\Users\\Fernando Rodrigues\\source\\repos\\kafka-net\\kafka-net\\Controllers\\WeatherForecastController.cs",
@@ -133,7 +134,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "kafka-net",
               "DocumentMoniker": "D:\\sourceControl\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\kafka-net.csproj",
               "RelativeDocumentMoniker": "kafka-net\\kafka-net.csproj",

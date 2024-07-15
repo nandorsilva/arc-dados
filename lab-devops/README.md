@@ -218,6 +218,17 @@ Vamos ver nosso processo de build
 
 ---
 
+
+## Testando a imagem
+
+```
+docker container run -d --name demo-fia -p 8080:80 fernandos/app-net-lab:1
+
+```
+
+* [Localhost](http://localhost:8080/)
+
+
 ## Criando o App Services na Azure
 
 
