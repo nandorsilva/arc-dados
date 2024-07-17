@@ -61,6 +61,9 @@ Verificando as imagens que foram feitas download do docker-hub
 
 ## Subindo as demais aplicações e validando o fluxo
 
+![Criando kafka](../content/observabilidade-01.png)
+
+
 ```
 docker-compose up -d sqlserver grafana prometheus zookeeper kafka-broker akhq connect sqlserver minio tempo loki otel-collector jaeger-all-in-one 
 ```
@@ -87,12 +90,21 @@ cat sql/init.sql | docker exec -i sqlserver /opt/mssql-tools/bin/sqlcmd -U sa -P
 
 ```
  http PUT http://localhost:8083/connectors/connector-sql/config < connect/conector-sql.json
+
+ //ou no PowerShell - Windows
+
+ $response = Invoke-WebRequest -Uri "http://localhost:8083/connectors/connector-sql/config" -Method Put -Body (Get-Content -Path "connect/conector-sql.json" -Raw) -ContentType "application/json"; $response.Content
+
 ```
 
 Verificando o status dos conectores
 
 ```
 http http://localhost:8083/connectors/connector-sql/status
+
+//Ou PowerSheell - Windows
+Invoke-WebRequest -Uri http://localhost:8083/connectors/connector-sql/status
+
 
 ```
 
@@ -121,9 +133,6 @@ docker exec -it kafka-broker /bin/bash
 kafka-topics --bootstrap-server localhost:9092 --list 
 
 kafka-console-consumer --bootstrap-server localhost:9092 --topic server.dbEcommerce.dbo.produtos --property print.headers=true  --property print.timestamp=true --property print.key=true --property print.value=true --property print.partition=true --from-beginning
-
-
-
 
 ```
 
@@ -179,3 +188,13 @@ docker-compose up -d kafka-net-api-obs kafka-net-worker-obs
 
 * http://localhost:16686/
 * http://localhost:3000/
+
+
+Criando mais produtos
+
+```
+export SA_PASSWORD=Password!
+
+docker exec -i sqlserver /opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d dbEcommerce -Q "INSERT INTO produtos(nome,descricao)  VALUES ('Lapis','lapis de escrever');"
+
+```
