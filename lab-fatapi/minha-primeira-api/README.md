@@ -13,8 +13,6 @@
 * Python 3.10
 ---
 
-Para o nosso exercícios vamos criar um repositório para versionar nossos arquivos
-
 ## Minha Primeira AP
 
 //criando a estrutura de pastas

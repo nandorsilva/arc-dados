@@ -42,7 +42,7 @@ async def Alunos()-> Any:
     return ALUNOS
 
 
-@app.get("/aluno/{idAluno}", response_model=AlunoResponse, status_code=status.HTTP_200_OK)
+@app.get("/alunos/{idAluno}", response_model=AlunoResponse, status_code=status.HTTP_200_OK)
 async def Consultar_Aluno(idAluno: Annotated[int, Path(title="O ID do aluno para a consulta", ge=1)]) -> Any:
       for item in ALUNOS:
         if item["id"] == idAluno:
@@ -50,7 +50,7 @@ async def Consultar_Aluno(idAluno: Annotated[int, Path(title="O ID do aluno para
       raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Aluno não encontrado")
       
 
-@app.post("/aluno", response_model=AlunoResponse, status_code=status.HTTP_201_CREATED)
+@app.post("/alunos", response_model=AlunoResponse, status_code=status.HTTP_201_CREATED)
 # async def Inserir_Aluno(aluno: str):
 async def Inserir_Aluno(aluno: AlunoRequest)-> Any:
   for _aluno in ALUNOS:
@@ -62,7 +62,7 @@ async def Inserir_Aluno(aluno: AlunoRequest)-> Any:
   return aluno
   
 
-@app.put("/aluno/{idAluno}", response_model=AlunoResponse,  status_code=status.HTTP_200_OK)
+@app.put("/alunos/{idAluno}", response_model=AlunoResponse,  status_code=status.HTTP_200_OK)
 async def Atualizar_Aluno(idAluno:int, aluno: AlunoRequest) -> Any:
  for _aluno in ALUNOS:
         if _aluno["id"] == aluno.id:
@@ -75,7 +75,7 @@ async def Atualizar_Aluno(idAluno:int, aluno: AlunoRequest) -> Any:
  raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Aluno não encontrado")
 
 
-@app.delete("/aluno/{idAluno}", response_model=AlunoResponse, status_code=status.HTTP_200_OK)
+@app.delete("/alunos/{idAluno}", response_model=AlunoResponse, status_code=status.HTTP_200_OK)
 async def Deletar_Aluno(idAluno: int) -> Any:
     for index, alnno in enumerate(ALUNOS):
         if alnno["id"] == idAluno:
