@@ -27,3 +27,7 @@ LAB-EDA/KAFKA-NET/npm-debug.log
 LAB-EDA/KAFKA-NET/obj
 LAB-EDA/KAFKA-NET/secrets.dev.yaml
 LAB-EDA/KAFKA-NET/values.dev.yaml
+
+__pycache__/
+*.py[cod]
+*$py.class

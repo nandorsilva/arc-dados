@@ -1,0 +1,4 @@
+fastapi
+pydantic
+pytest          # execução de testes
+httpx

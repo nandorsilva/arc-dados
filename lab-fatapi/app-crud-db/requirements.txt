@@ -1,0 +1,9 @@
+fastapi==0.100.0
+pydantic
+sqlmodel==0.0.8
+asyncpg==0.28.0
+uvicorn==0.22.0
+
+# dev
+pytest          # execução de testes
+httpx
