@@ -15,14 +15,14 @@
 
 ## Criando sua esteira de Integração Contínua com GitAction
 
-![FastAPI](../content/fastapi-01.png)
+![FastAPI](../../content/fastapi-01.png)
 
 
 ### Criando repositório docker, lembram??
-![Criando repositorio](../content/devops-14.png)
+![Criando repositorio](../../content/devops-14.png)
 
 
-![Criando repositorio](../content/devops-15.png)
+![Criando repositorio](../../content/devops-15.png)
 
 
 ### Criando Secrets para logar no docker hub
@@ -35,7 +35,7 @@
 > **NOTA**: As Variável são dados da sua conta
 
 
-![Criando repositorio](../content/devops-17.png)
+![Criando repositorio](../../content/devops-17.png)
 ![Criando repositorio](../content/devops-18.png)
 
 ### Criando as pastas `.github` e  `workflows`
