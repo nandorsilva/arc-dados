@@ -36,7 +36,7 @@
 
 
 ![Criando repositorio](../../content/devops-17.png)
-![Criando repositorio](../content/devops-18.png)
+![Criando repositorio](../../content/devops-18.png)
 
 ### Criando as pastas `.github` e  `workflows`
 
