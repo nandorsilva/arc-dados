@@ -19,12 +19,22 @@
 
 ![Estrutura](../../content/lab-fastapi-01.png)
 
-
+### Linux
 ```bash
 mkdir app
 touch app/main.py
 touch Dockerfile
 touch requirements.txt
+```
+ 
+ ### Powershell
+```powershell
+mkdir app
+
+$null | Out-File -FilePath "app/main.py" -Encoding utf8
+$null | Out-File -FilePath "Dockerfile" -Encoding utf8
+$null | Out-File -FilePath "requirements.txt" -Encoding utf8
+
 ```
 
 ```
@@ -94,7 +104,7 @@ docker logs  fast-api-fia
 
 Acesse os endereços:
 
-* http://0.0.0.0:8000/docs
-* http://localhost:8000/openapi.json
-* http://localhost:8000/redoc
+* http://localhost/docs
+* http://localhost/openapi.json
+* http://localhost/redoc
 
