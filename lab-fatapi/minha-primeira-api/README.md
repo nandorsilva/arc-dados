@@ -83,7 +83,7 @@ CMD ["fastapi", "run", "app/main.py", "--port", "80"]
 
 ```
 
-> [!IMPORTANTE]
+> [!IMPORTANT]
 > Não esqueçam de mudar para o usuário do DockerHub de vocês.
 
 Criando a imagem da nossa aplicação
