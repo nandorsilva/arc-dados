@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  api:
+    image: fia_fastapi
+    build:
+      context: .      
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"   
+    container_name:  fast-api-fia 
+    volumes:
+      - .:/home/app/api   
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db-postgres-fastapi:5432/dbfiafastapi
+    stdin_open: true
+    tty: true 
+
+  db-postgres-fastapi:
+    build: postgres
+    image: fia_postgres_alpine3.14 
+    container_name: postgres 
+    ports:   
+      - "5435:5432"
+    environment:
+      - POSTGRES_DBS=dbfiafastapi
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: lab-pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: postgres    
+    ports:
+      - "5433:80"
+    depends_on:
+      - db-postgres-fastapi    
+
