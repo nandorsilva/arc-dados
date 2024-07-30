@@ -19,8 +19,8 @@ Vamos criar mais arquivos
  ### Linux
 ```bash
 
-touch configs.py
-touch db.py
+touch app/configs.py
+touch app/db.py
 
 mkdir postgres
 touch postgres/create-databases.sh
@@ -33,8 +33,8 @@ touch docker-compose.yaml
  ### Powershell
 ```powershell
 
-$null | Out-File -FilePath "configs.py" -Encoding utf8
-$null | Out-File -FilePath "db.py" -Encoding utf8
+$null | Out-File -FilePath "app/configs.py" -Encoding utf8
+$null | Out-File -FilePath "app/db.py" -Encoding utf8
 
 mkdir postgres
 
@@ -275,7 +275,7 @@ services:
 
 ```
 
-### Vamos editar o arquivo `configs.py`
+### Vamos editar o arquivo `app/configs.py`
 
 ```python
 from pydantic import BaseSettings
@@ -292,7 +292,7 @@ settings: Settings = Settings()
 
 ```
 
-### Vamos editar o arquivo `db.py`
+### Vamos editar o arquivo `app/db.py`
 
 ```python
 from sqlalchemy.orm import sessionmaker
@@ -328,5 +328,56 @@ ActiveSession = Depends(get_session)
 
 ```
 
+### SQLAlchemy
 ORM, ou Object-Relational Mapping (Mapeamento Objeto-Relacional), é uma técnica de programação que permite que você interaja com um banco de dados relacional usando uma abordagem orientada a objetos. Em vez de escrever diretamente consultas SQL para interagir com o banco de dados, você pode usar classes e objetos em sua linguagem de programação preferida.
 
+
+Atualizando as imagens pelo arquivo DockerCompose
+
+```bash 
+docker compose up -d  db-postgres-fastapi pgadmin
+
+docker image ls
+
+```
+
+### Configurando o acesso PgAdmin ao postgress
+
+
+1. [PostGres](../../lab-kafka-connect/README.md)
+
+
+Acesso para o PgAdmin http://localhost:5433/
+
+
+* Login: lab-pgadmin4@pgadmin.org
+* Senha : postgres    
+
+* Nome do server: postgres
+* Nome do Host Name: postgres
+* database: postgres
+* Username: postgres
+* password: postgres
+
+### Tela de login do PgAdmin
+![Exemplo Kafka Conect](../content/login-pgadmin.png)
+
+
+### Inserindo um server
+![Exemplo Kafka Conect](../content/add-server.png)
+
+### Configurando o server
+![Exemplo Kafka Conect](../content/conect-pgadmin.png)
+
+
+
+```bash 
+docker compose up -d 
+
+docker image ls
+
+docker logs  fast-api-fia 
+
+```
+
+* http://localhost:8000/docs
