@@ -372,6 +372,9 @@ Acesso para o PgAdmin http://localhost:5433/
 
 
 ```bash 
+
+docker container rm  fast-api-fia -f
+
 docker compose up -d 
 
 docker image ls
