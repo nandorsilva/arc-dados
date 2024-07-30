@@ -360,14 +360,14 @@ Acesso para o PgAdmin http://localhost:5433/
 * password: postgres
 
 ### Tela de login do PgAdmin
-![Exemplo Kafka Conect](../content/login-pgadmin.png)
+![Exemplo Kafka Conect](../../content/login-pgadmin.png)
 
 
 ### Inserindo um server
-![Exemplo Kafka Conect](../content/add-server.png)
+![Exemplo Kafka Conect](../../content/add-server.png)
 
 ### Configurando o server
-![Exemplo Kafka Conect](../content/conect-pgadmin.png)
+![Exemplo Kafka Conect](../../content/conect-pgadmin.png)
 
 
 
