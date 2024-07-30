@@ -32,8 +32,6 @@ touch docker-compose.yaml
 
  ### Powershell
 ```powershell
-mkdir tests
-
 
 $null | Out-File -FilePath "configs.py" -Encoding utf8
 $null | Out-File -FilePath "db.py" -Encoding utf8
