@@ -220,6 +220,31 @@ def test_get_aluno(api_client):
 
 ```
 
+### Vamos editar o arquivo `Dockerfile`
+```docker
+FROM python:3.10
+
+ 
+# Create the home directory
+ENV APP_HOME=/home/app/api
+RUN mkdir -p $APP_HOME
+WORKDIR $APP_HOME
+# 
+
+# install
+COPY . $APP_HOME
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
+RUN pip install -e .
+
+
+# 
+CMD ["uvicorn","app.main:app","--host=0.0.0.0","--port=8000","--reload"]
+
+
+
+```
+
+
 ### Vamos editar o arquivo `docker-compose.yaml`
 
 ```yaml
@@ -242,6 +267,9 @@ services:
 Atualizando a imagem pelo arquivo DockerCompose
 
 ```bash
+
+docker container rm  fast-api-fia -f
+
 docker compose up -d
 
 docker image ls

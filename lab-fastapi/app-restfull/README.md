@@ -184,6 +184,8 @@ Execute o container para testar
 
 ```console
 
+docker container rm  fast-api-fia -f
+
 docker container run -d --name fast-api-fia -p 80:80  <<seu usuario>>/app-fastapi-fia
 
 docker logs  fast-api-fia

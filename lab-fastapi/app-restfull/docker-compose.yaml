@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: fernandos/app-fastapi-fia:v123
     ports:
       - "8000:8000"   
     container_name:  fast-api-fia 
