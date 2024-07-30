@@ -112,7 +112,7 @@ Acesse os endereços:
 
 
 
-2. [Um poouco mais sobre RestFull](app-restfull/README.md)
-3. [Vamos melhorar um pouco](app-restfull-refactor/README.md)
-4. [FastAPI e Esteira GitAction](app-gitaction/README.md)
-5. [FastAPI e Postgresql](app-crud-db/README.md)
+2. [Um poouco mais sobre RestFull](../app-restfull/README.md)
+3. [Vamos melhorar um pouco](../app-restfull-refactor/README.md)
+4. [FastAPI e Esteira GitAction](../app-gitaction/README.md)
+5. [FastAPI e Postgresql](../app-crud-db/README.md)

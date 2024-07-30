@@ -261,5 +261,5 @@ docker logs  fast-api-fia
 docker compose exec api pytest tests/
 ```
 
-4. [FastAPI e Esteira GitAction](app-gitaction/README.md)
-5. [FastAPI e Postgresql](app-crud-db/README.md)
+4. [FastAPI e Esteira GitAction](../app-gitaction/README.md)
+5. [FastAPI e Postgresql](../app-crud-db/README.md)
