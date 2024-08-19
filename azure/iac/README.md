@@ -11,6 +11,7 @@
 
 ## Pré-requisitos?
 * Conta Azure
+* Instalação - https://learn.microsoft.com/en-us/powershell/azure/install-azps-windows?view=azps-12.2.0&tabs=powershell&pivots=windows-psgallery
 
 ## Deployando Arm Template 
 

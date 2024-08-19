@@ -241,7 +241,7 @@ services:
       otel:
 
   connect:
-        image: fernandos/kafka-connet-debezium-lab:v213
+        image: fernandos/kafka-connet-debezium-lab:v214
         container_name: kafkaConect
         ports:
         - 8083:8083
