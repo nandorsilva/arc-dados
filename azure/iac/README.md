@@ -37,3 +37,7 @@ Executando o arquivo power shell
 az group deployment create -g "aula-01-fia" --template-file storage.json 
 
 ```
+
+
+> https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/syntax
+> https://learn.microsoft.com/en-us/samples/browse/?expanded=azure&products=azure-resource-manager
