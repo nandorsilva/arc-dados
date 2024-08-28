@@ -59,7 +59,7 @@ $null | Out-File -FilePath "docker-compose.yaml" -Encoding utf8
 
 
 ```plain
-fastapi
+fastapi[standard]
 pydantic
 pytest          # execução de testes
 httpx

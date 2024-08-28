@@ -49,7 +49,7 @@ $null | Out-File -FilePath "requirements.txt" -Encoding utf8
 
 
 ```plain
-fastapi
+fastapi[standard]
 ```
 
 ### Editando o arquivo `app/main.py`

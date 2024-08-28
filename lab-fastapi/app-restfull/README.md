@@ -76,7 +76,7 @@ setup(
 
 
 ```plain
-fastapi
+fastapi[standard]
 pydantic
 ```
 
@@ -171,26 +171,66 @@ async def Deletar_Aluno(idAluno: int) -> Any:
 
 ```
 
+### Vamos editar o arquivo `Dockerfile`
+```docker
+FROM python:3.10
 
-Atualizando a imagem da nossa aplicação
+ 
+# Create the home directory
+ENV APP_HOME=/home/app/api
+RUN mkdir -p $APP_HOME
+WORKDIR $APP_HOME
+# 
 
-```bash
-docker image build -t <<seu usuario>>/app-fastapi-fia .
+# install
+COPY . $APP_HOME
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
+RUN pip install -e .
+
+
+# 
+CMD ["uvicorn","app.main:app","--host=0.0.0.0","--port=8000","--reload"]
+
+
 
 ```
 
+### Vamos editar o arquivo `docker-compose.yaml`
 
-Execute o container para testar
+```yaml
+version: '3.9'
 
-```console
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"   
+    container_name:  fast-api-fia 
+    volumes:
+      - .:/home/app/api   
+    stdin_open: true
+    tty: true 
+```
+
+Atualizando a imagem pelo arquivo DockerCompose
+
+```bash
 
 docker container rm  fast-api-fia -f
 
-docker container run -d --name fast-api-fia -p 80:80  <<seu usuario>>/app-fastapi-fia
+docker compose up -d
+
+docker image ls
 
 docker logs  fast-api-fia
 
 ```
+
+> [!IMPORTANT]
+> A API vai ser atualizada automaticamente quando detectar mudanças no có
+
 
 
 Acesse os endereços:
