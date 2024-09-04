@@ -14,10 +14,10 @@ O Arquivo `docker-compose` provisiona o Redis e Interface Web para acesso ao red
 
 
 
-## Executando Redis e UI
+## Executando Redis
 
 ```sh
-docker-compose up -d redis
+docker-compose up -d redis-stack
 ```
 
 
