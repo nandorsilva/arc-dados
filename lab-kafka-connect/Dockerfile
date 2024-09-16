@@ -21,6 +21,8 @@ RUN mkdir $KAFKA_CONNECT_PLUGIN_PATH &&\
     cd $KAFKA_CONNECT_PLUGIN_PATH &&\
     curl -sfSL  https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/${DEBEZIUM_CONNECTOR_VERSION}/debezium-connector-postgres-${DEBEZIUM_CONNECTOR_VERSION}-plugin.tar.gz | tar xz &&\
     cd debezium-connector-postgres &&\
+    curl -sfSL  https://repo1.maven.org/maven2/io/debezium/debezium-connector-sqlserver/${DEBEZIUM_CONNECTOR_VERSION}/debezium-connector-sqlserver-${DEBEZIUM_CONNECTOR_VERSION}-plugin.tar.gz | tar xz &&\
+    cd debezium-connector-sqlserver &&\
     curl -sfSL https://repo1.maven.org/maven2/io/debezium/debezium-interceptor/${DEBEZIUM_CONNECTOR_VERSION}/debezium-interceptor-${DEBEZIUM_CONNECTOR_VERSION}.jar -o debezium-interceptor-${DEBEZIUM_CONNECTOR_VERSION}.jar
 
  COPY --from=unzip-layer /tmp/connect-plugins/confluentinc-kafka-connect-s3-10.5.5 ${KAFKA_CONNECT_PLUGIN_PATH}/confluentinc-kafka-connect-s3-10.5.5

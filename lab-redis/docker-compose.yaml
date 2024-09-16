@@ -7,19 +7,26 @@ services:
     hostname: redis
     ports:
       - "6379:6379"
+      - "8001:8001" 
     command: redis-server /usr/local/etc/redis/redis.conf
     volumes:
     - ./redis.conf:/usr/local/etc/redis/redis.conf
     environment:
      REDIS_ARGS: --requirepass labdata
-
+    networks:
+      - redis-net
 
   redisinsight:
     image: redislabs/redisinsight  
     container_name: redisinsight
     hostname: redislabs
     ports:
-      - "8001:5540"
+       - "8002:8001"  # Porta do RedisInsight (note que está exposta na porta 8002 no host)
     depends_on:
      - redis-stack
+    networks:
+      - redis-net
 
+networks:
+  redis-net:
+    driver: bridge

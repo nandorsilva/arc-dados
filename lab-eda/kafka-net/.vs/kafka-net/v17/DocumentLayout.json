@@ -80,7 +80,7 @@
               "RelativeDocumentMoniker": "kafka-net\\appsettings.json",
               "ToolTip": "D:\\sourceControl\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\appsettings.json",
               "RelativeToolTip": "kafka-net\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAABJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-04-28T00:20:19.961Z",
               "EditorCaption": ""
@@ -105,7 +105,7 @@
               "RelativeDocumentMoniker": "kafka-net\\Controllers\\KafkaController.cs",
               "ToolTip": "D:\\sourceControl\\arc-dados\\lab-eda\\kafka-net\\kafka-net\\Controllers\\KafkaController.cs",
               "RelativeToolTip": "kafka-net\\Controllers\\KafkaController.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAuwCIAAABOAAAA",
+              "ViewState": "AQIAACUAAAAAAAAAAAAAAC8AAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-28T00:20:19.975Z",
               "EditorCaption": ""
@@ -120,8 +120,7 @@
               "RelativeToolTip": "kafka-net\\Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-28T00:20:19.981Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-28T00:20:19.981Z"
             },
             {
               "$type": "Document",
