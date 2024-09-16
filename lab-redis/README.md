@@ -14,10 +14,10 @@ O Arquivo `docker-compose` provisiona o Redis e Interface Web para acesso ao red
 
 
 
-## Executando Redis e UI
+## Executando Redis
 
 ```sh
-docker-compose up -d
+docker-compose up -d redis-stack
 ```
 
 
@@ -26,12 +26,6 @@ Deu tudo certo ?
 ```sh
 docker container ls
 ```
-
-## Acesso WebUI do Redis Insight 
-
-
-* http://localhost:8001/
-
 
 Acessando o client que está no container do Redis para acessar o cluster
 
