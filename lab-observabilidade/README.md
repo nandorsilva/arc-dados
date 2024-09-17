@@ -23,7 +23,7 @@
 ```
 
 cd lab-eda/ambiente
-docker-compose up -d grafana prometheus jmx-kafka-broker zookeeper kafka-broker  akhq
+docker compose up -d grafana prometheus jmx-kafka-broker zookeeper kafka-broker  akhq
 
 ```
 
@@ -65,7 +65,7 @@ Verificando as imagens que foram feitas download do docker-hub
 
 
 ```
-docker-compose up -d sqlserver grafana prometheus zookeeper kafka-broker akhq connect sqlserver minio tempo loki otel-collector jaeger-all-in-one 
+docker compose up -d sqlserver grafana prometheus zookeeper kafka-broker akhq connect  minio tempo loki otel-collector jaeger-all-in-one 
 ```
 
 Listando os plugins existentes, os padrões da imagem e do debezium que foi inserido na imagem, via arquivo `Dockerfile`
@@ -82,14 +82,21 @@ docker exec -it kafkaConect curl  http://localhost:8083/connector-plugins
 Executando os scripts
 
 ```
+//Linux
 export  SA_PASSWORD=Password!
-cat sql/init.sql | docker exec -i sqlserver /opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD
+cat sql/init.sql | docker exec -i sqlserver /opt/mssql-tools18/bin/sqlcmd -U sa -P $SA_PASSWORD -C
+
+//PowerShell
+$SA_PASSWORD = "Password!"
+Get-Content sql/init.sql | docker exec -i sqlserver /opt/mssql-tools18/bin/sqlcmd -U sa -P $Env:SA_PASSWORD -C
 
 ```
 
 
 ```
- http PUT http://localhost:8083/connectors/connector-sql/config < connect/conector-sql.json
+//Linux
+curl -X PUT -d @connect/conector-sql.json http://localhost:8083/connectors/connector-sql/config -H 'Content-Type: application/json' -H 'Accept: application/json'
+
 
  //ou no PowerShell - Windows
 
@@ -100,11 +107,7 @@ cat sql/init.sql | docker exec -i sqlserver /opt/mssql-tools/bin/sqlcmd -U sa -P
 Verificando o status dos conectores
 
 ```
-http http://localhost:8083/connectors/connector-sql/status
-
-//Ou PowerSheell - Windows
-Invoke-WebRequest -Uri http://localhost:8083/connectors/connector-sql/status
-
+docker exec -it kafkaConect curl  http://localhost:8083/connectors/connector-sql/status
 
 ```
 
@@ -119,9 +122,17 @@ docker-compose up -d akhq
 
 
 ```
+
+//Linux
 export SA_PASSWORD=Password!
 
-docker exec -i sqlserver /opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d dbEcommerce -Q "INSERT INTO produtos(nome,descricao)  VALUES ('Lapis','lapis de escrever');"
+
+//PowerShell
+$SA_PASSWORD = "Password!"
+
+
+docker exec -i sqlserver /opt/mssql-tools18/bin/sqlcmd -U sa -P $SA_PASSWORD -d dbEcommerce  -Q "INSERT INTO produtos(nome,descricao)  VALUES ('Lapis','lapis de escrever');" -C
+
 
 ```
 
@@ -193,7 +204,6 @@ docker-compose up -d kafka-net-api-obs kafka-net-worker-obs
 Criando mais produtos
 
 ```
-export SA_PASSWORD=Password!
 
 docker exec -i sqlserver /opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d dbEcommerce -Q "INSERT INTO produtos(nome,descricao)  VALUES ('Lapis','lapis de escrever');"
 

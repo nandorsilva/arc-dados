@@ -125,6 +125,12 @@ services:
               connect:
                 - name: "connect"
                   url: "http://connect:8083"
+            docker-kafka-server-prd:
+              properties:
+                bootstrap.servers: "kafka-broker:29092"       
+              connect:
+                - name: "connect"
+                  url: "http://connect:8083"
     ports:
       - "8080:8080"
     depends_on:
@@ -276,7 +282,7 @@ services:
           otel:
 
   sqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:2019-CU28-GDR1-ubuntu-20.04
     container_name: sqlserver
     ports:
      - 1433:1433
