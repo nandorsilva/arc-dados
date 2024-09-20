@@ -23,7 +23,7 @@ Provisionando o container da imagem fernandos/kafka-net.
 
 cd lab-eda/ambiente/
 
-docker-compose up -d kafka-net kafka-broker zookeeper
+docker compose up -d kafka-net kafka-broker zookeeper
 
 docker container ls
 
