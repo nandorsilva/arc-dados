@@ -297,6 +297,22 @@ services:
     networks:
       otel:
 
+  sqlserver2:
+    image: mcr.microsoft.com/mssql/server:2019-CU27-ubuntu-20.04
+    container_name: sqlserver2
+    ports:
+     - 1432:1433
+    environment:
+     - ACCEPT_EULA=Y
+     - MSSQL_PID=Standard
+     - SA_PASSWORD=Password!
+     - MSSQL_AGENT_ENABLED=true
+    stdin_open: true
+    volumes:
+      - /sql/init.sql:/opt/sql_scripts/init.sql
+    networks:
+      otel:
+
   postgres:
     image: quay.io/debezium/example-postgres:2.1
     container_name: postgres

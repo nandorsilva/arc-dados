@@ -11,7 +11,7 @@
 * Kubectl
 
 
-## Deploy Aplicação Net Producer Localmente
+# Deploy Aplicação Net Producer Localmente
 
 
 
@@ -34,7 +34,7 @@ http://localhost:5000/swagger/index.html
 
 > Ambiente funcionando localmente
 
-# Consumindo mensagens
+## Consumindo mensagens
 
 ```
 docker exec -it kafka-broker /bin/bash
@@ -42,9 +42,9 @@ docker exec -it kafka-broker /bin/bash
 kafka-console-consumer --bootstrap-server localhost:9092 --topic aluno --from-beginning
 ```
 
+---
 
-
-## Deploy a aplicação em um Kubernetes aks.
+# Deploy a aplicação em um Kubernetes aks.
 
 
 ### Alguns utilitários são necessários a instalação e configuração dos componentes, ou pode usar o shell da Azure
