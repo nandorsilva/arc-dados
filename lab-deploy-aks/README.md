@@ -7,17 +7,9 @@
 ### Pré-requisitos?
 * Docker
 * Docker-Compose
-* Kubernetes - AKS
-* Kubectl
 
 
 # Deploy Aplicação Net Producer Localmente
-
-
-
-Provisionando o container da imagem fernandos/kafka-net.
-
-> No arquivo docker-compose no caminho /lab-eda/ambiente alterar a image que foi criada por vocês.
 
 ```
 
