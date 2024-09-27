@@ -88,7 +88,7 @@ cat sql/init.sql | docker exec -i sqlserver /opt/mssql-tools18/bin/sqlcmd -U sa 
 
 //PowerShell
 $SA_PASSWORD = "Password!"
-Get-Content sql/init.sql | docker exec -i sqlserver /opt/mssql-tools18/bin/sqlcmd -U sa -P $Env:SA_PASSWORD -C
+Get-Content sql/init.sql | docker exec -i sqlserver /opt/mssql-tools18/bin/sqlcmd -U sa -P $SA_PASSWORD -C
 
 ```
 
