@@ -205,6 +205,6 @@ Criando mais produtos
 
 ```
 
-docker exec -i sqlserver /opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d dbEcommerce -Q "INSERT INTO produtos(nome,descricao)  VALUES ('Lapis','lapis de escrever');"
+docker exec -i sqlserver /opt/mssql-tools18/bin/sqlcmd -U sa -P $SA_PASSWORD -d dbEcommerce  -Q "INSERT INTO produtos(nome,descricao)  VALUES ('Lapis','lapis de escrever');" -C
 
 ```
