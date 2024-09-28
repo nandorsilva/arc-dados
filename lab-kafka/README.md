@@ -64,7 +64,7 @@ Verificando as imagens que foram feitas download do docker-hub
 
 Vamos executar alguns comandos de dentro do container kafka1
 
-Acessar o Shell do container kafka1
+Acessar o Shell do container kafka-broker
 
 ```
 docker exec -it kafka-broker /bin/bash
@@ -109,11 +109,9 @@ Criando tópicos com configurações
 ```
 kafka-topics --bootstrap-server localhost:9092 --create --topic topico-config --partitions 3 --replication-factor 1
 
-
 kafka-configs --bootstrap-server kafka:29092 --entity-type topics --entity-name topico-config --alter --add-config retention.ms=259200000
 
 kafka-topics --bootstrap-server localhost:9092 --describe --topic topico-config
-
 ```
 
 # Deletando um tópico
@@ -121,7 +119,6 @@ kafka-topics --bootstrap-server localhost:9092 --describe --topic topico-config
 ```
 kafka-topics --bootstrap-server localhost:9092 --topic alunos-novos-factor --delete
 kafka-topics --bootstrap-server localhost:9092 --topic alunos-novos-factor --describe
-
 ```
 
 # Produzinho mensagens
@@ -148,7 +145,6 @@ Criando o tópico no momento de criar a mensagem
 kafka-console-producer --bootstrap-server localhost:9092 --topic professor
 
 kafka-topics --bootstrap-server localhost:9092 --topic professor --describe
-
 ```
 
 > A Criação do tópico foi possivel pois a propriedade auto.create.topics.enable está com true.
@@ -157,7 +153,7 @@ O tópico foi criado com configurações default
 
 Ver as configurações na pasta cat /etc/kafka/server.properties
 
-Produzir mensagens com habilitando a Key
+Produzir mensagens habilitando a Key
 
 ```
 kafka-console-producer --bootstrap-server localhost:9092 --topic alunos --property parse.key=true --property key.separator=:
@@ -174,7 +170,6 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic alunos
 Abre outro terminal, entre no container e produza uma mensagem
 
 ```
-
 //Entrando no containar em outro terminal
 
 docker exec -it kafka1 /bin/bash
@@ -190,7 +185,7 @@ kafka-console-producer --bootstrap-server localhost:9092 --topic alunos --proper
 
 Consumindo as mensagens desde o inicio
 
-No primeiro terminal cancela o consumo da mensagem
+No primeiro terminal cancele o consumo das mensagens
 
 ```
 >^C  (<- Ctrl + C is used to exit the producer)
@@ -243,7 +238,7 @@ kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group aplic
 Deletando os consumer groups
 kafka-consumer-groups --bootstrap-server kafka:29092 --delete --group aplicacao-lab
 
-Produzindo mensagem no Round Robin Partitioner
+Produzindo mensagem com a instrução Round Robin Partitioner
 
 ```
 kafka-console-producer --bootstrap-server localhost:9092 --producer-property partitioner.class=org.apache.kafka.clients.producer.RoundRobinPartitioner --topic alunos
@@ -255,13 +250,13 @@ kafka-console-producer --bootstrap-server localhost:9092 --producer-property par
 ![Cluster Mongo db](img/desafio.png)
 
 
-O desafio tera a estrutura da imagem acima:
+O desafio terá a estrutura da imagem acima:
 
 - Um tópico com nome preco-alterado com 3 partições
 - Um consumer group com 3 consumidores
 
 
-> Crie o tópico com a opção `RoundRobinPartitioner` para simular as mensagens em cada consumidor
+> Crie o tópico  e com a opção `RoundRobinPartitioner` para produizar as mensagens em cada consumidor
 
 
 
