@@ -224,7 +224,6 @@ Acesso para o MinIO http://localhost:9001/login
 
 ![MinIO](../content/minio-01.png)
 ![MinIO](../content/minio-02.png)
-![MinIO](../content/minio-03.png)
 ![MinIO](../content/minio-04.png)
 ![MinIO](../content/minio-05.png)
 ![MinIO](../content/minio-06.png)
