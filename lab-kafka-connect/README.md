@@ -205,9 +205,9 @@ docker exec -it kafkaConect curl http://localhost:8083/connectors/connector-post
 Interagindo com os connetores
 
 ```
-PUT http://localhost:8083/connectors/connector-postgres/pause
-GET http://localhost:8083/connectors/connector-postgres/status
-PUT http://localhost:8083/connectors/connector-postgres/resume
+Método PUT http://localhost:8083/connectors/connector-postgres/pause
+Método GET http://localhost:8083/connectors/connector-postgres/status
+Método PUT http://localhost:8083/connectors/connector-postgres/resume
 ```
 
 ### Configurando MinIO
