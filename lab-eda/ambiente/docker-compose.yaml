@@ -314,7 +314,7 @@ services:
       otel:
 
   postgres:
-    image: quay.io/debezium/example-postgres:2.1
+    image: quay.io/debezium/example-postgres:${POSTGRES_DEBEZIUM}
     container_name: postgres
     ports:
      - 5432:5432
@@ -373,9 +373,7 @@ services:
       - minio_storage:/data
     environment:
       MINIO_ROOT_USER: admin
-      MINIO_ROOT_PASSWORD: minioadmin
-      MINIO_ACCESS_KEY: cursolab
-      MINIO_SECRET_KEY: cursolab
+      MINIO_ROOT_PASSWORD: minioadmin    
     command: server --console-address ":9001" /data
     networks:
       otel:

@@ -111,7 +111,8 @@ Criando o conector PostGres
 
  cd ../../lab-kafka-connect/
 
-http PUT http://localhost:8083/connectors/connector-postgres/config < conector-postgres.json
+curl -X PUT -d @conector-postgres.json http://localhost:8083/connectors/connector-postgres/config -H 'Content-Type: application/json' -H 'Accept: application/json'
+
 
 //Ou via powershell
 $response = Invoke-WebRequest -Uri "http://localhost:8083/connectors/connector-postgres/config" -Method Put -Body (Get-Content -Path "conector-postgres.json" -Raw) -ContentType "application/json"; $response.Content
@@ -204,9 +205,9 @@ docker exec -it kafkaConect curl http://localhost:8083/connectors/connector-post
 Interagindo com os connetores
 
 ```
-http PUT http://localhost:8083/connectors/connector-postgres/pause
-http http://localhost:8083/connectors/connector-postgres/status
-http PUT http://localhost:8083/connectors/connector-postgres/resume
+PUT http://localhost:8083/connectors/connector-postgres/pause
+GET http://localhost:8083/connectors/connector-postgres/status
+PUT http://localhost:8083/connectors/connector-postgres/resume
 ```
 
 ### Configurando MinIO
@@ -236,7 +237,8 @@ Instalando o conector do MinIO
 ```
 cd ../../lab-kafka-connect/
 
-http PUT http://localhost:8083/connectors/connector-minio/config < conector-minio.json
+curl -X PUT -d @conector-minio.json http://localhost:8083/connectors/connector-minio/config -H 'Content-Type: application/json' -H 'Accept: application/json'
+
 
 //Ou via powershell
 $response = Invoke-WebRequest -Uri "http://localhost:8083/connectors/connector-minio/config" -Method Put -Body (Get-Content -Path "conector-minio.json" -Raw) -ContentType "application/json"; $response.Content
@@ -259,30 +261,3 @@ INSERT INTO inventory.products(	id, name, description, weight)
 VALUES (112, 'Lapis', 'O melhor', 1);
 ```
 
-
-## Desafio
-
-
-
-*Fazer o Sinc para o Mongodb*
-
-![Exemplo Kafka Conect](../content/sinc.png)
-
-
->Dicas
-
-```
-//Download do Plugin do Kafka Connect
- wget https://repo1.maven.org/maven2/org/mongodb/kafka/mongo-kafka-connect/1.6.1/mongo-kafka-connect-1.6.1-all.jar -P plugin
-
-//Instalação do Mongodb mongo-connect
-docker-compose up -d mongo-connect
-
- http PUT http://localhost:8083/connectors/sinc-mongodb/config < sinc-mongodb.json
-
- ```
-
- > Lab Mongodb
- [LAB NOSQL](../lab-nosql/README.md)
-
- https://github.com/nandorsilva/arc-dados/tree/main/lab-nosql
