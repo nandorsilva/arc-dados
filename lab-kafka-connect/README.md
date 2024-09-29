@@ -17,7 +17,7 @@
 
 ## Kafka Connect
 
-![Exemplo Kafka Conect](../content/kafka-connect-minio.png)
+![Exemplo Kafka Conect](../content/kafka-connect-minio_b.png)
 
 
 ### Realizando download dos plugins dos conectores
