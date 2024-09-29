@@ -366,6 +366,7 @@ services:
 
   minio:
     image:  quay.io/minio/minio
+    container_name: minio
     ports:
       - "9000:9000"
       - "9001:9001"
@@ -373,10 +374,33 @@ services:
       - minio_storage:/data
     environment:
       MINIO_ROOT_USER: admin
-      MINIO_ROOT_PASSWORD: minioadmin    
+      MINIO_ROOT_PASSWORD: minioadmin      
+      MINIO_NOTIFY_KAFKA_ENABLE_EventKafka: "on"
+      MINIO_NOTIFY_KAFKA_BROKERS_EventKafka: "kafka-broker:29092"
+      MINIO_NOTIFY_KAFKA_TOPIC_EventKafka: "sink-products"
+      MINIO_NOTIFY_KAFKA_QUEUE_LIMIT_EventKafka: "10000"
+      MINIO_NOTIFY_KAFKA_TLS_EventKafka: "off"
     command: server --console-address ":9001" /data
     networks:
       otel:
+
+  mc:
+    image: minio/mc:latest
+    container_name: mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      until (/usr/bin/mc alias set myminio http://minio:9000 admin minioadmin) do sleep 1; done;     
+      
+      /usr/bin/mc mb myminio/bronze;    
+      
+      /usr/bin/mc event add  myminio/bronze arn:minio:sqs::EventKafka:kafka --event put --suffix .json;      
+     
+      sleep 3000 "
+    networks:
+      otel:    
+
 
   ksqldb-cli:
     image: confluentinc/cp-ksqldb-cli:${KSQLDB_VER}

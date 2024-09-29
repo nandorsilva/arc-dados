@@ -260,3 +260,19 @@ INSERT INTO inventory.products(	id, name, description, weight)
 VALUES (112, 'Lapis', 'O melhor', 1);
 ```
 
+
+Listando os tópicos
+
+
+```
+docker exec -it kafka-broker /bin/bash
+kafka-topics --bootstrap-server localhost:9092 --list 
+```
+
+
+
+*Consumindo mensagem sink-products Datasource MinIO*
+
+```
+kafka-console-consumer --bootstrap-server localhost:9092 --topic sink-products --from-beginning
+```
