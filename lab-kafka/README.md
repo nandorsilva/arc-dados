@@ -276,7 +276,7 @@ kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group aplic
 Deletando os consumer groups
 
 ```
-kafka-consumer-groups --bootstrap-server kafka:29092 --delete --group aplicacao-lab
+kafka-consumer-groups --bootstrap-server localhost:9092 --delete --group aplicacao-lab
 ```
 
 Produzindo mensagem com a instrução Round Robin Partitioner
