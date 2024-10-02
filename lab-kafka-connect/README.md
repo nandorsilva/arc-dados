@@ -37,10 +37,11 @@ docker image build -t <<usuario>>/kafka-connet-debezium-lab:v213  -f Dockerfile 
  
 ```
 
-Vamos enviar a imagem para o dockerhub ??
+OPCIONAL - Vamos enviar a imagem para o dockerhub ??
 https://hub.docker.com/
 
 ```
+docker login
 docker image push <<usuario>>/kafka-connet-debezium-lab:v213
 ```
 
