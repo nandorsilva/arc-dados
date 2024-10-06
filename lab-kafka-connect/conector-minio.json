@@ -8,5 +8,6 @@
         "format.class": "io.confluent.connect.s3.format.json.JsonFormat",     
         "s3.region": "us-east-1",
         "aws.access.key.id": "cursolab",
-        "aws.secret.access.key": "cursolab"
+        "aws.secret.access.key": "cursolab",
+        "behavior.on.null.values": "ignore"
 }

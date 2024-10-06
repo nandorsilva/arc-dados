@@ -183,7 +183,7 @@ git push -u origin main
 ![Criando repositorio](../content/devops-15.png)
 
 
-### Criando Secrets para logar no docker hub
+### No github vamos crias as Secrets para logar no docker hub
 
 * DOCKER_USERNAME
 * DOCKER_PASSWORD

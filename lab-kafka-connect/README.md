@@ -58,7 +58,7 @@ No diretório `/lab-eda/ambiente` execute o comando abaixo
 ```
 cd ../lab-eda/ambiente/
 
-docker-compose up -d grafana prometheus jmx-kafka-broker zookeeper kafka-broker zoonavigator akhq connect postgres pgadmin minio
+docker-compose up -d grafana prometheus jmx-kafka-broker zookeeper kafka-broker zoonavigator akhq connect postgres pgadmin minio mc
 
 docker container ls
 ```
@@ -173,7 +173,7 @@ Vamos inserir alguns registros nas tabelas e listar os tópicos do Kafka
 
 ```
 INSERT INTO inventory.products(	id, name, description, weight)
-VALUES (110, 'Lapis', 'O melhor', 1);
+VALUES (default, 'Lapis', 'O melhor', 1);
 ```
 
 Listando os tópicos
