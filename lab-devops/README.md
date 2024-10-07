@@ -6,8 +6,11 @@
 
 
 ### Pré-requisitos?
+* Docker
+* Docker-Compose
 * Conta github
 * Conta Docker hub
+* Git Client - https://git-scm.com/downloads
 
 
 ## Criando um repositório
