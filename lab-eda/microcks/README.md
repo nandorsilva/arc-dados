@@ -63,4 +63,4 @@ Consumindo as mensagens do tópico mock
 kafka-console-consumer --bootstrap-server localhost:9092 --topic UsersignedupAPI2-0.1.1-sku
 ```
 
-> https://microcks.io/documentation/using/advanced/templates/
+> https://microcks.io/documentation/references/templates/
