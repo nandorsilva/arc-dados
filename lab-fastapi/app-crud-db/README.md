@@ -10,7 +10,7 @@
 * Docker
 * Docker-Compose
 * Editor de códigos como VSCode, Sublime, Vim
-* Python 3.10
+* Python 3.9
 ---
 
 
@@ -44,11 +44,11 @@ $null | Out-File -FilePath "postgres/Dockerfile" -Encoding utf8
 ```
 
 
-### Editaremos o arquivo `requirements.txt` e adicionaremos mais bibliotecas
+### Editando o arquivo `requirements.txt` e adicionaremos mais bibliotecas
 
 
 ```plain
-fastapi==0.100.0
+fastapi[standard]==0.115.4
 pydantic
 sqlmodel==0.0.8
 asyncpg==0.28.0
@@ -59,7 +59,7 @@ pytest          # execução de testes
 httpx
 ```
 
-### Editaremos o arquivo `app/main.py` e adicionaremos mais bibliotecas
+### Editando o arquivo `app/main.py` e adicionaremos mais bibliotecas
 
 ```python
 from fastapi import FastAPI
@@ -84,7 +84,7 @@ app.include_router(main_router, prefix=settings.API_V1_STR)
 
 ```
 
-### Editaremos o arquivo `models/aluno.py` 
+### Editando o arquivo `models/aluno.py` 
 
 
 ```python
@@ -117,7 +117,7 @@ class AlunoResponse(SQLModel):
 
 ```
 
-### Editaremos o arquivo `routes/aluno.py` 
+### Editando o arquivo `routes/aluno.py` 
 
 
 
@@ -192,7 +192,7 @@ async def Deletar_Aluno(idAluno: int, session: Session = ActiveSession) -> Any:
 
 ```
 
-### Vamos editar o arquivo `postgres/create-databases.sh`
+### Editando o arquivo `postgres/create-databases.sh`
 ```bash
 #!/bin/bash
 
@@ -219,7 +219,7 @@ fi
 
 ```
 
-### Vamos editar o arquivo `postgres/Dockerfile`
+### Editando o arquivo `postgres/Dockerfile`
 ```yaml
 
 FROM postgres:alpine3.14
@@ -229,7 +229,7 @@ COPY create-databases.sh /docker-entrypoint-initdb.d/
 
 
 ```
-### Vamos editar o arquivo `docker-compose.yaml`
+### Editando o arquivo `docker-compose.yaml`
 
 ```yaml
 version: '3.9'
@@ -275,7 +275,7 @@ services:
 
 ```
 
-### Vamos editar o arquivo `app/configs.py`
+### Editando o arquivo `app/configs.py`
 
 ```python
 from pydantic import BaseSettings
@@ -292,7 +292,7 @@ settings: Settings = Settings()
 
 ```
 
-### Vamos editar o arquivo `app/db.py`
+### Editando o arquivo `app/db.py`
 
 ```python
 from sqlalchemy.orm import sessionmaker

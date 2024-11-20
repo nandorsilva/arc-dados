@@ -10,13 +10,13 @@
 * Docker
 * Docker-Compose
 * Editor de códigos como VSCode, Sublime, Vim
-* Python 3.10
+* Python 3.9
 ---
 
 ## Padrões Restfull, deixando mais profissional
 
 
-Vamos criar mais arquivos
+### Vamos criar mais alguns arquivos
 
  ### Linux
 ```bash
@@ -55,17 +55,17 @@ $null | Out-File -FilePath "docker-compose.yaml" -Encoding utf8
 ```
 
 
-### Editaremos o arquivo `requirements.txt` e adicionaremos mais bibliotecas
+### Editando o arquivo `requirements.txt` e adicionando mais bibliotecas
 
 
 ```plain
-fastapi[standard]
+fastapi[standard]==0.115.4
 pydantic
 pytest          # execução de testes
 httpx
 ```
 
-### Editaremos o arquivo `app/main.py` e adicionaremos mais bibliotecas
+### Editando o arquivo `app/main.py` e adicionando mais bibliotecas
 
 ```python
 from fastapi import FastAPI
@@ -82,7 +82,7 @@ app.include_router(main_router)
 
 ```
 
-### Editaremos o arquivo `models/aluno.py` 
+### Editando o arquivo `models/aluno.py` 
 
 
 ```python
@@ -104,7 +104,7 @@ class AlunoRequest(BaseModel):
 
 
 ```
-### Editaremos o arquivo `routes/aluno.py` 
+### Editando o arquivo `routes/aluno.py` 
 
 
 
@@ -177,7 +177,7 @@ async def Deletar_Aluno(idAluno: int) -> Any:
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Aluno não encontrado")
 
 ```
-### Editaremos o arquivo `routes/__init__.py` 
+### Editando o arquivo `routes/__init__.py` 
 
 ```python
 from fastapi import APIRouter
@@ -207,7 +207,7 @@ def api_client():
 
 ```
 
-### Vamos editar o arquivo `tests/test_api.py`
+### Editando o arquivo `tests/test_api.py`
 
 ```python
 import pytest
@@ -220,7 +220,7 @@ def test_get_aluno(api_client):
 
 ```
 
-### Vamos editar o arquivo `Dockerfile`
+### Editando o arquivo `Dockerfile`
 ```docker
 FROM python:3.10
 
@@ -229,23 +229,19 @@ FROM python:3.10
 ENV APP_HOME=/home/app/api
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
-# 
+
 
 # install
 COPY . $APP_HOME
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 RUN pip install -e .
-
-
-# 
+ 
 CMD ["uvicorn","app.main:app","--host=0.0.0.0","--port=8000","--reload"]
-
-
 
 ```
 
 
-### Vamos editar o arquivo `docker-compose.yaml`
+### Editando o arquivo `docker-compose.yaml`
 
 ```yaml
 version: '3.9'
@@ -264,7 +260,7 @@ services:
     tty: true 
 ```
 
-Atualizando a imagem pelo arquivo DockerCompose
+Atualizando a imagem docker pelo arquivo DockerCompose
 
 ```bash
 
@@ -279,8 +275,7 @@ docker logs  fast-api-fia
 ```
 
 > [!IMPORTANT]
-> A API vai ser atualizada automaticamente quando detectar mudanças no có
-
+> A API vai ser atualizada automaticamente quando detectar mudanças no arquivo
 
 
 ### Executando os Testes
@@ -288,6 +283,8 @@ docker logs  fast-api-fia
 ```
 docker compose exec api pytest tests/
 ```
+
+---
 
 4. [FastAPI e Esteira GitAction](../app-gitaction/README.md)
 5. [FastAPI e Postgresql](../app-crud-db/README.md)

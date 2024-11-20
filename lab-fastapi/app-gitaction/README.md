@@ -10,7 +10,7 @@
 * Docker
 * Docker-Compose
 * Editor de códigos como VSCode, Sublime, Vim
-* Python 3.10
+* Python 3.9
 ---
 
 ## Criando sua esteira de Integração Contínua com GitAction
@@ -27,14 +27,13 @@
 
 ### Criando Secrets para logar no docker hub
 
+> [!IMPORTANT]
+> Os dados de `DOCKER_USERNAME ` e `DOCKER_PASSWORD` são informações da conta do DockerHub
 
 
 * DOCKER_USERNAME
 * DOCKER_PASSWORD
 
-
-> [!IMPORTANT]
-> As Variáveis são dados da sua conta
 
 
 ![Criando repositorio](../../content/devops-17.png)
@@ -114,7 +113,7 @@ jobs:
 ```
 
 
-Vamos fazer um commit para executar nosso pipeline.
+### Vamos fazer um commit para executar nosso pipeline.
 
 ```bash
 
@@ -134,3 +133,5 @@ git commit -m "algum comentário"
 git push
 
 ```
+---
+5. [FastAPI e Postgresql](../app-crud-db/README.md)

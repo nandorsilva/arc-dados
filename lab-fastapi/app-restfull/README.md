@@ -10,7 +10,7 @@
 * Docker
 * Docker-Compose
 * Editor de códigos como VSCode, Sublime, Vim
-* Python 3.10
+* Python 3.9
 ---
 
 ## Padrões Restfull
@@ -18,7 +18,7 @@
 ![Estrutura](../../content/fastapi-02.png)
 
 
-Vamos criar um arquivo `setup.py`
+Vamos criar 0 arquivo `setup.py`
 
  ### Linux
 ```bash
@@ -30,7 +30,7 @@ touch setup.py
 $null | Out-File -FilePath "setup.py" -Encoding utf8
 ```
 
-### Editaremos o arquivo `setup.py` 
+### Editando o arquivo `setup.py` 
 
 
 ```python
@@ -72,11 +72,11 @@ setup(
 
 ```
 
-### Editaremos o arquivo `requirements.txt` e adicionaremos mais bibliotecas
+### Editando o arquivo `requirements.txt` e adicionando mais bibliotecas
 
 
 ```plain
-fastapi[standard]
+fastapi[standard]==0.115.4
 pydantic
 ```
 
@@ -174,21 +174,18 @@ async def Deletar_Aluno(idAluno: int) -> Any:
 ### Vamos editar o arquivo `Dockerfile`
 ```docker
 FROM python:3.10
-
  
 # Create the home directory
 ENV APP_HOME=/home/app/api
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
-# 
 
 # install
 COPY . $APP_HOME
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 RUN pip install -e .
 
-
-# 
+ 
 CMD ["uvicorn","app.main:app","--host=0.0.0.0","--port=8000","--reload"]
 
 
@@ -214,7 +211,7 @@ services:
     tty: true 
 ```
 
-Atualizando a imagem pelo arquivo DockerCompose
+Atualizando a imagem docker pelo arquivo DockerCompose
 
 ```bash
 
@@ -229,7 +226,7 @@ docker logs  fast-api-fia
 ```
 
 > [!IMPORTANT]
-> A API vai ser atualizada automaticamente quando detectar mudanças no có
+> A API vai ser atualizada automaticamente quando detectar mudanças no arquivo
 
 
 
@@ -239,6 +236,7 @@ Acesse os endereços:
 * http://localhost/openapi.json
 * http://localhost/redoc
 
+---
 
 3. [Vamos melhorar um pouco](../app-restfull-refactor/README.md)
 4. [FastAPI e Esteira GitAction](../app-gitaction/README.md)

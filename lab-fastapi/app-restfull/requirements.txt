@@ -1,2 +1,2 @@
-fastapi[standard]
+fastapi[standard]==0.115.4
 pydantic

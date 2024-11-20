@@ -10,12 +10,12 @@
 * Docker
 * Docker-Compose
 * Editor de códigos como VSCode, Sublime, Vim
-* Python 3.9
+* Python 3.9/
 ---
 
 ## Minha Primeira AP
 
-//criando a estrutura de pastas
+//Estrutura das pastas devem ficar assim
 
 ![Estrutura](../../content/lab-fastapi-01.png)
 
@@ -39,17 +39,17 @@ $null | Out-File -FilePath "requirements.txt" -Encoding utf8
 
 ```
 .
-├── Dockerfile           #Arquivo onde será gerado a imagem
-├── app                  #Pasta da aplicação FastApi
+├── Dockerfile           #Arquivo que será gerado a imagem docker
+├── app                  #Pasta para aplicação FastApi
 │   └── main.py          #Arquivo aplicação FastApi 
 └── requirements.txt     #Bibliotecas das depedencias das aplicação
 ```
 
-### Editaremos o arquivo `requirements.txt` e adicionaremos
+### Editando o arquivo `requirements.txt` e inserindo
 
 
 ```plain
-fastapi[standard]
+fastapi[standard]==0.115.4
 ```
 
 ### Editando o arquivo `app/main.py`
@@ -66,7 +66,7 @@ def read_root():
 
 ```
 
-Editar o arquivo `Dockerfile`
+### Editando o arquivo `Dockerfile`
 
 ```docker
 FROM python:3.9
@@ -110,6 +110,7 @@ Acesse os endereços:
 * http://localhost/openapi.json
 * http://localhost/redoc
 
+---
 
 
 2. [Um poouco mais sobre RestFull](../app-restfull/README.md)
