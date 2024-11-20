@@ -13,7 +13,7 @@
 * Python 3.10
 ---
 
-Para o nosso exercícios vamos criar um repositório para versionar nossos arquivos
+Para o nosso exercícios vamos criar um repositório para versionar nossos arquivos.
 
 ## Criando um repositório, lembra da aula de Devops?
 

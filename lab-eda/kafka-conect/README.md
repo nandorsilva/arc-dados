@@ -55,7 +55,7 @@ docker image push <<conta>>/kafka-connet-debezium-lab
 ```
 cd ..
 cd ambiente
-docker-compose up -d kafka-broker zk connect 
+docker-compose up -d kafka-broker zookeeper connect 
 ```
 
 Container  criado? Vamos ver!
@@ -90,11 +90,11 @@ Executando os scripts
 
 ```
 export  SA_PASSWORD=Password!
-cat sql/init.sql | docker exec -i sqlserver /opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD
+cat sql/init.sql | docker exec -i sqlserver /opt/mssql-tools18/bin/sqlcmd -U sa -P $SA_PASSWORD -C
 
-docker exec -i sqlserver /opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d dbEcommerce -Q "select * from produtos"
+docker exec -i sqlserver /opt/mssql-tools18/bin/sqlcmd -U sa -P $SA_PASSWORD -C -d dbEcommerce -Q "select * from produtos"
 
-docker exec -i sqlserver /opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d dbEcommerce -Q "INSERT INTO produtos(nome,descricao)  VALUES ('Lapis','lapis de escrever');"
+docker exec -i sqlserver /opt/mssql-tools18/bin/sqlcmd -U sa -P $SA_PASSWORD -C -d dbEcommerce -Q "INSERT INTO produtos(nome,descricao)  VALUES ('Lapis','lapis de escrever');"
 
 ```
 
