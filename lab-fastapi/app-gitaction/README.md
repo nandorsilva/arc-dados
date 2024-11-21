@@ -115,6 +115,13 @@ jobs:
 
 ### Vamos fazer um commit para executar nosso pipeline.
 
+
+> [!IMPORTANT]
+> Na própria pagina do git vai ter instruções para conectar o repositório criado.
+
+
+
+
 ```bash
 
 git add .

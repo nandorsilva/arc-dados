@@ -26,8 +26,6 @@ mkdir postgres
 touch postgres/create-databases.sh
 touch postgres/Dockerfile
 
-#DockerCompose
-touch docker-compose.yaml
 ```
 
  ### Powershell
@@ -344,8 +342,6 @@ docker image ls
 ### Configurando o acesso PgAdmin ao postgress
 
 
-1. [PostGres](../../lab-kafka-connect/README.md)
-
 
 Acesso para o PgAdmin http://localhost:5433/
 
@@ -375,7 +371,7 @@ Acesso para o PgAdmin http://localhost:5433/
 
 docker container rm  fast-api-fia -f
 
-docker compose up -d 
+docker-compose down api && docker-compose build api --no-cache && docker-compose up -d api
 
 docker image ls
 

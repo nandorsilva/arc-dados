@@ -18,16 +18,18 @@
 ![Estrutura](../../content/fastapi-02.png)
 
 
-Vamos criar 0 arquivo `setup.py`
+Vamos criar os arquivos `setup.py` e `docker-compose.yaml`
 
  ### Linux
 ```bash
 touch setup.py
+touch docker-compose.yaml
 ```
 
  ### Powershell
 ```powershell
 $null | Out-File -FilePath "setup.py" -Encoding utf8
+$null | Out-File -FilePath "docker-compose.yaml" -Encoding utf8
 ```
 
 ### Editando o arquivo `setup.py` 
@@ -217,7 +219,7 @@ Atualizando a imagem docker pelo arquivo DockerCompose
 
 docker container rm  fast-api-fia -f
 
-docker compose up -d
+docker-compose down && docker-compose build --no-cache && docker-compose up -d
 
 docker image ls
 
@@ -232,9 +234,9 @@ docker logs  fast-api-fia
 
 Acesse os endereços:
 
-* http://localhost/docs
-* http://localhost/openapi.json
-* http://localhost/redoc
+* http://localhost:8000/docs
+* http://localhost:8000/openapi.json
+* http://localhost:8000/redoc
 
 ---
 

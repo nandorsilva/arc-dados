@@ -26,11 +26,9 @@ touch tests/{__init__,conftest,test_api}.py
 
 #Aplicação
 mkdir -p app/{models,routes}
-touch app/models/{aluno}.py
+touch app/models/aluno.py
 touch app/routes/{__init__,aluno}.py
 
-#DockerCompose
-touch docker-compose.yaml
 ```
 
  ### Powershell
@@ -47,9 +45,6 @@ mkdir app/routes
 $null | Out-File -FilePath "app/models/aluno.py" -Encoding utf8
 $null | Out-File -FilePath "app/routes/__init__.py" -Encoding utf8
 $null | Out-File -FilePath "app/routes/aluno.py" -Encoding utf8
-
-
-$null | Out-File -FilePath "docker-compose.yaml" -Encoding utf8
 
 
 ```
@@ -266,7 +261,7 @@ Atualizando a imagem docker pelo arquivo DockerCompose
 
 docker container rm  fast-api-fia -f
 
-docker compose up -d
+docker-compose down && docker-compose build --no-cache && docker-compose up -d
 
 docker image ls
 
