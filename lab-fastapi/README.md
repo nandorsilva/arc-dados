@@ -10,7 +10,7 @@
 * Docker
 * Docker-Compose
 * Editor de códigos como VSCode, Sublime, Vim
-* Python 3.10
+* Python 3.9
 ---
 
 Para o nosso exercícios vamos criar um repositório para versionar nossos arquivos.
