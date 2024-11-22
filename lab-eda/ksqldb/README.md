@@ -13,7 +13,8 @@
 
 # Instalação Kafka 
 
-[LAB EDA](lab-eda//README.md)
+# [Para configurar o ambiente do Kafka, consulte o laboratório dedicado ao Kafka](../../lab-kafka/README.md)
+
 ---
 
 ![Ksqldb](../../content/ksql-01.png)
@@ -21,34 +22,40 @@
 
 # KSqldb
 
-Entrando no container cli
+Entrando no container e acessando o CLI do `ksqldb`
 
-```
+> [!IMPORTANT]
+> Daqui por diante, no código que será executado no Terminal com `ksqldb` terá um a informação de ksqldb.
+
+
+
+```bash
 cd ambiente
-docker-compose up -d kafka-broker zookeeper  connect ksqldb-server ksqldb-cli 
-docker-compose exec ksqldb-cli ksql http://ksqldb-server:8088
+docker compose up -d kafka-broker zookeeper  connect ksqldb-server ksqldb-cli 
+docker compose exec ksqldb-cli ksql http://ksqldb-server:8088
 ```
 
 
-### Criando um tópico
+### Criando o tópico
 
-Eu outro terminal crie um tópico
-```
+Eu outro terminal crie um novo tópico
+
+```bash
 docker exec -it kafka-broker /bin/bash
 kafka-topics --bootstrap-server localhost:9092 --create --partitions 1 --replication-factor 1 --topic alunos ;
 ```
 
-No terminal do KSQL execute o comando abaixo:
+No primeiro terminal, o  KSQL, execute os comandos abaixo: [ksqldb]
 
-```
+```bash
 ksql> show topics;
 
 ksql> list topics;
 ```
 
-Terminal Linux
+Volte para o terminal que criou o tópico para produzir as mensagens.
 
-```
+```bash
 kafka-console-producer --bootstrap-server localhost:9092 --topic alunos --property parse.key=true --property key.separator=:
 
 //key:value
@@ -59,9 +66,9 @@ kafka-console-producer --bootstrap-server localhost:9092 --topic alunos --proper
 >aluno:aluno 4
 ```
 
-No terminal KSQLdb
+No terminal com KSQLdb aberto. [ksqldb]
 
-```
+```bash
 print 'alunos' from beginning;
 
 print 'alunos' from beginning limit 2;
@@ -73,42 +80,39 @@ print 'alunos' from beginning interval 2 ;
 ```
 
 
-### Criando nosso primeiro stream
+### Criando nosso primeiro Stream
 
-> No terminal do KSQLdb
+> No terminal do KSQLdb [ksqldb]
 
-```
+```bash
 create stream alunos_stream (id int, nome varchar , curso varchar) with (kafka_topic='alunos', value_format='DELIMITED');
 
 ```
 
 
-Listando o Stream
+Listando o Stream [ksqldb]
 
-```
+```bash
 list streams;
 ```
 
 
-Descrever o Stream
+Descrevendo o Stream [ksqldb]
 
-```
+```bash
 describe ALUNOS_STREAM;
 
 ```
 
-Selecionando os dados
+Selecionando os dados [ksqldb]
 
-```
+```bash
 select rowtime, id, nome, curso from ALUNOS_STREAM emit changes;
 ```
 
-No outro terminal - linuz
+Em outro terminal
 
-
-
-
-```
+```bash
 
 //Se não estiver dentro do container
 
@@ -122,53 +126,53 @@ kafka-console-producer --bootstrap-server localhost:9092 --topic alunos --proper
 >aluno:4,aluno 4 ,arquitetura de dados
 ```
 
-Formatando a data da query no terminal KSQLdb
+Formatando a data da query no terminal com KSQLdb aberto.[ksqldb]
 
-
-```
+```bash
 select FORMAT_TIMESTAMP(FROM_UNIXTIME(rowtime), 'yyyy-MM-dd HH:mm:ss') as data , id, nome, curso from ALUNOS_STREAM emit changes;
 
 ```
 
 Cade os dados ??
 
-
-```
+Terminal [ksqldb]
+```bash
  //Configuração para ver todas as mensagens produzidas
  SET 'auto.offset.reset'='earliest';
 ```
 
 Agrupando as mensagens
 
-```
-^C
+Terminal [ksqldb]
+```bash
+^C 
 select curso, count(*) from ALUNOS_STREAM  group by curso emit changes;
 ```
 
-Produzinho mais uma mensagem no outro terminal
+Produzinho mais mensagens no outro terminal que já está aberto
 
-```
+```bash
 >aluno:4,aluno 4 ,arquitetura de dados
 ```
 
+No terminal  [ksqldb]
 
-
-```
+```bash
 ^C
 select FORMAT_TIMESTAMP(FROM_UNIXTIME(rowtime), 'yyyy-MM-dd HH:mm:ss') as data , id, nome, curso from ALUNOS_STREAM emit changes limit 4;
 ```
 
 ### Criando seu stream no formato json
 
-Terminal linux
+No Terminal
 
-```
+```bash
 kafka-topics --bootstrap-server localhost:9092 --create --topic professores --partitions 1 --replication-factor 1
 ```
 
-Terminal KSqlDB
+Terminal [ksqldb]
 
-```
+```bash
 list topics;
 
 create stream professores_stream (id int, nome varchar , materia varchar, quantidadeaula int) with (kafka_topic='professores', value_format='json');
@@ -180,9 +184,9 @@ select rowtime, id, nome from professores_stream emit changes;
 ```
 
 
-Terminal linux
+Terminal
 
-```
+```bash
 kafka-console-producer --bootstrap-server localhost:9092 --topic professores --property parse.key=true --property key.separator=:
 
 >professor1:{"id":1, "nome":"Fernando", "materia":"dados" , "quantidadeaula": 2}
@@ -195,12 +199,11 @@ kafka-console-producer --bootstrap-server localhost:9092 --topic professores --p
 
 > https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/scalar-functions/
 
-Terminal KsqlDB
+Terminal [ksqldb]
 
 
-```
+```bash
 select FORMAT_TIMESTAMP(FROM_UNIXTIME(rowtime), 'yyyy-MM-dd HH:mm:ss', 'America/Sao_Paulo') as data, id, nome from ALUNOS_STREAM emit changes;
-
 
 
 select CAST(FROM_UNIXTIME(rowtimE) AS DATE) as data, id, nome from ALUNOS_STREAM emit changes;
@@ -211,7 +214,6 @@ select CAST(FROM_UNIXTIME(rowtimE) AS DATE) as data, id, ucase(nome) as nome fro
 
 ```
 
-
 ---
 
 ### Visões Stream
@@ -219,9 +221,10 @@ select CAST(FROM_UNIXTIME(rowtimE) AS DATE) as data, id, ucase(nome) as nome fro
 
 Criando uma consulta baseada em um stream.
 
-Terminal Ksqldb
+Terminal [ksqldb]
 
-```
+
+```bash
 
 SET 'auto.offset.reset'='earliest';
 
@@ -236,9 +239,9 @@ from professores_stream;
 
 ```
 
-Executando o script criando a view.
+Executando o script e criando a view.
 
-```
+```bash
 run script '/scripts/view_professores_stream.ksql';
 
 show streams;
@@ -249,44 +252,45 @@ show streams;
 No terminal do Linux crie mais uma mensagem
 
 
-```
+```bash
 professor4:{"id":4, "nome":"Maria", "materia":"dados", "quantidadeaula": 8}
 ```
 
-No terminal Ksqlsb
+Terminal [ksqldb]
 
 
-```
- describe view_professores_stream extended;
+```bash
+describe view_professores_stream extended;
 
 select descricao from view_professores_stream emit changes;
   
 ```
 
-No terminal do Linux crie mais uma mensagem
+No outro terminal crie mais uma mensagem
 
 
-```
+```bash
 professor5:{"id":5, "nome":"Maria", "materia":"dados", "quantidadeaula": 10}
-
 
 ```
 
 Observe o tópico criado
 
-```
+```bash
 kafka-topics --bootstrap-server localhost:9092 --list 
 ```
 
 Aplicando um consumer no tópico `VIEW_PROFESSORES_STREAM`
 
-```
+```bash
 kafka-console-consumer --bootstrap-server localhost:9092 --topic VIEW_PROFESSORES_STREAM --from-beginning
 ```
 
 Apagando o stream 
 
-```
+Terminal [ksqldb]
+
+```bash
  drop stream VIEW_PROFESSORES_STREAM;
 ```
 
@@ -297,14 +301,14 @@ Apagando o stream
 
 No terminal Linux vamos criar nosso topico para trabalhar com tabelas
 
-```
+```bash
 kafka-topics --bootstrap-server localhost:9092 --create --partitions 1 --replication-factor 1 --topic produto ;
 
 ```
 
-No terminal KSqldb criar a tabela `produtosTable`
+Terminal [ksqldb] criar a tabela `produtosTable`
 
-```
+```bash
 create table produtosTable (idProduto int primary key, produto varchar) with (KAFKA_TOPIC='produto', KEY_FORMAT = 'JSON',
   VALUE_FORMAT = 'JSON');
 
@@ -320,7 +324,7 @@ select idProduto, produto from produtosTable emit changes;
 
 No terminal Linux, vamos criar algumas mensagens
 
-```
+```bash
 kafka-console-producer --bootstrap-server localhost:9092 --topic produto --property parse.key=true --property key.separator=:
 
 >1:{"produto":"Celular"}
@@ -330,15 +334,15 @@ kafka-console-producer --bootstrap-server localhost:9092 --topic produto --prope
 ```
 
 
-No terminal Ksqldb
+Terminal [ksqldb]
 
-```
+```bash
  select * from PRODUTOSTABLE where idproduto= 2  emit changes;
 ```
 
 No terminal Linux, vamos alterar a mensagem 2
 
-```
+```bash
 >2:{"produto":"TV - Alterada"}
 
 ^C
@@ -371,30 +375,32 @@ drop table IF EXISTS produtosTable DELETE TOPIC;
 Criando um topico para preço no terminal Linux
 
 
-```
+```bash
 kafka-topics --bootstrap-server localhost:9092 --create --topic produto-preco --partitions 1 --replication-factor 1
 
 ```
 
-Criando o stream para os preços dos produto no terminal Ksqldb
+Criando o stream para os preços dos produto no Terminal [ksqldb]
 
 
-```
+```bash
 create stream produto_preco_stream (idprodutopreco int, idproduto int,  preco decimal(18,2)) with (kafka_topic='produto-preco', value_format='json');
 
 ```
 
 Criando Join Stream x Table
 
-```
+Terminal [ksqldb]
+
+```bash
 select p.idproduto, p.PRODUTO, pp.preco
 from produto_preco_stream pp 
 left join PRODUTOSTABLE p on pp.idproduto=p.idproduto emit changes;
 ```
 
-Criando mensagens no topico de preço no terminal Linux
+Criando mensagens no topico de preço no terminal
 
-```
+```bash
 kafka-console-producer --bootstrap-server localhost:9092 --topic produto-preco --property parse.key=true --property key.separator=:
 
 >1:{"idprodutopreco":1,"idproduto":1, "preco": 1.99}
@@ -403,8 +409,9 @@ kafka-console-producer --bootstrap-server localhost:9092 --topic produto-preco -
 
 ```
 
-Invertendo o join...Terminal Ksqldb
-```
+Invertendo o join...Terminal [ksqldb]
+
+```bash
 select pp.idproduto, pp.PRODUTO, p.preco
 from PRODUTOSTABLE  pp 
 left join produto_preco_stream p on pp.idproduto=p.idproduto emit changes;
@@ -416,7 +423,9 @@ left join produto_preco_stream p on pp.idproduto=p.idproduto emit changes;
 
 Criando um um Stream do join
 
-```
+Terminal [ksqldb]
+
+```bash
 create stream produto_com_precos as 
 select p.idproduto, p.PRODUTO, pp.preco
 from produto_preco_stream pp 
@@ -427,24 +436,6 @@ select P_IDPRODUTO, produto , preco from produto_com_precos  emit changes;
 
 
 --------
-
-## Consultas Push e Pull
-
-> Push emit changes
-> Pull query, executa a consulta e acaba o processamento/consulta
-
-### Inserção no Ksql
-
-
-```
-
-INSERT INTO produto_preco_stream (idprodutopreco, idproduto, preco) VALUES (5, 1, 2.99);
-INSERT INTO produto_preco_stream (idprodutopreco, idproduto, preco) VALUES (5, 1, 2.99);
-
-
-INSERT INTO PRODUTOSTABLE (idProduto, produto) VALUES (3, 'Computador');
-INSERT INTO PRODUTOSTABLE (idProduto, produto) VALUES (4, 'Geladeira');
- ```
 
 
  ### Formatos Ksqldb
@@ -462,7 +453,7 @@ INSERT INTO PRODUTOSTABLE (idProduto, produto) VALUES (4, 'Geladeira');
 
 #Explain Plan
 
- ```
+```bash
 show queries;
 explain (id-query) 
 
