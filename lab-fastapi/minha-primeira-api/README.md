@@ -17,9 +17,8 @@
 
 //Estrutura das pastas devem ficar assim
 
-![Estrutura](../../content/lab-fastapi-01.png)
 
-### Linux
+ ### Terminal do Linux
 ```bash
 mkdir app
 touch app/main.py
@@ -27,7 +26,7 @@ touch Dockerfile
 touch requirements.txt
 ```
  
- ### Powershell
+ ### Terminal do Powershell
 ```powershell
 mkdir app
 
@@ -36,6 +35,11 @@ $null | Out-File -FilePath "Dockerfile" -Encoding utf8
 $null | Out-File -FilePath "requirements.txt" -Encoding utf8
 
 ```
+
+//Após a criação da estrutura das pastas o Visual Studio Code deve ficar assim
+
+![Estrutura](../../content/lab-fastapi-01.png)
+
 
 ```
 .

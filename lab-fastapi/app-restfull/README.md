@@ -20,13 +20,13 @@
 
 Vamos criar os arquivos `setup.py` e `docker-compose.yaml`
 
- ### Linux
+ ### Terminal do Linux
 ```bash
 touch setup.py
 touch docker-compose.yaml
 ```
 
- ### Powershell
+ ### Terminal do Powershell
 ```powershell
 $null | Out-File -FilePath "setup.py" -Encoding utf8
 $null | Out-File -FilePath "docker-compose.yaml" -Encoding utf8
@@ -219,7 +219,7 @@ Atualizando a imagem docker pelo arquivo DockerCompose
 
 docker container rm  fast-api-fia -f
 
-docker-compose down && docker-compose build --no-cache && docker-compose up -d
+docker compose down && docker-compose build --no-cache && docker-compose up -d
 
 docker image ls
 

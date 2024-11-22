@@ -18,7 +18,7 @@
 
 ### Vamos criar mais alguns arquivos
 
- ### Linux
+ ### Terminal do Linux
 ```bash
 #Testes
 mkdir tests
@@ -31,7 +31,7 @@ touch app/routes/{__init__,aluno}.py
 
 ```
 
- ### Powershell
+ ### Terminal do Powershell
 ```powershell
 mkdir tests
 
@@ -261,7 +261,7 @@ Atualizando a imagem docker pelo arquivo DockerCompose
 
 docker container rm  fast-api-fia -f
 
-docker-compose down && docker-compose build --no-cache && docker-compose up -d
+docker compose down && docker-compose build --no-cache && docker-compose up -d
 
 docker image ls
 

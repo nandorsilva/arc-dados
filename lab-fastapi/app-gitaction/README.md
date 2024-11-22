@@ -41,8 +41,8 @@
 
 ### Criando as pastas `.github` e  `workflows`
 
- ### Linux
-
+ ### Terminal do Linux
+ 
 ```bash
 #Testes
 mkdir .github
@@ -50,7 +50,7 @@ mkdir .github/workflows
 touch .github/workflows/pipeline.yaml
 ```
 
- ### Powershell
+ ### Terminal do Powershell
 ```powershell
 mkdir .github
 mkdir .github/workflows

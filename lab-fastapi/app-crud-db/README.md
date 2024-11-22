@@ -16,7 +16,7 @@
 
 Vamos criar mais arquivos
 
- ### Linux
+ ### Terminal do Linux
 ```bash
 
 touch app/configs.py
@@ -28,7 +28,7 @@ touch postgres/Dockerfile
 
 ```
 
- ### Powershell
+ ### Terminal do Powershell
 ```powershell
 
 $null | Out-File -FilePath "app/configs.py" -Encoding utf8
@@ -371,7 +371,7 @@ Acesso para o PgAdmin http://localhost:5433/
 
 docker container rm  fast-api-fia -f
 
-docker-compose down api && docker-compose build api --no-cache && docker-compose up -d api
+docker compose down api && docker-compose build api --no-cache && docker-compose up -d api
 
 docker image ls
 
