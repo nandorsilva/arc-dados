@@ -13,7 +13,7 @@
 * Python 3.9/
 ---
 
-## Minha Primeira AP
+## Minha Primeira Aplicação
 
  ### Terminal do Linux
 ```bash
