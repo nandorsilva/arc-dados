@@ -12,33 +12,27 @@
 
 # Instalação Kafka 
 
-[LAB EDA](lab-eda//README.md)
 
+# [Para configurar o ambiente do Kafka, consulte o laboratório dedicado ao Kafka](../../lab-kafka/README.md)
 
 ## Instalando o Microcks
 
-Entre na pasta microcks
 
-
-
-*** Limpando os deploy anteriormente
-```
-
+```bash
 //Entrar na pasta lab-eda
 cd lab-eda 
 ```
 
-Execute o docke-compose
+Execute o docke-compose no Terminal
 
-
-```
-docker-compose -f ambiente/docker-compose.yaml  up -d zookeeper kafka-broker mongo keycloak postman app async-minion 
+```bash
+docker compose -f ambiente/docker-compose.yaml  up -d zookeeper kafka-broker mongo keycloak postman app async-minion 
 
 ```
 
 O que aconteceu ??
 
-Acessando http://localhost:8080/
+Acessando o endereço http://localhost:8080/
 
 * Username: admin
 * Password: microcks123
@@ -46,20 +40,20 @@ Acessando http://localhost:8080/
 
 ## Vamos subir o Arquivo AsyncAPI ?
 
-No menu `Importers >> Upload` realizar o upload do arquivo `asyncAPI/microcks.yml`
+No menu `Importers >> Upload` realizar o upload do arquivo que está dentro da pasta `asyncAPI/microcks.yml`
 
 Vamos observar....
 
-Listando os tópicos kafka do mock
+Listando os tópicos kafka gerados pelo Microcks
 
-```
+```bash
 docker exec -it kafka-broker /bin/bash
 kafka-topics --bootstrap-server localhost:9092 --list 
 ```
 
 Consumindo as mensagens do tópico mock
 
-```
+```bash
 kafka-console-consumer --bootstrap-server localhost:9092 --topic UsersignedupAPI2-0.1.1-sku
 ```
 
