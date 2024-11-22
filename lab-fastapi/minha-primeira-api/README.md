@@ -15,9 +15,6 @@
 
 ## Minha Primeira AP
 
-//Estrutura das pastas devem ficar assim
-
-
  ### Terminal do Linux
 ```bash
 mkdir app
