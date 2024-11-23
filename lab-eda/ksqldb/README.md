@@ -11,9 +11,6 @@
 * Docker
 * Docker-Compose
 
-# Instalação Kafka 
-
-# [Para configurar o ambiente do Kafka, consulte o laboratório dedicado ao Kafka](../../lab-kafka/README.md)
 
 ---
 
@@ -22,18 +19,28 @@
 
 # KSqldb
 
-Entrando no container e acessando o CLI do `ksqldb`
 
 > [!IMPORTANT]
 > Daqui por diante, no código que será executado no Terminal com `ksqldb` terá um a informação de ksqldb.
 
-
+## Iniciando seus ambientes `kafka-broker`, `zookeeper`, `connect` e  `ksqldb-server ksqldb-cli`.
 
 ```bash
 cd ambiente
 docker compose up -d kafka-broker zookeeper  connect ksqldb-server ksqldb-cli 
 docker compose exec ksqldb-cli ksql http://ksqldb-server:8088
 ```
+
+Entrando no container e acessando o CLI do `ksqldb`
+
+```bash
+docker compose exec ksqldb-cli ksql http://ksqldb-server:8088
+```
+
+
+# Instalação Kafka 
+
+# [Para configurar o ambiente do Kafka, consulte o laboratório dedicado ao Kafka](../../lab-kafka/README.md)
 
 
 ### Criando o tópico
