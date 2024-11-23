@@ -126,10 +126,10 @@ docker exec -it kafka-broker /bin/bash
 
 kafka-console-producer --bootstrap-server localhost:9092 --topic alunos --property parse.key=true --property key.separator=:
 
->aluno:1,aluno 1 ,arquitetura de dados
->aluno:2,aluno 2 ,engenharia de dados
->aluno:3,aluno 3 ,engenharia de dados
->aluno:4,aluno 4 ,arquitetura de dados
+>aluno1:1,aluno 1 ,arquitetura de dados
+>aluno2:2,aluno 2 ,engenharia de dados
+>aluno3:3,aluno 3 ,engenharia de dados
+>aluno4:4,aluno 4 ,arquitetura de dados
 ```
 
 Formatando a data da query no terminal com KSQLdb aberto.[ksqldb]
