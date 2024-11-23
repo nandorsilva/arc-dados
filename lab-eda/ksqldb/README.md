@@ -158,7 +158,7 @@ select curso, count(*) from ALUNOS_STREAM  group by curso emit changes;
 Produzinho mais mensagens no outro terminal que já está aberto
 
 ```bash
->aluno:4,aluno 4 ,arquitetura de dados
+>aluno6:6,aluno 6 ,arquitetura de dados
 ```
 
 No terminal  [ksqldb]
@@ -255,7 +255,7 @@ show streams;
 
 ```
 
-No terminal do Linux crie mais uma mensagem
+No terminal  crie mais uma mensagem
 
 
 ```bash
@@ -352,7 +352,7 @@ No terminal Linux, vamos alterar a mensagem 2
 >2:{"produto":"TV - Alterada"}
 
 ^C
-kafka-consumer-groups --bootstrap-server localhost:9092 --list
+kafka-topics --bootstrap-server localhost:9092 --list 
 
 //Verifica se tem o topico *PRODUTOSTABLE*KsqlTopic*
 
