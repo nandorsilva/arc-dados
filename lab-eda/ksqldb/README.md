@@ -66,10 +66,10 @@ kafka-console-producer --bootstrap-server localhost:9092 --topic alunos --proper
 
 //key:value
 
->aluno:aluno 1
->aluno:aluno 2
->aluno:aluno 3
->aluno:aluno 4
+>aluno1:aluno 1
+>aluno2:aluno 2
+>aluno3:aluno 3
+>aluno4:aluno 4
 ```
 
 No terminal com KSQLdb aberto. [ksqldb]
