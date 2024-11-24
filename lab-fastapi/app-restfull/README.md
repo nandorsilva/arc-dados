@@ -215,11 +215,27 @@ services:
 
 Atualizando a imagem docker pelo arquivo DockerCompose
 
+### Terminal Linux
 ```bash
 
 docker container rm  fast-api-fia -f
 
 docker compose down && docker-compose build --no-cache && docker-compose up -d
+
+docker image ls
+
+docker logs  fast-api-fia
+
+```
+
+### Terminal PowerShell
+``````powershell
+
+docker container rm  fast-api-fia -f
+
+docker compose down 
+docker-compose build --no-cache 
+docker-compose up -d
 
 docker image ls
 
