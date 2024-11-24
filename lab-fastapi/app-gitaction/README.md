@@ -55,8 +55,11 @@ touch .github/workflows/pipeline.yaml
 mkdir .github
 mkdir .github/workflows
 
+# Cria um objeto de codificação UTF-8 sem BOM
+$utf8NoBomEncoding = New-Object System.Text.UTF8Encoding($false)
 
-$null | Out-File -FilePath ".github/workflows/pipeline.yaml" -Encoding utf8
+[System.IO.File]::WriteAllText(".github/workflows/pipeline.yaml", "", $utf8NoBomEncoding)
+
 
 ```
 

@@ -27,9 +27,13 @@ touch requirements.txt
 ```powershell
 mkdir app
 
-$null | Out-File -FilePath "app/main.py" -Encoding utf8
-$null | Out-File -FilePath "Dockerfile" -Encoding utf8
-$null | Out-File -FilePath "requirements.txt" -Encoding utf8
+# Cria um objeto de codificação UTF-8 sem BOM
+$utf8NoBomEncoding = New-Object System.Text.UTF8Encoding($false)
+
+[System.IO.File]::WriteAllText("app/main.py", "", $utf8NoBomEncoding)
+[System.IO.File]::WriteAllText("Dockerfile", "", $utf8NoBomEncoding)
+[System.IO.File]::WriteAllText("requirements.txt", "", $utf8NoBomEncoding)
+
 
 ```
 

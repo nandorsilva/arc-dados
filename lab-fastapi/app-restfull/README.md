@@ -28,8 +28,13 @@ touch docker-compose.yaml
 
  ### Terminal do Powershell
 ```powershell
-$null | Out-File -FilePath "setup.py" -Encoding utf8
-$null | Out-File -FilePath "docker-compose.yaml" -Encoding utf8
+
+# Cria um objeto de codificação UTF-8 sem BOM
+$utf8NoBomEncoding = New-Object System.Text.UTF8Encoding($false)
+
+[System.IO.File]::WriteAllText("setup.py", "", $utf8NoBomEncoding)
+[System.IO.File]::WriteAllText("docker-compose.yaml", "", $utf8NoBomEncoding)
+
 ```
 
 ### Editando o arquivo `setup.py` 

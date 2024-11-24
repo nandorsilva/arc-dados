@@ -35,16 +35,19 @@ touch app/routes/{__init__,aluno}.py
 ```powershell
 mkdir tests
 
+# Cria um objeto de codificação UTF-8 sem BOM
+$utf8NoBomEncoding = New-Object System.Text.UTF8Encoding($false)
 
-$null | Out-File -FilePath "tests/conftest.py" -Encoding utf8
-$null | Out-File -FilePath "tests/test_api.py" -Encoding utf8
+[System.IO.File]::WriteAllText("tests/conftest.py", "", $utf8NoBomEncoding)
+[System.IO.File]::WriteAllText("tests/test_api.py", "", $utf8NoBomEncoding)
+
 
 mkdir app/models
 mkdir app/routes
 
-$null | Out-File -FilePath "app/models/aluno.py" -Encoding utf8
-$null | Out-File -FilePath "app/routes/__init__.py" -Encoding utf8
-$null | Out-File -FilePath "app/routes/aluno.py" -Encoding utf8
+[System.IO.File]::WriteAllText("app/models/aluno.py", "", $utf8NoBomEncoding)
+[System.IO.File]::WriteAllText("app/routes/__init__.py", "", $utf8NoBomEncoding)
+[System.IO.File]::WriteAllText("app/routes/aluno.py", "", $utf8NoBomEncoding)
 
 
 ```
@@ -257,16 +260,31 @@ services:
 
 Atualizando a imagem docker pelo arquivo DockerCompose
 
-```bash
+### Terminal Linux
+```bash 
 
 docker container rm  fast-api-fia -f
 
-docker compose down && docker-compose build --no-cache && docker-compose up -d
+docker compose down api && docker-compose build api --no-cache && docker-compose up -d api
+
+docker image ls
+
+docker logs  fast-api-fia 
+
+```
+
+### Terminal PowerShell
+```powershell
+
+docker container rm  fast-api-fia -f
+
+docker compose down 
+docker-compose build --no-cache 
+docker-compose up -d
 
 docker image ls
 
 docker logs  fast-api-fia
-
 ```
 
 > [!IMPORTANT]

@@ -31,13 +31,18 @@ touch postgres/Dockerfile
  ### Terminal do Powershell
 ```powershell
 
-$null | Out-File -FilePath "app/configs.py" -Encoding utf8
-$null | Out-File -FilePath "app/db.py" -Encoding utf8
+# Cria um objeto de codificação UTF-8 sem BOM
+$utf8NoBomEncoding = New-Object System.Text.UTF8Encoding($false)
+
+[System.IO.File]::WriteAllText("app/configs.py", "", $utf8NoBomEncoding)
+[System.IO.File]::WriteAllText("app/db.py", "", $utf8NoBomEncoding)
+
 
 mkdir postgres
 
-$null | Out-File -FilePath "postgres/create-databases.sh" -Encoding utf8
-$null | Out-File -FilePath "postgres/Dockerfile" -Encoding utf8
+[System.IO.File]::WriteAllText("postgres/create-databases.sh", "", $utf8NoBomEncoding)
+[System.IO.File]::WriteAllText("postgres/Dockerfile", "", $utf8NoBomEncoding)
+
 
 ```
 
@@ -366,7 +371,7 @@ Acesso para o PgAdmin http://localhost:5433/
 ![Exemplo Kafka Conect](../../content/conect-pgadmin.png)
 
 
-
+### Terminal Linux
 ```bash 
 
 docker container rm  fast-api-fia -f
@@ -378,5 +383,20 @@ docker image ls
 docker logs  fast-api-fia 
 
 ```
+
+### Terminal PowerShell
+```powershell
+
+docker container rm  fast-api-fia -f
+
+docker compose down 
+docker-compose build --no-cache 
+docker-compose up -d
+
+docker image ls
+
+docker logs  fast-api-fia
+```
+
 
 * http://localhost:8000/docs
