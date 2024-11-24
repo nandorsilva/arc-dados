@@ -229,7 +229,7 @@ docker logs  fast-api-fia
 ```
 
 ### Terminal PowerShell
-``````powershell
+```powershell
 
 docker container rm  fast-api-fia -f
 
