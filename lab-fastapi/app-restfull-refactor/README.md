@@ -265,7 +265,7 @@ Atualizando a imagem docker pelo arquivo DockerCompose
 
 docker container rm  fast-api-fia -f
 
-docker image rm app-fastapi-fia
+docker image rm fia_fastapi
 
 docker compose down api && docker-compose build api --no-cache && docker-compose up -d api
 
@@ -280,7 +280,7 @@ docker logs  fast-api-fia
 
 docker container rm  fast-api-fia -f
 
-docker image rm app-fastapi-fia
+docker image rm fia_fastapi
 
 docker compose down 
 docker-compose build --no-cache 
