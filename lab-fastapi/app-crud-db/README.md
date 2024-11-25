@@ -376,6 +376,8 @@ Acesso para o PgAdmin http://localhost:5433/
 
 docker container rm  fast-api-fia -f
 
+docker image rm app-fastapi-fia
+
 docker compose down api && docker-compose build api --no-cache && docker-compose up -d api
 
 docker image ls
@@ -388,6 +390,8 @@ docker logs  fast-api-fia
 ```powershell
 
 docker container rm  fast-api-fia -f
+
+docker image rm app-fastapi-fia
 
 docker compose down 
 docker-compose build --no-cache 
